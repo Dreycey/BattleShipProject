@@ -3,11 +3,8 @@ import java.util.HashMap;
 
 
 /*
-The Person class is in control of the Person Objects that are in  use during 
-game play.
-
 */
-public class Person {
+public class Example {
     
     public int returnsNull() {
         return 0;
