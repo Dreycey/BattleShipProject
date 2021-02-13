@@ -7,7 +7,7 @@ import static junit.framework.TestCase.*;
 
 public class ExampleTest {
     
-    Person personObjOne = new Example();
+    Example personObjOne = new Example();
 
     // runs before the tests.
     @Before
