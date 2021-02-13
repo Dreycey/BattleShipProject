@@ -9,7 +9,7 @@ game play.
 */
 public class Person {
     
-    public null returnsNull() {
+    public int returnsNull() {
         return null;
     }
     
@@ -17,11 +17,11 @@ public class Person {
         return input;
     }
 
-    public returnTrue() {
+    public void returnTrue() {
         return true;
     }
 
-    public returnFalse() {
+    public void returnFalse() {
         return false;
     }
 
