@@ -1,5 +1,5 @@
 package test.collective;
-import io.collective.Person; //Make sure to open the java class
+import io.collective.Example; //Make sure to open the java class
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import static junit.framework.TestCase.*;
 
 public class ExampleTest {
     
-    Person personObjOne = new Person();
+    Person personObjOne = new Example();
 
     // runs before the tests.
     @Before
