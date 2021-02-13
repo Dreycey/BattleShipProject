@@ -10,18 +10,18 @@ game play.
 public class Person {
     
     public int returnsNull() {
-        return null;
+        return 0;
     }
     
     public int returnsInput(int input) {
         return input;
     }
 
-    public void returnTrue() {
+    public boolean returnTrue() {
         return true;
     }
 
-    public void returnFalse() {
+    public boolean returnFalse() {
         return false;
     }
 
