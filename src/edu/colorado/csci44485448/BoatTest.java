@@ -31,4 +31,13 @@ class BoatTest {
         Assertions.assertArrayEquals(emptyCoords,boat.getCoordinates());
 
     }
+
+    @Test
+    public void testSetCoords() throws Exception{
+        String[] newCoords = {"A1","A2","A3"};
+
+        boat.setCoordinates(newCoords);
+
+        Assertions.assertArrayEquals(newCoords, boat.getCoordinates());
+    }
 }
