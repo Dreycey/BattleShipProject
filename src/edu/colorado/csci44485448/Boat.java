@@ -40,21 +40,23 @@ public class Boat {
     }
 
     public void removeCoordinate(String c) {
-        int freshLength = coordinates.length - 1;
-        String[] coords = new String[freshLength];
+        if(isCoordAfloat(c)){
+            int freshLength = coordinates.length - 1;
+            String[] coords = new String[freshLength];
 
-        for (int i = 0, k = 0; i < coordinates.length; i++) {
+            for (int i = 0, k = 0; i < coordinates.length; i++) {
 
-            // check if index is crossed, continue without copying
-            if (coordinates[i].equals(c)) {
-                continue;
+                // check if index is crossed, continue without copying
+                if (coordinates[i].equals(c)) {
+                    continue;
+                }
+
+                // else copy the element
+                coords[k++] = coordinates[i];
+
+
             }
-
-            // else copy the element
-            coords[k++] = coordinates[i];
-
-
+            coordinates = coords;
         }
-        coordinates = coords;
     }
 }
