@@ -41,4 +41,9 @@ class BattleShipTest {
 
         Assertions.assertEquals(name, boat.getName());
     }
+
+    @Test
+    public void testGetSize() throws Exception{
+        Assertions.assertEquals(4, boat.getSize());
+    }
 }
