@@ -39,7 +39,22 @@ public class Boat {
         return Arrays.asList(coordinates).contains(c);
     }
 
-    public void removeCoordinate(String c){
+    public void removeCoordinate(String c) {
+        int freshLength = coordinates.length - 1;
+        String[] coords = new String[freshLength];
 
+        for (int i = 0, k = 0; i < coordinates.length; i++) {
+
+            // check if index is crossed, continue without copying
+            if (coordinates[i].equals(c)) {
+                continue;
+            }
+
+            // else copy the element
+            coords[k++] = coordinates[i];
+
+
+        }
+        coordinates = coords;
     }
 }

@@ -73,5 +73,9 @@ class BoatTest {
         boat.removeCoordinate("A2");
 
         Assertions.assertArrayEquals(postRemoval,boat.getCoordinates());
+
+        boat.removeCoordinate("J9");
+
+        Assertions.assertArrayEquals(postRemoval,boat.getCoordinates());
     }
 }
