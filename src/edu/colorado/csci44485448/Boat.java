@@ -7,6 +7,10 @@ public class Boat {
     private String status = "Afloat";
     private String[] coordinates = {};
 
+    public boolean isValidCoordinate(String coord){
+        return true;
+    }
+
     public String getStatus(){
         return status;
     }
@@ -23,6 +27,6 @@ public class Boat {
     }
 
     public void setCoordinates(String[] c){
-
+        coordinates = c;
     }
 }
