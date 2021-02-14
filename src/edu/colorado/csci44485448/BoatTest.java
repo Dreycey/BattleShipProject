@@ -63,4 +63,15 @@ class BoatTest {
         Assertions.assertTrue(boat.isCoordAfloat("A2"));
         Assertions.assertFalse(boat.isCoordAfloat("A4"));
     }
+
+    @Test
+    public void removeCoord() throws Exception{
+        String[] coords = {"A1","A2","A3"};
+        String[] postRemoval = {"A1","A3"};
+        boat.setCoordinates(coords);
+
+        boat.removeCoordinate("A2");
+
+        Assertions.assertArrayEquals(postRemoval,boat.getCoordinates());
+    }
 }

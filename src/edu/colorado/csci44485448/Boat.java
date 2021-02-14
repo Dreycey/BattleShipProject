@@ -36,6 +36,10 @@ public class Boat {
     }
 
     public boolean isCoordAfloat(String c){
-        return false;
+        return Arrays.asList(coordinates).contains(c);
+    }
+
+    public void removeCoordinate(String c){
+
     }
 }
