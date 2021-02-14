@@ -34,4 +34,11 @@ class BattleShipTest {
         Assertions.assertArrayEquals(shouldBe, boat.getCoordinates());
 
     }
+
+    @Test
+    public void testGetName() throws Exception{
+        String name = "BattleShip";
+
+        Assertions.assertEquals(name, boat.getName());
+    }
 }
