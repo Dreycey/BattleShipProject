@@ -7,4 +7,8 @@ public class Boat {
     public String getStatus(){
         return status;
     }
+
+    public void setStatus(String s){
+
+    }
 }
