@@ -32,6 +32,10 @@ public class Boat {
     }
 
     public void setCoordinates(String[] c){
-        coordinates = c;
+        coordinates = Arrays.stream(c).filter(x -> isValidCoordinate(x)).toArray(String[]::new);
+    }
+
+    public boolean isCoordAfloat(String c){
+        return false;
     }
 }

@@ -54,4 +54,13 @@ class BoatTest {
         Assertions.assertTrue(boat.isValidCoordinate("A9"));
         Assertions.assertTrue(boat.isValidCoordinate("J10"));
     }
+
+    @Test
+    public void testIsCoordInList() throws Exception{
+        String[] coords = {"A1","A2","A3"};
+        boat.setCoordinates(coords);
+
+        Assertions.assertTrue(boat.isCoordAfloat("A2"));
+        Assertions.assertFalse(boat.isCoordAfloat("A4"));
+    }
 }
