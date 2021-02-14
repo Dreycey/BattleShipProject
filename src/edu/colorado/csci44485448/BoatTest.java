@@ -20,5 +20,7 @@ class BoatTest {
         String newStatus = "Hit";
 
         boat.setStatus(newStatus);
+
+        Assertions.assertEquals(newStatus, boat.getStatus());
     }
 }
