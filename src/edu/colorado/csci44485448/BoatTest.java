@@ -17,10 +17,11 @@ class BoatTest {
 
     @Test
     public void testSetStatus() throws Exception{
-        String newStatus = "Hit";
+        String defaultStatus = "Afloat";
+        String badStatus = "BadStatus";
 
-        boat.setStatus(newStatus);
+        boat.setStatus(badStatus);
 
-        Assertions.assertEquals(newStatus, boat.getStatus());
+        Assertions.assertEquals(defaultStatus, boat.getStatus());
     }
 }

@@ -9,6 +9,6 @@ public class Boat {
     }
 
     public void setStatus(String s){
-
+        status = s;
     }
 }
