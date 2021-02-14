@@ -34,11 +34,12 @@ class BoatTest {
 
     @Test
     public void testSetCoords() throws Exception{
-        String[] newCoords = {"A1","A2","A3"};
+        String[] newCoords = {"A1","A2","A3","A30"};
+        String[] shouldBeCoords = {"A1","A2","A3"};
 
         boat.setCoordinates(newCoords);
 
-        Assertions.assertArrayEquals(newCoords, boat.getCoordinates());
+        Assertions.assertArrayEquals(shouldBeCoords, boat.getCoordinates());
     }
 
     //what if there's a bad coordinate?
@@ -50,5 +51,7 @@ class BoatTest {
 
         Assertions.assertFalse(boat.isValidCoordinate(badCoord));
         Assertions.assertFalse(boat.isValidCoordinate(badCoordAgain));
+        Assertions.assertTrue(boat.isValidCoordinate("A9"));
+        Assertions.assertTrue(boat.isValidCoordinate("J10"));
     }
 }

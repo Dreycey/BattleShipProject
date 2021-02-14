@@ -8,7 +8,12 @@ public class Boat {
     private String[] coordinates = {};
 
     public boolean isValidCoordinate(String coord){
-        return true;
+        int letter = (int) coord.charAt(0);
+        int number = Integer.parseInt(coord.substring(1));
+        if(number > 0 && number < 11 && letter > 64 && letter < 75){
+            return true;
+        }
+        return false;
     }
 
     public String getStatus(){
