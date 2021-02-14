@@ -24,4 +24,11 @@ class BoatTest {
 
         Assertions.assertEquals(defaultStatus, boat.getStatus());
     }
+
+    @Test
+    public void testGetCoords() throws Exception{
+
+        Assertions.assertAll(boat.getCoordinates());
+
+    }
 }

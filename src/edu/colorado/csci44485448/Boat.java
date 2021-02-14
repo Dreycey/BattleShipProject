@@ -1,5 +1,7 @@
 package edu.colorado.csci44485448;
 
+import java.util.Arrays;
+
 public class Boat {
 
     private String status = "Afloat";
@@ -9,6 +11,9 @@ public class Boat {
     }
 
     public void setStatus(String s){
-        status = s;
+        String[] validStatuses = {"Afloat", "Hit", "Sunk"};
+        if(Arrays.asList(validStatuses).contains(s)) {
+            status = s;
+        }
     }
 }
