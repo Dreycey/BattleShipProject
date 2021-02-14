@@ -16,4 +16,9 @@ public class Boat {
             status = s;
         }
     }
+
+    public String[] getCoordinates(){
+        String[] c = {};
+        return c;
+    }
 }
