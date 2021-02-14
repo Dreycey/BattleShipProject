@@ -28,7 +28,7 @@ class BoatTest {
     @Test
     public void testGetCoords() throws Exception{
         String[] emptyCoords = {};
-        Assertions.assertEquals(emptyCoords,boat.getCoordinates());
+        Assertions.assertArrayEquals(emptyCoords,boat.getCoordinates());
 
     }
 }

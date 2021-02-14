@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Boat {
 
     private String status = "Afloat";
+    private String[] coordinates = {};
 
     public String getStatus(){
         return status;
@@ -18,7 +19,6 @@ public class Boat {
     }
 
     public String[] getCoordinates(){
-        String[] c = {};
-        return c;
+        return coordinates;
     }
 }
