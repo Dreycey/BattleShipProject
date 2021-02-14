@@ -1,13 +1,12 @@
 package edu.colorado.csci44485448;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-class BattleShipTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    BattleShip boat = new BattleShip();
+class DestroyerTest {
+    Destroyer boat = new Destroyer();
 
     @Test
     public void testInheritedWorks() throws Exception{
@@ -37,20 +36,20 @@ class BattleShipTest {
 
     @Test
     public void testGetName() throws Exception{
-        String name = "BattleShip";
+        String name = "Destroyer";
 
         Assertions.assertEquals(name, boat.getName());
     }
 
     @Test
     public void testGetSize() throws Exception{
-        Assertions.assertEquals(4, boat.getSize());
+        Assertions.assertEquals(3, boat.getSize());
     }
 
     @Test
     public void testRealignStatus() throws  Exception{
-        String[] coords = {"A1","A2","A3","A4"};
-        String[] hitCoords = {"A1","A2","A4"};
+        String[] coords = {"A1","A2","A3"};
+        String[] hitCoords = {"A1","A2"};
         String[] sunkCoords = {};
         String defaultStatus = "Afloat";
 
@@ -64,8 +63,8 @@ class BattleShipTest {
 
         boat.removeCoordinate("A1");
         boat.removeCoordinate("A2");
-        boat.removeCoordinate("A4");
 
         Assertions.assertEquals("Sunk", boat.getStatus());
     }
+
 }
