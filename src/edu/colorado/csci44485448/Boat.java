@@ -21,4 +21,8 @@ public class Boat {
     public String[] getCoordinates(){
         return coordinates;
     }
+
+    public void setCoordinates(String[] c){
+
+    }
 }
