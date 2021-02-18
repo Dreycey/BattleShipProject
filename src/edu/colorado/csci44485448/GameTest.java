@@ -32,4 +32,11 @@ class GameTest {
         Assertions.assertEquals(1,g.getTurn());
     }
 
+    @Test
+    public void testGetSetBoats(){
+        String[] defaultBoats = {"Minesweeper","Destroyer","Battleship"};
+
+        Assertions.assertArrayEquals(defaultBoats, g.getBoats());
+    }
+
 }

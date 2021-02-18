@@ -3,6 +3,7 @@ package edu.colorado.csci44485448;
 public class Game {
 
     int turn;
+    String[] boats;
 
     public Game(){
 
@@ -15,7 +16,9 @@ public class Game {
     }
 
     public void setTurn(int t){
-        turn = t;
+        if(t==0 || t==1){
+            turn = t;
+        }
     }
 
     public void playTurn(){
@@ -23,6 +26,10 @@ public class Game {
 
         //then switch turn
         turn = (turn == 1)?2:1;
+    }
+
+    public String[] getBoats(){
+        return null;
     }
 
 }
