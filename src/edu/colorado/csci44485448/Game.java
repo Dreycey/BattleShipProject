@@ -15,7 +15,7 @@ public class Game {
     }
 
     public void setTurn(int t){
-
+        turn = t;
     }
 
     public void playTurn(){
