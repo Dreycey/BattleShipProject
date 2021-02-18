@@ -8,6 +8,7 @@ public class Game {
     public Game(){
 
         turn = 1;
+        boats = new String[]{"Minesweeper","Destroyer","Battleship"};
 
     }
 
@@ -29,7 +30,11 @@ public class Game {
     }
 
     public String[] getBoats(){
-        return null;
+        return boats;
+    }
+
+    public void setBoats(String[] newBoats){
+
     }
 
 }

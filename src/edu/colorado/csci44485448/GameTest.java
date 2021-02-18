@@ -35,8 +35,16 @@ class GameTest {
     @Test
     public void testGetSetBoats(){
         String[] defaultBoats = {"Minesweeper","Destroyer","Battleship"};
+        String[] newBoats = {"Destroyer","Battleship"};
 
         Assertions.assertArrayEquals(defaultBoats, g.getBoats());
+
+        g.setBoats(newBoats);
+
+        Assertions.assertArrayEquals(newBoats, g.getBoats());
+
+
+
     }
 
 }
