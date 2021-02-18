@@ -14,6 +14,11 @@ class GameTest {
         g.playTurn();
 
         Assertions.assertEquals(2,g.getTurn());
+
+        //oops, set turn to 1 just bc
+        g.setTurn(1);
+
+        Assertions.assertEquals(1,g.getTurn());
     }
 
 }

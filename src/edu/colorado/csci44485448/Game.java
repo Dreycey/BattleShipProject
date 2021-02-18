@@ -14,8 +14,15 @@ public class Game {
         return turn;
     }
 
-    public void playTurn(){
+    public void setTurn(int t){
 
+    }
+
+    public void playTurn(){
+        //more complex behavior here -actual gameplay
+
+        //then switch turn
+        turn = (turn == 1)?2:1;
     }
 
 }
