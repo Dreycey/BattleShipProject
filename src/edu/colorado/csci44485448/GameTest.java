@@ -10,6 +10,10 @@ class GameTest {
         Game g = new Game();
 
         Assertions.assertEquals(1,g.getTurn());
+
+        g.playTurn();
+
+        Assertions.assertEquals(2,g.getTurn());
     }
 
 }
