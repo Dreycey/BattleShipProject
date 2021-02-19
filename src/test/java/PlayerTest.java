@@ -15,13 +15,6 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
-    //Minesweeper[] boatList;
-
-    // add boats to array TODO: This isn't working.
-    //boatList[0] = new Minesweeper();
-    //boatList[1] = new Destroyer();
-    //boatList[2] = new Battleship();
-
     // Instantiate Player
     Player playerObjOne = new Player();
 
