@@ -66,7 +66,7 @@ public class Player {
 
     OUTPUT:
         boolean <True, False>,
-        Boat.name
+        Boat.name <- NOT YET
     */
     public boolean receiveFire(String inCoordinate) {
         // TODO: Find out whether or not it was a hit
@@ -85,22 +85,27 @@ public class Player {
         TODO:
             supposed to find out which ship was hit, if there was a hit.
             One way to do this could be to find out the ship from the
-            primaryB object using the method latifa described.  
+            primaryB object using the method latifa described.
          */
 
     }
 
     /*
-
+    DESCRIPTION:
+        This method updates the target board for a player, based on the result
+        from the inital offensive. The Game Manager will call this method and
+        update the target board for the player on offense.
 
     INPUT:
+        String inCoordinate, String strikeResult
 
     OUTPUT:
-
+        return 0 for passing
     */
-   //public boolean fireUpon() {
-    //    return true;
-   // }
+   public int fireUpon(String inCoordinate, String strikeResult) {
+        //targetB.fireUpon(inCoordinate, strikeResult);
+        return 0;
+   }
 
     /*
 
