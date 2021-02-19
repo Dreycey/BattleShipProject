@@ -45,10 +45,10 @@ public class Player {
         Current: array of list with "C" added to each item
     */
     public List<String> placeShip(List<String> boatlist) { // assumes array type
-        List<String> outputTestArray = new List<Integer>();
-        for (int ind=0; ind > boatlist.size(); ind++ ){
+        List<String> outputTestArray = new ArrayList<>();
+        for (int ind=0; ind < boatlist.size(); ind++){
             System.out.println(boatlist.get(ind));
-            outputTestArray.add(ind + "C");
+            outputTestArray.add(boatlist.get(ind) + "C");
         }
         return outputTestArray;
     }
@@ -66,9 +66,9 @@ public class Player {
         boolean <True, False>,
         Boat.name
     */
-    public boolean receiveFire(int[] inCoordinate) {
-        return input;
-    }
+    //public boolean receiveFire(int[] inCoordinate) {
+    //    return input;
+   // }
 
     /*
 
@@ -78,9 +78,9 @@ public class Player {
     OUTPUT:
 
     */
-   public boolean fireUpon() {
-        return true;
-    }
+   //public boolean fireUpon() {
+    //    return true;
+   // }
 
     /*
 
@@ -90,7 +90,7 @@ public class Player {
     OUTPUT:
 
     */
-    public boolean render() {
-        return false;
-    }
+    //public boolean render() {
+      //  return false;
+   // }
 }

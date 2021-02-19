@@ -1,13 +1,15 @@
-package test.BoatPackage;
-
 import BoatPackage.Player;
-//Junit imports
-import static junit.framework.TestCase.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
+
+//Junit imports
 
 public class PlayerTest {
     Player playerObjOne = new Player();
@@ -39,7 +41,8 @@ public class PlayerTest {
     public void placeShipTest() {
         // need the primary boat class for ultimate test
         // for now test
-        List<String> boatsList = new List<String>("A3", "C5", "D5")
-        assertEquals(["A3", "C5", "D5"], playerObjOne.placeShip(boatsList););
+        List<String> boatsList = new ArrayList<>(Arrays.asList("A3", "C5", "D5"));
+        List<String> boatsListRed = new ArrayList<>(Arrays.asList("A3C", "C5C", "D5C"));
+        assertEquals(boatsListRed, playerObjOne.placeShip(boatsList));
     }
 }
