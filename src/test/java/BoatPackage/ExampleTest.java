@@ -1,12 +1,13 @@
-package test.collective;
-import io.collective.Example; //Make sure to open the java class
 
+
+import BoatPackage.Example;
+
+import static junit.framework.TestCase.*;
 import org.junit.Before;
 import org.junit.Test;
-import static junit.framework.TestCase.*;
 
 public class ExampleTest {
-    
+
     Example personObjOne = new Example();
 
     // runs before the tests.
@@ -28,9 +29,9 @@ public class ExampleTest {
         assertEquals(-45, personObjOne.returnsInput(-45));
     }
 
-    // Testing the get method for retrieving value from a key
-    //@Test
-    //public String testNull() {
-    //    assertNull(personObjOne.returnNull());
-    //}
+//    // Testing the get method for retrieving value from a key
+//    //@Test
+//    //public String testNull() {
+//    //    assertNull(personObjOne.returnNull());
+//    //}
 }

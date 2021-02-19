@@ -1,4 +1,4 @@
-package edu.colorado.csci44485448;
+package edu.colorado.csci44485448;//package edu.colorado.csci44485448;
   
 public class Main {
 
@@ -6,6 +6,5 @@ public class Main {
         // write your code here
          Ship ship = new Ship();
          ship.show();
-
     }
 }
