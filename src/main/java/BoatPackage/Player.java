@@ -43,12 +43,14 @@ public class Player {
 
     OUTPUT:
         Current: array of list with "C" added to each item
+        Eventual: add Object Boat
     */
     public List<String> placeShip(List<String> boatlist) { // assumes array type
         List<String> outputTestArray = new ArrayList<>();
         for (int ind=0; ind < boatlist.size(); ind++){
             System.out.println(boatlist.get(ind));
             outputTestArray.add(boatlist.get(ind) + "C");
+            // primaryB.addShip(boatlist.get(ind)) //TODO: Make sure this works.
         }
         return outputTestArray;
     }
@@ -60,15 +62,33 @@ public class Player {
     lastly, it returns a True if hit or False if not.
 
     INPUT:
-        int[] inCoordinate
+        String inCoordinate
 
     OUTPUT:
         boolean <True, False>,
         Boat.name
     */
-    //public boolean receiveFire(int[] inCoordinate) {
-    //    return input;
-   // }
+    public boolean receiveFire(String inCoordinate) {
+        // TODO: Find out whether or not it was a hit
+        //typeOfHit = primaryB.receiveFire(inCoordinate);
+        String typeOfHit = "hit";
+
+        //check if typeOfHit is a hit
+        //List<String> arr = new ArrayList<String>("hit","miss");
+        if (typeOfHit == "hit"){
+            return true;
+        } else{
+            return false;
+        }
+
+        /*
+        TODO:
+            supposed to find out which ship was hit, if there was a hit.
+            One way to do this could be to find out the ship from the
+            primaryB object using the method latifa described.  
+         */
+
+    }
 
     /*
 
