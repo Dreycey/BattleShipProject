@@ -1,17 +1,11 @@
 import BoatPackage.*;
 
+//Junit imports
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-//import static junit.framework.TestCase.assertEquals;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-//Junit imports
 
 public class PlayerTest {
 
