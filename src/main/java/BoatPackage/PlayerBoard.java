@@ -30,15 +30,19 @@ public class PlayerBoard extends GameBoard {
 
     // during opponent's turn, check to see if I've been hit
     public char receiveFire(String coord) {
-        char fireStatus = 'o';
-        int[] cell = convertCoordToIndex(coord);
 
+        char fireStatus = '-';
+        int[] cell = convertCoordToIndex(coord);
+        // TODO: validation of indices should be done in Game Class
         if (cell[0] != -1 && cell[1] != -1) {
-            if (getMatrix()[cell[0]][cell[1]] == '-')
+            //if (getMatrix()[cell[0]][cell[1]] == '-')
+            if (valueAt(coord) == '-') {
                 fireStatus = 'o'; // miss
+            }
             else fireStatus = 'x'; // hit (anything that's not a '-' would be a ship
         }
-        else fireStatus = '-'; // what to do in this case?
+
+        updateCoord(coord, fireStatus);
 
         return fireStatus;
     }

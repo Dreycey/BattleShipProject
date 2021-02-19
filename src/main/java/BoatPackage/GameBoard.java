@@ -36,6 +36,11 @@ public abstract class GameBoard {
         return matrix;
     }
 
+    public char valueAt(String coord) {
+        int[] cell = convertCoordToIndex(coord);
+        return matrix[cell[0]][cell[1]];
+    }
+
     public boolean updateCoord(String coordinate, char action) {
         int[] indexCoord = convertCoordToIndex(coordinate);
         if (indexCoord[0] != -1 && indexCoord[1] != -1) {
