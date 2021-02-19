@@ -1,6 +1,6 @@
 import BoatPackage.PlayerBoard;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class PlayerBoardTest {
     PlayerBoard p = new PlayerBoard();
@@ -11,7 +11,7 @@ public class PlayerBoardTest {
         String[] coordList = {"C3", "C4"};
 
         boolean isPlaced = p.placeShip(shipType, coordList);
-        Assert.assertTrue(isPlaced);
+        Assertions.assertTrue(isPlaced);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class PlayerBoardTest {
         String targetCell = "C9";
         char expectedResult = 'o';
         char result = p.receiveFire(targetCell);
-        Assert.assertEquals(expectedResult, result);
+        Assertions.assertEquals(expectedResult, result);
     }
 
 }

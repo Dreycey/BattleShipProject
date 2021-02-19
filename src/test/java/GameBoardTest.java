@@ -1,6 +1,6 @@
 import BoatPackage.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class GameBoardTest {
 
@@ -10,7 +10,7 @@ public class GameBoardTest {
         char[][] expectedMatrix = {{'-','-'},{'-','-'}};
 
         char[][] board = g1.getMatrix();
-        Assert.assertArrayEquals(expectedMatrix, board);
+        Assertions.assertArrayEquals(expectedMatrix, board);
     }
 
     @Test
@@ -18,14 +18,14 @@ public class GameBoardTest {
         String coordinate = "A1";
         char action = 'x'; // hit
         boolean isUpdated = g1.updateCoord(coordinate, action);
-        Assert.assertTrue(isUpdated);
+        Assertions.assertTrue(isUpdated);
     }
 
     @Test
     public void convertCoordToIndex() {
         int[] expectedLocation = {0,0};
         int[] location = g1.convertCoordToIndex("A1");
-        Assert.assertArrayEquals(expectedLocation, location);
+        Assertions.assertArrayEquals(expectedLocation, location);
     }
 
 }

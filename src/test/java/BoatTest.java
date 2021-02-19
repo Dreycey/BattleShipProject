@@ -1,4 +1,4 @@
-package edu.colorado.csci44485448;
+import BoatPackage.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

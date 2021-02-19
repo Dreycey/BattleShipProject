@@ -1,20 +1,22 @@
 import BoatPackage.Player;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.TestCase.assertEquals;
+//import static junit.framework.TestCase.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 //Junit imports
 
 public class PlayerTest {
     Player playerObjOne = new Player();
 
-    @Before
+    @BeforeEach
     public void before() {
     }
 
@@ -25,7 +27,7 @@ public class PlayerTest {
         // for now test
         List<String> boatsList = new ArrayList<>(Arrays.asList("A3", "C5", "D5"));
         List<String> boatsListRed = new ArrayList<>(Arrays.asList("A3C", "C5C", "D5C"));
-        assertEquals(boatsListRed, playerObjOne.placeShip(boatsList));
+        Assertions.assertEquals(boatsListRed, playerObjOne.placeShip(boatsList));
     }
 
     // test revieveFire
@@ -33,7 +35,7 @@ public class PlayerTest {
     public void revieveFireTest() {
         // need the primary boat class for ultimate test
         // for now return True
-        assertEquals(true, playerObjOne.receiveFire("A5"));
+        Assertions.assertEquals(true, playerObjOne.receiveFire("A5"));
     }
 
     // test fireUpon
@@ -41,7 +43,7 @@ public class PlayerTest {
     public void fireUponTest() {
         // need the primary boat class for ultimate test
         // for now return True
-        assertEquals(0, playerObjOne.fireUpon("A5", "hit"));
+        Assertions.assertEquals(0, playerObjOne.fireUpon("A5", "hit"));
     }
 
     // test render
@@ -49,6 +51,6 @@ public class PlayerTest {
     public void renderTest() {
         // need the primary boat class for ultimate test
         // for now return True
-        assertEquals(0, playerObjOne.render());
+        Assertions.assertEquals(0, playerObjOne.render());
     }
 }

@@ -4,8 +4,9 @@ import java.util.*;
 import java.sql.SQLOutput;
 
 public class Player {
-    //private primaryBoard primaryB; //TODO: ensure this is right class
-    //private targetBoard targetB; //TODO: ensure this is right class
+    private PlayerBoard primaryBoard; //TODO: ensure this is right class
+    private TargetBoard targetBoard; //TODO: ensure this is right class
+    private Boat[] fleet;
 
     // Constructor for Player class
     public Player() {
@@ -112,7 +113,7 @@ public class Player {
     public int render() {
         // print primary board
         System.out.println("Primary Board:");
-        //primaryB.render();
+        //primaryBoard.render();
 
         // print target board
         System.out.println("Target Board:");
