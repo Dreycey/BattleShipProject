@@ -108,14 +108,26 @@ public class Player {
    }
 
     /*
-
+    DESCRIPTION:
+        The render method called upon by the player displays both boards of the
+        player. In effect, this method calls upon the render methods of both the
+        primary and target boards.
 
     INPUT:
+        N/A
 
     OUTPUT:
-
+        returns 0 for passing
     */
-    //public boolean render() {
-      //  return false;
-   // }
+    public int render() {
+        // print primary board
+        System.out.println("Primary Board:");
+        //primaryB.render();
+
+        // print target board
+        System.out.println("Target Board:");
+        //targetB.render();
+
+        return 0;
+   }
 }
