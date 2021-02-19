@@ -6,6 +6,8 @@ import static junit.framework.TestCase.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 
 public class PlayerTest {
     Player playerObjOne = new Player();
@@ -35,6 +37,9 @@ public class PlayerTest {
     // text placeShip
     @Test
     public void placeShipTest() {
-
+        // need the primary boat class for ultimate test
+        // for now test
+        List<String> boatsList = new List<String>("A3", "C5", "D5")
+        assertEquals(["A3", "C5", "D5"], playerObjOne.placeShip(boatsList););
     }
 }
