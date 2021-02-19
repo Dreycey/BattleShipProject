@@ -1,28 +1,46 @@
 package BoatPackage;
 import java.util.*;
 
-import java.sql.SQLOutput;
-
 public class Player {
-    private PlayerBoard primaryBoard; //TODO: ensure this is right class
-    private TargetBoard targetBoard; //TODO: ensure this is right class
-    private Boat[] fleet;
+    private PlayerBoard primaryBoard;
+    private TargetBoard targetBoard;
+    private List<Boat> fleet = new ArrayList<Boat>();
 
-    // Constructor for Player class
+    // if no input, construct boats
     public Player() {
-      //  primaryB = new primaryBoard();
-      //  targetB = new targetBoard();
+        primaryBoard = new PlayerBoard();
+        targetBoard = new TargetBoard();
+
+        // Construct Boats
+        Boat mineBoat = new Minesweeper();
+        Boat DestBoat = new Destroyer();
+        Boat BatBoat = new Battleship();
+
+        // Define Boats
+        mineBoat.setCoordinates(new String[]{"C3", "C4"});
+
+        // add 3 default boats
+        fleet.add(mineBoat);
+        fleet.add(DestBoat);
+        fleet.add(BatBoat);
+
+        //add ships to primaryBoard
+        for (int ind=0; ind < fleet.size(); ind++){
+            Boat shipIter = fleet.get(ind);
+            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+        }
+    }
+
+    public List<Boat> getFleet() {
+        return fleet;
     }
 
     // Constructor for Player class
-    /*
-    public Player(targetBoard targetBoardIn, primaryBoard primaryBoardIn) {
-        //  primaryB = primaryBoardIn;
-        //  targetB = targetBoardIn;
+    public Player(Boat[] inputBoats) {
+        primaryBoard = new PlayerBoard();
+        targetBoard = new TargetBoard();
+        fleet = Arrays.asList(inputBoats);
     }
-    */
-
-
 
     /*
     DESCRIPTION:
@@ -36,12 +54,14 @@ public class Player {
         Current: array of list with "C" added to each item
         Eventual: add Object Boat
     */
-    public List<String> placeShip(List<String> boatlist) { // assumes array type
-        List<String> outputTestArray = new ArrayList<>();
+    public List<Boat> placeShip(List<Boat> boatlist) { // assumes array type
+        List<Boat> outputTestArray = new ArrayList<>();
         for (int ind=0; ind < boatlist.size(); ind++){
             System.out.println(boatlist.get(ind));
-            outputTestArray.add(boatlist.get(ind) + "C");
-            // primaryB.addShip(boatlist.get(ind)) //TODO: Make sure this works.
+            Boat shipIter = boatlist.get(ind);
+            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            outputTestArray.add(shipIter);
+            fleet.add(shipIter);
         }
         return outputTestArray;
     }
@@ -56,35 +76,49 @@ public class Player {
         String inCoordinate
 
     OUTPUT:
-        boolean <True, False>,
-        Boat.name <- NOT YET
+        String <"Sunk", "Surrender", "Hit", "Miss">
     */
-    public boolean receiveFire(String inCoordinate) {
-        // TODO: Find out whether or not it was a hit
-        //typeOfHit = primaryB.receiveFire(inCoordinate);
-        String typeOfHit = "hit";
+    public String receiveFire(String inCoordinate) {
 
-        //check if typeOfHit is a hit
-        //List<String> arr = new ArrayList<String>("hit","miss");
-        if (typeOfHit == "hit"){
-            return true;
-        } else{
-            return false;
+        // initialize variables
+        char typeOfHit = primaryBoard.receiveFire(inCoordinate);
+        String hitOrSunk = "Hit";
+        int indexToSink = -1;
+
+        // If hit, remove from fleet and determine Hit, Sunk, or Surrender
+        // Else, Miss
+        if (typeOfHit == 'x'){ // IF HIT
+            // go through boats in the fleet
+            for (Boat b : fleet) {
+                if (b.isCoordAfloat(inCoordinate)){
+                    b.removeCoordinate(inCoordinate);
+                    if (b.getStatus() == "Sunk") {
+                        //"Afloat", "Hit", "Sunk"
+                        indexToSink = fleet.indexOf(b);
+                        hitOrSunk = "Sunk";
+                    }
+                }
+            }
+            // If sunk, remove that ship.
+            if (hitOrSunk == "Sunk") {
+                fleet.remove(indexToSink);
+            }
+            // Check if all boats are sunk. -> this is a surrender
+            if (fleet.isEmpty()){
+                return "Surrender";
+            } else {
+                return hitOrSunk;
+            }
+
+        } else{ // IF NOT HIT
+            return "Miss";
         }
-
-        /*
-        TODO:
-            supposed to find out which ship was hit, if there was a hit.
-            One way to do this could be to find out the ship from the
-            primaryB object using the method latifa described.
-         */
-
     }
 
     /*
     DESCRIPTION:
         This method updates the target board for a player, based on the result
-        from the inital offensive. The Game Manager will call this method and
+        from the initial offensive. The Game Manager will call this method and
         update the target board for the player on offense.
 
     INPUT:
@@ -94,7 +128,7 @@ public class Player {
         return 0 for passing
     */
    public int fireUpon(String inCoordinate, String strikeResult) {
-        //targetB.fireUpon(inCoordinate, strikeResult);
+        targetBoard.fireUpon(inCoordinate, strikeResult);
         return 0;
    }
 
@@ -113,11 +147,11 @@ public class Player {
     public int render() {
         // print primary board
         System.out.println("Primary Board:");
-        //primaryBoard.render();
+        primaryBoard.renderBoard();
 
         // print target board
         System.out.println("Target Board:");
-        //targetB.render();
+        targetBoard.renderBoard();
 
         return 0;
    }
