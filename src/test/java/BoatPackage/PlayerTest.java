@@ -61,4 +61,12 @@ public class PlayerTest {
         // for now return True
         assertEquals(0, playerObjOne.fireUpon("A5", "hit"));
     }
+
+    // text placeShip
+    @Test
+    public void renderTest() {
+        // need the primary boat class for ultimate test
+        // for now return True
+        assertEquals(0, playerObjOne.render());
+    }
 }
