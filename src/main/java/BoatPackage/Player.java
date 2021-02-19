@@ -4,7 +4,6 @@ import java.util.*;
 import java.sql.SQLOutput;
 
 public class Player {
-    public int age = 28;
     //private primaryBoard primaryB; //TODO: ensure this is right class
     //private targetBoard targetB; //TODO: ensure this is right class
 
@@ -14,29 +13,20 @@ public class Player {
       //  targetB = new targetBoard();
     }
 
-    // example return tests
-    public int returnAge() {
-        return this.age;
+    // Constructor for Player class
+    /*
+    public Player(targetBoard targetBoardIn, primaryBoard primaryBoardIn) {
+        //  primaryB = primaryBoardIn;
+        //  targetB = targetBoardIn;
     }
+    */
 
-    public int returnAge2() {
-        return 29;
-    }
-
-
-
-    ///////////////
-    //
-    //
-    //   CODE BELOW
-    //
-    //
-    ///////////////
 
 
     /*
-    This method places a ship on the board and sends
-    the coordinates back to the primary board.
+    DESCRIPTION:
+        This method places a ship on the board and sends
+        the coordinates back to the primary board.
 
     INPUT:
         Array[] boatlist
@@ -55,11 +45,11 @@ public class Player {
         return outputTestArray;
     }
 
-
     /*
-    The input for this method is a coordinate where
-    a hit is sent. It then updates the fleet, and
-    lastly, it returns a True if hit or False if not.
+    DESCRIPTION:
+        The input for this method is a coordinate where
+        a hit is sent. It then updates the fleet, and
+        lastly, it returns a True if hit or False if not.
 
     INPUT:
         String inCoordinate
