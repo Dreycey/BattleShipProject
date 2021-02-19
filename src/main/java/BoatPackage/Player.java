@@ -6,7 +6,7 @@ public class Player {
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
 
-    // if no input, construct boats
+    // if no input, construct boats for a example
     public Player() {
         primaryBoard = new PlayerBoard();
         targetBoard = new TargetBoard();
@@ -31,15 +31,16 @@ public class Player {
         }
     }
 
-    public List<Boat> getFleet() {
-        return fleet;
-    }
-
     // Constructor for Player class
-    public Player(Boat[] inputBoats) {
+    public Player(List<Boat> inputBoats) {
         primaryBoard = new PlayerBoard();
         targetBoard = new TargetBoard();
-        fleet = Arrays.asList(inputBoats);
+        fleet = inputBoats;
+    }
+
+    // returns the fleet at hand
+    public List<Boat> getFleet() {
+        return fleet;
     }
 
     /*
@@ -48,11 +49,10 @@ public class Player {
         the coordinates back to the primary board.
 
     INPUT:
-        Array[] boatlist
+        List<Boat> boatlist
 
     OUTPUT:
-        Current: array of list with "C" added to each item
-        Eventual: add Object Boat
+        List<Boat> (returns the input list.)
     */
     public List<Boat> placeShip(List<Boat> boatlist) { // assumes array type
         List<Boat> outputTestArray = new ArrayList<>();
