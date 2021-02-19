@@ -1,4 +1,4 @@
-package io.collective;
+package BoatPackage;
 import java.util.HashMap;
 
 

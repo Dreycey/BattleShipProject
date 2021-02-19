@@ -1,5 +1,6 @@
-package edu.colorado.csci44485448;//package edu.colorado.csci44485448;
-  
+package BoatPackage;
+
+
 public class Main {
 
     public static void main(String[] args) {

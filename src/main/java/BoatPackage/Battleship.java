@@ -1,4 +1,4 @@
-package edu.colorado.csci44485448;
+package BoatPackage;
 
 public class Battleship extends Boat{
 
