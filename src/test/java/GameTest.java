@@ -13,7 +13,6 @@ class GameTest {
         Assertions.assertEquals(1,g.getTurn());
 
         g.playTurn();
-
         Assertions.assertEquals(2,g.getTurn());
     }
 
@@ -42,9 +41,6 @@ class GameTest {
         g.setBoats(newBoats);
 
         Assertions.assertArrayEquals(newBoats, g.getBoats());
-
-
-
     }
 
 }

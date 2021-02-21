@@ -3,9 +3,28 @@ package BoatPackage;
 import java.util.Arrays;
 
 public class Boat {
-
+    private String name;
+    private int size;
     private String status = "Afloat";
     private String[] coordinates = {};
+
+    public Boat() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSize() {
+        return size;
+    }
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public boolean isValidCoordinate(String coord){
         int letter = (int) coord.charAt(0);

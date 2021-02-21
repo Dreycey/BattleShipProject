@@ -1,15 +1,10 @@
 package BoatPackage;
 
 public class Destroyer extends Boat{
-    private static String name = "Destroyer";
-    private static int size = 3;
 
-    public String getName(){
-        return name;
-    }
-
-    public int getSize(){
-        return size;
+    public Destroyer() {
+        setName("Destroyer");
+        setSize(3);
     }
 
     @Override
@@ -38,10 +33,10 @@ public class Destroyer extends Boat{
     public void realignStatus(){
         int coordLength = getCoordinates().length;
 
-        if(coordLength == size){
+        if(coordLength == getSize()){
             setStatus("Afloat");
         }
-        else if(coordLength < size && coordLength > 0){
+        else if(coordLength < getSize() && coordLength > 0){
             setStatus("Hit");
         }
         else{

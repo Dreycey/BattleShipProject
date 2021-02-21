@@ -1,16 +1,11 @@
 package BoatPackage;
 
 public class Minesweeper extends Boat{
-    private static String name = "Minesweeper";
-    private static int size = 2;
 
-    public String getName(){
-        return name;
-    }
-
-    public int getSize(){
-        return size;
-    }
+    public Minesweeper() {
+        setName("Minesweeper");
+        setSize(2);
+    };
 
     @Override
     public void removeCoordinate(String c) {
@@ -24,11 +19,8 @@ public class Minesweeper extends Boat{
                 if (getCoordinates()[i].equals(c)) {
                     continue;
                 }
-
                 // else copy the element
                 coords[k++] = getCoordinates()[i];
-
-
             }
             setCoordinates(coords);
         }
@@ -38,10 +30,10 @@ public class Minesweeper extends Boat{
     public void realignStatus(){
         int coordLength = getCoordinates().length;
 
-        if(coordLength == size){
+        if(coordLength == getSize()){
             setStatus("Afloat");
         }
-        else if(coordLength < size && coordLength > 0){
+        else if(coordLength < getSize() && coordLength > 0){
             setStatus("Hit");
         }
         else{

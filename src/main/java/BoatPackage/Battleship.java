@@ -1,16 +1,9 @@
 package BoatPackage;
 
 public class Battleship extends Boat{
-
-    private static String name = "Battleship";
-    private static int size = 4;
-
-    public String getName(){
-        return name;
-    }
-
-    public int getSize(){
-        return size;
+    public Battleship() {
+        setName("Battleship");
+        setSize(4);
     }
 
     @Override
@@ -39,10 +32,10 @@ public class Battleship extends Boat{
     public void realignStatus(){
         int coordLength = getCoordinates().length;
 
-        if(coordLength == size){
+        if(coordLength == getSize()){
             setStatus("Afloat");
         }
-        else if(coordLength < size && coordLength > 0){
+        else if(coordLength < getSize() && coordLength > 0){
             setStatus("Hit");
         }
         else{

@@ -7,11 +7,11 @@ public class PlayerBoardTest {
 
     @Test
     public void placeShip() {
-        int shipType = 1; // minesweeper
         String[] coordList = {"C3", "C4"};
-
+        String shipType = "Minesweeper";
         boolean isPlaced = p.placeShip(shipType, coordList);
         Assertions.assertTrue(isPlaced);
+        Assertions.assertEquals('M', p.valueAt("C4"));
     }
 
     @Test
