@@ -2,7 +2,7 @@
 Assignment template
 ### Minimal Requirments
 <ol>
-  <li> Dreycey Albin, Latifa Al-Niami, Clare Lohrman</li>
+  <li> Dreycey Albin, Latifa Al-Naimi, Clare Lohrmann</li>
   <li> An appropriate .gitignore - CHECK</li>
   <li> The pdf with the CRC cards = "crc cards.pdf" </li>
    <li>The pdf and code changes tagged with the tag "milestone2" </li>
