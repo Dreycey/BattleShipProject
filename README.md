@@ -1,3 +1,10 @@
+# Team Members
+Clare Lohrmann
+
+Dreycey Albin
+
+Latifa Al-Naimi
+
 # CSCI4448-5448 Milestone1
 Assignment template
 ### Minimal Requirments
