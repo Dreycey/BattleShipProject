@@ -21,10 +21,15 @@ public class Game {
         //boats = new String[]{"BoatPackage.Battleship","BoatPackage.Destroyer", "BoatPackage.Minesweeper"};
 
         // Instantiate Players
-        String[][] coordPlayerOne = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"B4","B5"}};
-        String[][] coordPlayerTwo = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"B4","B5"}};
+        String[][] coordPlayerOne = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
+        String[][] coordPlayerTwo = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
         playerOne = new Player(setUpCoords(coordPlayerOne));
         playerTwo = new Player(setUpCoords(coordPlayerTwo));
+
+        // Play the game!!
+       // while(!gameOver()) {
+        //    playTurn();
+        //}
     }
 
     public int getTurn() {
@@ -128,11 +133,51 @@ public class Game {
         return playerBoatList; // if works, returns 0
     }
 
-    public void playTurn() {
-        //more complex behavior here -actual gameplay
+    public boolean gameOver() {
+        if (playerOne.fleetIsEmpty()){
+            System.out.println("GAME OVER: player 2 has won!");
+            return true;
+        }
+        if (playerTwo.fleetIsEmpty()){
+            System.out.println("GAME OVER: player 1 has won!");
+            return true;
+        }
+        return false;
+
+    }
+
+    public int playTurn() {
+        // assign the offensePlayer / defense
+        Player offensePlayer;
+        Player defensePlayer;
+        if (turn == 1){
+            offensePlayer = playerOne;
+            defensePlayer = playerTwo;
+        } else {
+            offensePlayer = playerTwo;
+            defensePlayer = playerOne;
+        }
+
+        // print out player board
+        offensePlayer.render();
+
+        // take input from offense
+        Scanner sc = new Scanner(System.in);
+        //System.out.print("Enter target for strike!");
+        //String strikeCoord = sc.next();
+
+        // checks impact on defensive player
+        //String strikeRes = defensePlayer.receiveFire(strikeCoord);
+        //System.out.println("Result:" + strikeRes);
+
+        // returns output to offensive player
+        //offensePlayer.fireUpon(strikeCoord, strikeRes);
 
         //then switch turn
         turn = (turn == 1) ? 2 : 1;
+
+
+        return 0;
     }
 
     public String[] getBoats() {

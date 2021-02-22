@@ -17,7 +17,6 @@ class GameTest {
     public void testTurns(){
 
         Assertions.assertEquals(1,g.getTurn());
-
         g.playTurn();
         Assertions.assertEquals(2,g.getTurn());
     }
@@ -57,6 +56,11 @@ class GameTest {
         Assertions.assertEquals(false, g.isValidCoordinate(falseInput));
         String[] falseInput2 = {"A2","A3","A10"};
         Assertions.assertEquals(false, g.isValidCoordinate(falseInput2));
+    }
+
+    @Test
+    public void testGameOver(){
+        Assertions.assertEquals(false, g.gameOver());
     }
 
 }

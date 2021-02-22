@@ -36,6 +36,11 @@ public class Player {
         primaryBoard = new PlayerBoard();
         targetBoard = new TargetBoard();
         fleet = inputBoats;
+        //add ships to primaryBoard
+        for (int ind=0; ind < fleet.size(); ind++){
+            Boat shipIter = fleet.get(ind);
+            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+        }
     }
 
     // returns the fleet at hand
@@ -64,6 +69,13 @@ public class Player {
             fleet.add(shipIter);
         }
         return outputTestArray;
+    }
+
+    public boolean fleetIsEmpty(){
+        if (fleet.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     /*
