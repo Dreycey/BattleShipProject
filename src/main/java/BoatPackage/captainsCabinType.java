@@ -7,4 +7,12 @@ public class captainsCabinType {
         loc = coordinate;
     }
 
+    public String getLoc(){
+        return loc;
+    }
+
+    public void setLoc(String newLoc){
+
+    }
+
 }
