@@ -25,4 +25,11 @@ class armoredCaptainsCabinTest {
         Assertions.assertEquals(newLoc, type.getLoc());
     }
 
+    @Test
+    public void testGetAlready() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new armoredCaptainsCabin(location);
+
+        Assertions.assertFalse(type.getHitStatus());
+    }
 }
