@@ -31,5 +31,13 @@ class armoredCaptainsCabinTest {
         Assertions.assertTrue(type.getHitStatus());
     }
 
+    @Test
+    public void testHit() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new armoredCaptainsCabin(location);
+
+        Assertions.assertEquals("Miss", type.hit());
+    }
+
 
 }

@@ -8,6 +8,4 @@ public class armoredCaptainsCabin extends captainsCabinType{
         super(location);
     }
 
-
-
 }
