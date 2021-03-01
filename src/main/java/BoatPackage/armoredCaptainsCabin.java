@@ -10,7 +10,11 @@ public class armoredCaptainsCabin extends captainsCabinType{
 
     @Override
     public String hit(){
-        return "Miss";
+        if(!getHitStatus()){
+            setHitStatus(true);
+            return "Miss";
+        }
+        return "Sunk";
     }
 
 }
