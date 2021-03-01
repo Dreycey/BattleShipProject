@@ -26,4 +26,12 @@ class unarmoredCaptainsCabinTest {
         Assertions.assertEquals(newLoc, type.getLoc());
     }
 
+    @Test
+    public void testHit() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new unarmoredCaptainsCabin(location);
+
+        Assertions.assertEquals("Sunk", type.hit());
+    }
+
 }
