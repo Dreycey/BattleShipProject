@@ -6,4 +6,9 @@ public class unarmoredCaptainsCabin extends captainsCabinType{
         super(location);
     }
 
+    @Override
+    public String hit(){
+        return "Sunk";
+    }
+
 }
