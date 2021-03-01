@@ -12,7 +12,11 @@ public class captainsCabinType {
     }
 
     public void setLoc(String newLoc){
+        loc = newLoc;
+    }
 
+    public String hit() {
+        return null;
     }
 
 }

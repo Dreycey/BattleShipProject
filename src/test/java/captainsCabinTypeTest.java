@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class captainsCabinTypeTest {
 
     @Test
-    public void testContructor() throws Exception{
+    public void testConstructor() throws Exception{
         String location = "A3";
         captainsCabinType type = new captainsCabinType(location);
     }
@@ -30,5 +30,13 @@ class captainsCabinTypeTest {
         type.setLoc(newLoc);
 
         Assertions.assertEquals(newLoc, type.getLoc());
+    }
+
+    @Test
+    public void testHit() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new captainsCabinType(location);
+
+        Assertions.assertEquals(null, type.hit());
     }
 }
