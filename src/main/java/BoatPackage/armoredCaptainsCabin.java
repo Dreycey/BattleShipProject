@@ -13,4 +13,8 @@ public class armoredCaptainsCabin extends captainsCabinType{
         return alreadyHit;
     }
 
+    public void setHitStatus(boolean status){
+        alreadyHit = status;
+    }
+
 }
