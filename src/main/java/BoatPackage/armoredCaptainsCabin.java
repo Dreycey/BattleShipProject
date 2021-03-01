@@ -8,4 +8,9 @@ public class armoredCaptainsCabin extends captainsCabinType{
         super(location);
     }
 
+    @Override
+    public String hit(){
+        return "Miss";
+    }
+
 }

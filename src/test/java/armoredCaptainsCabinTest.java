@@ -39,5 +39,14 @@ class armoredCaptainsCabinTest {
         Assertions.assertEquals("Miss", type.hit());
     }
 
+    @Test
+    public void testHitTwice() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new armoredCaptainsCabin(location);
+
+        Assertions.assertEquals("Miss", type.hit());
+        Assertions.assertEquals("Sunk", type.hit());
+    }
+
 
 }
