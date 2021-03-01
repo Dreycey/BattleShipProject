@@ -7,6 +7,7 @@ class captainsCabinTypeTest {
 
     @Test
     public void testContructor() throws Exception{
-        captainsCabinType type = new captainsCabinType();
+        String location = "A3";
+        captainsCabinType type = new captainsCabinType(location);
     }
 }
