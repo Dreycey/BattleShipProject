@@ -2,8 +2,9 @@ package BoatPackage;
 
 public class captainsCabinType {
 
-    public captainsCabinType(){
-
+    private  String loc;
+    public captainsCabinType(String coordinate){
+        loc = coordinate;
     }
 
 }
