@@ -23,23 +23,13 @@ class armoredCaptainsCabinTest {
         type.setLoc(newLoc);
 
         Assertions.assertEquals(newLoc, type.getLoc());
-    }
-
-    @Test
-    public void testGetAlready() throws Exception{
-        String location = "A3";
-        armoredCaptainsCabin type = new armoredCaptainsCabin(location);
 
         Assertions.assertFalse(type.getHitStatus());
-    }
-
-    @Test
-    public void testSetAlready() throws Exception{
-        String location = "A3";
-        armoredCaptainsCabin type = new armoredCaptainsCabin(location);
 
         type.setHitStatus(true);
 
         Assertions.assertTrue(type.getHitStatus());
     }
+
+
 }

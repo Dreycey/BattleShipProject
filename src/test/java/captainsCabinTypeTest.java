@@ -33,6 +33,24 @@ class captainsCabinTypeTest {
     }
 
     @Test
+    public void testGetAlready() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new captainsCabinType(location);
+
+        Assertions.assertFalse(type.getHitStatus());
+    }
+
+    @Test
+    public void testSetAlready() throws Exception{
+        String location = "A3";
+        captainsCabinType type = new captainsCabinType(location);
+
+        type.setHitStatus(true);
+
+        Assertions.assertTrue(type.getHitStatus());
+    }
+
+    @Test
     public void testHit() throws Exception{
         String location = "A3";
         captainsCabinType type = new captainsCabinType(location);

@@ -24,6 +24,12 @@ class unarmoredCaptainsCabinTest {
         type.setLoc(newLoc);
 
         Assertions.assertEquals(newLoc, type.getLoc());
+
+        Assertions.assertFalse(type.getHitStatus());
+
+        type.setHitStatus(true);
+
+        Assertions.assertTrue(type.getHitStatus());
     }
 
     @Test
