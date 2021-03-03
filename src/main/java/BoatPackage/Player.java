@@ -167,4 +167,8 @@ public class Player {
 
         return 0;
    }
+
+    public PlayerBoard getPrimaryBoard() {
+        return primaryBoard;
+    }
 }

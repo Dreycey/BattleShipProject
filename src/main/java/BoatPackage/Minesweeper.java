@@ -8,7 +8,11 @@ public class Minesweeper extends Boat{
     }
 
     public Minesweeper(String[] coords){
-
+        setName("Minesweeper");
+        setSize(2);
+        setCabinIndex(0);
+        setCoordinates(coords);
+        setCaptainsCabin("unarmored",getCoordinates()[getCabinIndex()]);
     }
 
     @Override

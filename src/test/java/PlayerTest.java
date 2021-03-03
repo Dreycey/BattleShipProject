@@ -4,8 +4,10 @@ import BoatPackage.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import sun.security.krb5.internal.crypto.Des;
 
 public class PlayerTest {
 
@@ -68,6 +70,37 @@ public class PlayerTest {
         // need the primary boat class for ultimate test
         // for now return True
         Assertions.assertEquals(3, playerObjOne.getFleet().size());
+    }
+
+    @Test
+    public void testReceiveFireUnarmored() throws Exception{
+        //set up boats
+        String[] bCoords = {"A1","A2","A3","A4"};
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Battleship battleship = new Battleship(bCoords);
+        Destroyer destroyer = new Destroyer(dCoords);
+        Minesweeper minesweeper = new Minesweeper(mCoords);
+
+        List<Boat> fleet = Arrays.asList(battleship, destroyer, minesweeper);
+
+        //construct player
+        Player player = new Player(fleet);
+
+        //hit unarmored captains cabin
+        String result = player.receiveFire("C1");
+
+        //did method return sunk?
+        Assertions.assertEquals("Sunk C1 C2", result);
+
+        //is the unarmored boat out of the fleet?
+        Assertions.assertFalse(player.getFleet().contains(minesweeper));
+        Assertions.assertTrue(player.getFleet().contains(battleship));
+
+        //is the player board correct?
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("C1"));
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("C2"));
     }
 
 
