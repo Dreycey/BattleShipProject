@@ -79,4 +79,24 @@ class BoatTest {
         Assertions.assertArrayEquals(postRemoval,boat.getCoordinates());
     }
 
+    @Test
+    public void testCabin() throws Exception{
+        boat.setCaptainsCabin("armored","A3");
+
+        String location = "A3";
+
+        Assertions.assertEquals(location, boat.getCaptainsCabin().getLoc());
+
+        String newLoc = "A4";
+        boat.getCaptainsCabin().setLoc(newLoc);
+
+        Assertions.assertEquals(newLoc, boat.getCaptainsCabin().getLoc());
+
+        Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
+
+        boat.getCaptainsCabin().setHitStatus(true);
+
+        Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
+    }
+
 }

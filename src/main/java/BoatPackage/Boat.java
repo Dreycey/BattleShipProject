@@ -7,6 +7,7 @@ public class Boat {
     private int size;
     private String status = "Afloat";
     private String[] coordinates = {};
+    private captainsCabinType captainsCabin;
 
     public Boat() {
     }
@@ -77,5 +78,13 @@ public class Boat {
             }
             coordinates = coords;
         }
+    }
+
+    public void setCaptainsCabin(String type, String loc){
+
+    }
+
+    public captainsCabinType getCaptainsCabin(){
+        return null;
     }
 }
