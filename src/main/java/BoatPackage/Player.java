@@ -132,6 +132,9 @@ public class Player {
                             return hitOrSunk;
                         }
                         else{
+                            //if it is a miss, need to update board
+                            char toReplace = b.getName().charAt(0);
+                            getPrimaryBoard().updateCoord(inCoordinate, toReplace);
                             return "Miss";
                         }
                     }
@@ -204,4 +207,8 @@ public class Player {
     public PlayerBoard getPrimaryBoard() {
         return primaryBoard;
     }
+
+    public TargetBoard getTargetBoard() {return targetBoard;}
+
+    public void fireUponMany(String[] coords, String strikeResult){}
 }

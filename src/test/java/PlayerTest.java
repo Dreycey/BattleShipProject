@@ -141,8 +141,77 @@ public class PlayerTest {
         //is the armored boat still in the fleet?
         Assertions.assertTrue(player.getFleet().contains(battleship));
 
+        //is the coordinate still in the boat's list?
+        Assertions.assertTrue(player.getFleet().get(0).isCoordAfloat("A3"));
+
         //is the player board correct?
         Assertions.assertEquals('B', player.getPrimaryBoard().valueAt("A3"));
+    }
+
+    @Test
+    public void testReceiveFireArmoredSecond() throws Exception{
+        //set up boats
+        String[] bCoords = {"A1","A2","A3","A4"};
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Battleship battleship = new Battleship(bCoords);
+        Destroyer destroyer = new Destroyer(dCoords);
+        Minesweeper minesweeper = new Minesweeper(mCoords);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        Player player = new Player(fleet);
+
+        //hit armored captains cabin
+        String result = player.receiveFire("A2");
+
+        Assertions.assertEquals("Hit", result);
+
+        result = player.receiveFire("A3");
+
+        Assertions.assertEquals("Miss", result);
+
+        //hit second time
+        result = player.receiveFire("A3");
+
+        //did method return sunk?
+        Assertions.assertEquals("Sunk A1 A3 A4", result);
+
+        //is the unarmored boat out of the fleet?
+        Assertions.assertFalse(player.getFleet().contains(battleship));
+
+        //is the player board correct?
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A1"));
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A2"));
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A3"));
+        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A4"));
+    }
+
+    @Test
+    public void testFireUponMany() throws Exception{
+        //set up boats
+        String[] bCoords = {"A1","A2","A3","A4"};
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Battleship battleship = new Battleship(bCoords);
+        Destroyer destroyer = new Destroyer(dCoords);
+        Minesweeper minesweeper = new Minesweeper(mCoords);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        Player player = new Player(fleet);
+
+        String[] fires = {"A3","A4","A6"};
+
+        player.fireUponMany(fires, "Sunk A3 A4 A6");
+
+        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A3"));
+        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A4"));
+        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A6"));
     }
 
 
