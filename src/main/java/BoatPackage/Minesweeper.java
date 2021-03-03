@@ -5,7 +5,11 @@ public class Minesweeper extends Boat{
     public Minesweeper() {
         setName("Minesweeper");
         setSize(2);
-    };
+    }
+
+    public Minesweeper(String[] coords){
+
+    }
 
     @Override
     public void removeCoordinate(String c) {

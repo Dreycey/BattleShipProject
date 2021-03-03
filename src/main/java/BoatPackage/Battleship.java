@@ -6,6 +6,14 @@ public class Battleship extends Boat{
         setSize(4);
     }
 
+    public Battleship(String[] coords){
+        setName("Battleship");
+        setSize(4);
+        setCabinIndex(2);
+        setCoordinates(coords);
+        setCaptainsCabin("armored",getCoordinates()[getCabinIndex()]);
+    }
+
     @Override
     public void removeCoordinate(String c) {
         if(isCoordAfloat(c)){

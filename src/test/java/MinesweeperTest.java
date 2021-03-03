@@ -66,4 +66,17 @@ class MinesweeperTest {
         Assertions.assertEquals("Sunk", boat.getStatus());
     }
 
+    @Test
+    public void testCabin() throws Exception{
+        String[] coords = {"A1","A2"};
+
+        Minesweeper boat = new Minesweeper(coords);
+
+        Assertions.assertEquals("A1", boat.getCaptainsCabin().getLoc());
+
+        Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
+    }
+
 }
