@@ -71,7 +71,7 @@ class DestroyerTest {
     public void testCabin() throws Exception{
         String[] coords = {"A1","A2","A3"};
 
-        boat.setCoordinates(coords);
+        Destroyer boat = new Destroyer(coords);
 
         Assertions.assertEquals("A2", boat.getCaptainsCabin().getLoc());
 

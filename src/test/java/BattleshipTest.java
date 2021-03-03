@@ -68,4 +68,20 @@ class BattleshipTest {
 
         Assertions.assertEquals("Sunk", boat.getStatus());
     }
+
+    @Test
+    public void testCabin() throws Exception{
+        String[] coords = {"A1","A2","A3","A4"};
+
+        Battleship boat = new Battleship(coords);
+
+        Assertions.assertEquals("A3", boat.getCaptainsCabin().getLoc());
+
+        Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Miss", boat.getCaptainsCabin().hit());
+        Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
+    }
 }

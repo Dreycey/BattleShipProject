@@ -5,6 +5,15 @@ public class Destroyer extends Boat{
     public Destroyer() {
         setName("Destroyer");
         setSize(3);
+        setCabinIndex(1);
+    }
+
+    public Destroyer(String[] coords){
+        setName("Destroyer");
+        setSize(3);
+        setCabinIndex(1);
+        setCoordinates(coords);
+        setCaptainsCabin("armored",getCoordinates()[getCabinIndex()]);
     }
 
     @Override

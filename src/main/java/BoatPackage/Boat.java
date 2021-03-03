@@ -94,7 +94,9 @@ public class Boat {
         return captainsCabin;
     }
 
-    public void setCabinIndex(int i){}
+    public void setCabinIndex(int i){
+        cabinIndex = i;
+    }
 
-    public int getCabinIndex(){return 0;}
+    public int getCabinIndex(){return cabinIndex;}
 }
