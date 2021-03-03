@@ -99,4 +99,16 @@ class BoatTest {
         Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
     }
 
+    @Test
+    public void testCabinHits() throws Exception{
+        boat.setCaptainsCabin("armored","A3");
+
+        Assertions.assertEquals("Miss", boat.getCaptainsCabin().hit());
+
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
+
+        boat.setCaptainsCabin("unarmored", "A3");
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
+    }
+
 }

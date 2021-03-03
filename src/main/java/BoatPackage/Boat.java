@@ -81,10 +81,15 @@ public class Boat {
     }
 
     public void setCaptainsCabin(String type, String loc){
-
+        if(type == "armored"){
+            captainsCabin = new armoredCaptainsCabin(loc);
+        }
+        else{
+            captainsCabin = new unarmoredCaptainsCabin(loc);
+        }
     }
 
     public captainsCabinType getCaptainsCabin(){
-        return null;
+        return captainsCabin;
     }
 }
