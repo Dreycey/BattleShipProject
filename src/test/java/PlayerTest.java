@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import sun.security.krb5.internal.crypto.Des;
@@ -12,7 +13,19 @@ import sun.security.krb5.internal.crypto.Des;
 public class PlayerTest {
 
     // Instantiate Player
-    Player playerObjOne = new Player();
+    //set up boats
+    String[] bCoords = {"A1","A2","A3","A4"};
+    String[] dCoords = {"B1","B2","B3"};
+    String[] mCoords = {"C1","C2"};
+
+    Battleship battleship = new Battleship(bCoords);
+    Destroyer destroyer = new Destroyer(dCoords);
+    Minesweeper minesweeper = new Minesweeper(mCoords);
+
+    List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+    //construct player
+    Player playerObjOne = new Player(fleet);
 
     @BeforeEach
     public void before() {
@@ -33,12 +46,12 @@ public class PlayerTest {
 
     // test revieveFire
     @Test
-    public void revieveFireTest() {
+    public void receiveFireTest() {
         // need the primary boat class for ultimate test
         // for now return True
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("C3"));
-        Assertions.assertEquals("Sunk", playerObjOne.receiveFire("C4"));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("C2"));
+        Assertions.assertEquals("Sunk", playerObjOne.receiveFire("C1"));
 
     }
 
@@ -83,7 +96,7 @@ public class PlayerTest {
         Destroyer destroyer = new Destroyer(dCoords);
         Minesweeper minesweeper = new Minesweeper(mCoords);
 
-        List<Boat> fleet = Arrays.asList(battleship, destroyer, minesweeper);
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
         //construct player
         Player player = new Player(fleet);

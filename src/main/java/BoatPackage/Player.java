@@ -109,12 +109,17 @@ public class Player {
                         hitOrSunk = b.getCaptainsCabin().hit();
 
                         if(hitOrSunk == "Sunk"){
-                            //tack the coords onto the end so we can sink them all
-                            for (int i=0;i<b.getCoordinates().length;i++){
-                                hitOrSunk = hitOrSunk + " "+ b.getCoordinates()[i];
+                            //tack the coords onto the end so we can sink them all (IF other coords exist)
+                            if(b.getCoordinates().length > 1) {
+                                for (int i = 0; i < b.getCoordinates().length; i++) {
+                                    hitOrSunk = hitOrSunk + " " + b.getCoordinates()[i];
+                                }
                             }
                             //remove it from fleet
                             indexToSink = fleet.indexOf(b);
+                            fleet.remove(fleet.indexOf(b));
+
+                            if (fleet.isEmpty()) return "Surrender";
 
                             return hitOrSunk;
                         }
