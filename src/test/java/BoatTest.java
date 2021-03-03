@@ -100,6 +100,13 @@ class BoatTest {
     }
 
     @Test
+    public void testCabinIndex() throws Exception{
+        boat.setCabinIndex(2);
+
+        Assertions.assertEquals(2, boat.getCabinIndex());
+    }
+
+    @Test
     public void testCabinHits() throws Exception{
         boat.setCaptainsCabin("armored","A3");
 

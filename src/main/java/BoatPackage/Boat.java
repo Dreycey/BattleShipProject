@@ -8,6 +8,7 @@ public class Boat {
     private String status = "Afloat";
     private String[] coordinates = {};
     private captainsCabinType captainsCabin;
+    private int cabinIndex;
 
     public Boat() {
     }
@@ -92,4 +93,8 @@ public class Boat {
     public captainsCabinType getCaptainsCabin(){
         return captainsCabin;
     }
+
+    public void setCabinIndex(int i){}
+
+    public int getCabinIndex(){return 0;}
 }
