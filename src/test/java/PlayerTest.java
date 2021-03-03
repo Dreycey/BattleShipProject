@@ -116,5 +116,34 @@ public class PlayerTest {
         Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("C2"));
     }
 
+    @Test
+    public void testReceiveFireArmoredFirst() throws Exception{
+        //set up boats
+        String[] bCoords = {"A1","A2","A3","A4"};
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Battleship battleship = new Battleship(bCoords);
+        Destroyer destroyer = new Destroyer(dCoords);
+        Minesweeper minesweeper = new Minesweeper(mCoords);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        Player player = new Player(fleet);
+
+        //hit armored captains cabin
+        String result = player.receiveFire("A3");
+
+        //did method return sunk?
+        Assertions.assertEquals("Miss", result);
+
+        //is the armored boat still in the fleet?
+        Assertions.assertTrue(player.getFleet().contains(battleship));
+
+        //is the player board correct?
+        Assertions.assertEquals('B', player.getPrimaryBoard().valueAt("A3"));
+    }
+
 
 }

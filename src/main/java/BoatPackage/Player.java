@@ -119,6 +119,14 @@ public class Player {
                             indexToSink = fleet.indexOf(b);
                             fleet.remove(fleet.indexOf(b));
 
+                            //sink all coords
+                            //get coord list
+                            String[] arr = hitOrSunk.split(" ", 0);
+                            //for each one that isn't "Sunk", update the coord
+                            for(int i = 1; i < arr.length; i++){
+                                getPrimaryBoard().updateCoord(arr[i], 'x');
+                            }
+
                             if (fleet.isEmpty()) return "Surrender";
 
                             return hitOrSunk;
