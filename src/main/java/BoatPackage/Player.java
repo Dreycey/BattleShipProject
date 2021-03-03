@@ -103,6 +103,26 @@ public class Player {
             // go through boats in the fleet
             for (Boat b : fleet) {
                 if (b.isCoordAfloat(inCoordinate)){
+                    //if it is captains cabin
+                    if(b.getCaptainsCabin().getLoc() == inCoordinate){
+                        //hit captains cabin, get result
+                        hitOrSunk = b.getCaptainsCabin().hit();
+
+                        if(hitOrSunk == "Sunk"){
+                            //tack the coords onto the end so we can sink them all
+                            for (int i=0;i<b.getCoordinates().length;i++){
+                                hitOrSunk = hitOrSunk + " "+ b.getCoordinates()[i];
+                            }
+                            //remove it from fleet
+                            indexToSink = fleet.indexOf(b);
+
+                            return hitOrSunk;
+                        }
+                        else{
+                            return "Miss";
+                        }
+                    }
+                    //if the result is not a miss: remove
                     b.removeCoordinate(inCoordinate);
                     if (b.getStatus() == "Sunk") {
                         //"Afloat", "Hit", "Sunk"
