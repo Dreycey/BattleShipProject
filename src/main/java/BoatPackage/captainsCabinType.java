@@ -5,6 +5,10 @@ public class captainsCabinType {
     private  String loc;
     private boolean alreadyHit;
 
+    public captainsCabinType(){
+        alreadyHit = false;
+    }
+
     public captainsCabinType(String coordinate){
         loc = coordinate;
         alreadyHit = false;

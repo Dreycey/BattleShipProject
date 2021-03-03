@@ -2,8 +2,7 @@ package BoatPackage;
 
 public class armoredCaptainsCabin extends captainsCabinType{
 
-
-
+    public  armoredCaptainsCabin(){super();}
     public armoredCaptainsCabin(String location){
         super(location);
     }
