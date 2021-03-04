@@ -80,13 +80,15 @@ public class PlayerTest {
                 {"-1","-1","-1","-1","-1"},
                 {"1","1","1","1","0"},
                 {"0","0","0","0","0"},
-                {"0","0","0","0","0"},
+                {"0","0","1","1","0"},
                 {"0","0","0","0","0"}
         };
 
         // testing
         Boat boat1 = new Destroyer();
+        Boat boat2 = new Minesweeper();
         boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
+        boat2.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 
@@ -103,13 +105,15 @@ public class PlayerTest {
                 {"-1","-1","-1","-1","-1"},
                 {"1","1","1","1","0"},
                 {"0","0","0","0","0"},
-                {"0","0","0","0","0"},
+                {"0","0","1","1","0"},
                 {"0","0","0","0","0"}
         };
 
         // testing
         Boat boat1 = new Destroyer();
+        Boat boat2 = new Minesweeper();
         boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
+        boat1.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 

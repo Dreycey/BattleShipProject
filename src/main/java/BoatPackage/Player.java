@@ -175,16 +175,18 @@ public class Player {
    public String[][] receiveSonarPulse(String coordIn) {
         // initialize local DS
         //String[][] sonarOut = {{}};
-        String[][] sonarOut = {
-               {"-1","-1","-1","-1","-1"},
-               {"1","1","1","1","0"},
-               {"0","0","0","0","0"},
-               {"0","0","0","0","0"},
-               {"0","0","0","0","0"}
-        };
+        //String[][] sonarOut = {
+        //       {"-1","-1","-1","-1","-1"},
+        //       {"1","1","1","1","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"}
+        //};
         char[][] playerMatrix = primaryBoard.getMatrix();
         int[] index = primaryBoard.convertCoordToIndex(coordIn);
+        int boardSize = primaryBoard.getBoardSize();
         System.out.println("index: " + Arrays.toString(index));
+
 
         /*
         Now:
@@ -201,11 +203,39 @@ public class Player {
             else: "1"
         4. return the new array
          */
-        return sonarOut;
+
+       String[][] outputArray = new String[5][5];
+       char activeElement;
+       int outRow = 0; // counter Row
+       for (int row = (index[0]-2); row <= (index[0]+2); row++) {
+           int outCol = 0; // counter Col
+           for (int col = (index[1]-2); col <= (index[1]+2); col++) {
+
+               // if on board
+               if ( (0 <= row) && (row <= boardSize) && (0 <= col) && (col <= boardSize) ) {
+                   activeElement = playerMatrix[row][col];
+                   if (activeElement == '-') {
+                       outputArray[outRow][outCol] = "0";
+                   } else {
+                       outputArray[outRow][outCol] = "1";
+                   }
+               } else { // if not board
+                   outputArray[outRow][outCol] = "-1";
+               }
+               outCol++;
+           }
+           outRow++;
+       }
+       for (int row = 0; row < outputArray.length; row++) {
+           for (int col = 0; col < outputArray[row].length; col++) {
+               System.out.print(outputArray[row][col] + "\t");
+           }
+           System.out.println();
+       }
+        return outputArray;
    }
 
     public int fireSonarPulse(String[][] resultIn) {
-
         System.out.println("Sonar Pulse: ");
         for (int row = 0; row < resultIn.length; row++) {
             for (int col = 0; col < resultIn[row].length; col++) {

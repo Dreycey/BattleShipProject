@@ -168,6 +168,14 @@ public class Game {
 
         // checks impact on defensive player
         //String strikeRes = defensePlayer.receiveFire(strikeCoord);
+
+/*        // TODO: impliment later on
+        if (player.getSonarPulse > 0) {
+            String inputCoord = x;
+            char[][] sonarResult = defensePlayer.recieveSonarPulse(inputCoord);
+            offensePlayer.fireSonarPulse(inputCoord, sonarResult);
+        }*/
+
         //System.out.println("Result:" + strikeRes);
 
         // returns output to offensive player
