@@ -5,6 +5,8 @@ public class Player {
     private PlayerBoard primaryBoard;
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
+    private int numSonarPulse = 0;
+    private boolean canUseSonarPulse = false;
 
     // if no input, construct boats for a example
     public Player() {
@@ -42,6 +44,7 @@ public class Player {
             primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
         }
     }
+
 
     // returns the fleet at hand
     public List<Boat> getFleet() {
@@ -148,6 +151,7 @@ public class Player {
         return 0;
    }
 
+
     /*
     DESCRIPTION:
         The render method called upon by the player displays both boards of the
@@ -171,4 +175,78 @@ public class Player {
 
         return 0;
    }
+
+   public String[][] receiveSonarPulse(String coordIn) {
+        // initialize local DS
+        //String[][] sonarOut = {{}};
+        //String[][] sonarOut = {
+        //       {"-1","-1","-1","-1","-1"},
+        //       {"1","1","1","1","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"}
+        //};
+        char[][] playerMatrix = primaryBoard.getMatrix();
+        int[] index = primaryBoard.convertCoordToIndex(coordIn);
+        int boardSize = primaryBoard.getBoardSize();
+        System.out.println("index: " + Arrays.toString(index));
+
+
+        /*
+        Now:
+
+        NOTE:  think about making a char array.
+
+
+        1. loop through playerMatrix
+        1.5 make 5x5 String[5][5]
+        2. if off board: "-1" for that element
+            2.1 - if  rowmin < row < rowmax || colmin < col < colmax
+                   - use getBoardSize()
+        3. elif -: "0"
+            else: "1"
+        4. return the new array
+         */
+
+       String[][] outputArray = new String[5][5];
+       char activeElement;
+       int outRow = 0; // counter Row
+       for (int row = (index[0]-2); row <= (index[0]+2); row++) {
+           int outCol = 0; // counter Col
+           for (int col = (index[1]-2); col <= (index[1]+2); col++) {
+
+               // if on board
+               if ( (0 <= row) && (row <= boardSize) && (0 <= col) && (col <= boardSize) ) {
+                   activeElement = playerMatrix[row][col];
+                   if (activeElement == '-') {
+                       outputArray[outRow][outCol] = "0";
+                   } else {
+                       outputArray[outRow][outCol] = "1";
+                   }
+               } else { // if not board
+                   outputArray[outRow][outCol] = "-1";
+               }
+               outCol++;
+           }
+           outRow++;
+       }
+       for (int row = 0; row < outputArray.length; row++) {
+           for (int col = 0; col < outputArray[row].length; col++) {
+               System.out.print(outputArray[row][col] + "\t");
+           }
+           System.out.println();
+       }
+        return outputArray;
+   }
+
+    public int fireSonarPulse(String[][] resultIn) {
+        System.out.println("Sonar Pulse: ");
+        for (int row = 0; row < resultIn.length; row++) {
+            for (int col = 0; col < resultIn[row].length; col++) {
+                System.out.print(resultIn[row][col] + "\t");
+            }
+            System.out.println();
+        }
+        return 0;
+    }
 }
