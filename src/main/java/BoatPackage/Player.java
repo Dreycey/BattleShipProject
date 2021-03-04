@@ -223,6 +223,8 @@ public class Player {
         for (String c : coords){
             fireUpon(c, strikeResult);
         }
+    }
+
       
    public String[][] receiveSonarPulse(String coordIn) {
         // initialize local DS
