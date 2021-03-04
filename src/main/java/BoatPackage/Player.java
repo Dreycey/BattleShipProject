@@ -5,6 +5,8 @@ public class Player {
     private PlayerBoard primaryBoard;
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
+    private int numSonarPulse = 0;
+    private boolean canUseSonarPulse = false;
 
     // if no input, construct boats for a example
     public Player() {
@@ -42,6 +44,7 @@ public class Player {
             primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
         }
     }
+
 
     // returns the fleet at hand
     public List<Boat> getFleet() {
@@ -144,6 +147,7 @@ public class Player {
         return 0;
    }
 
+
     /*
     DESCRIPTION:
         The render method called upon by the player displays both boards of the
@@ -167,4 +171,19 @@ public class Player {
 
         return 0;
    }
+
+   public String[][] receiveSonarPulse(String coordIn) {
+       String[][] sonarOutExpected2 = {
+               {"-1","-1","-1","-1","-1"},
+               {"1","1","1","1","0"},
+               {"0","0","0","0","0"},
+               {"0","0","0","0","0"},
+               {"0","0","0","0","0"}
+       };
+        return sonarOutExpected2;
+   }
+
+    public int fireSonarPulse(String[][] resultIn) {
+        return 0;
+    }
 }

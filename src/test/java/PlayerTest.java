@@ -31,13 +31,13 @@ public class PlayerTest {
 
     // test revieveFire
     @Test
-    public void revieveFireTest() {
+    public void recieveFireTest() {
         // need the primary boat class for ultimate test
         // for now return True
+        //TODO: Add surrender
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
         Assertions.assertEquals("Hit", playerObjOne.receiveFire("C3"));
         Assertions.assertEquals("Sunk", playerObjOne.receiveFire("C4"));
-
     }
 
     // test fireUpon
@@ -70,5 +70,28 @@ public class PlayerTest {
         Assertions.assertEquals(3, playerObjOne.getFleet().size());
     }
 
+    @Test
+    public void testReceiveSonarPulse() throws  Exception{
+        // input
+        String coordIn = "B3";
 
+        // expected output
+        String[][] sonarOutExpected = {
+                {"-1","-1","-1","-1","-1"},
+                {"1","1","1","1","0"},
+                {"0","0","0","0","0"},
+                {"0","0","0","0","0"},
+                {"0","0","0","0","0"}
+        };
+
+        // testing
+        Boat boat1 = new Destroyer();
+        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
+        List<Boat> boatsList = new ArrayList<>();
+        boatsList.add(boat1);
+
+        // testing the receiveFire method
+        playerObjOne.placeShip(boatsList);
+        Assertions.assertArrayEquals(sonarOutExpected, playerObjOne.receiveSonarPulse(coordIn));
+    }
 }
