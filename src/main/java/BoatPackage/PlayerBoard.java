@@ -51,7 +51,6 @@ public class PlayerBoard extends GameBoard {
         }
 
         updateCoord(coord, fireStatus);
-
         return fireStatus;
     }
 

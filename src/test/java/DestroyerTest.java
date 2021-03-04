@@ -43,10 +43,7 @@ class DestroyerTest {
         Assertions.assertEquals(name, boat.getName());
     }
 
-    @Test
-    public void testGetSize() throws Exception{
-        Assertions.assertEquals(3, boat.getSize());
-    }
+
 
     @Test
     public void testRealignStatus() throws  Exception{

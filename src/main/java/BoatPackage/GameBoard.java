@@ -74,7 +74,7 @@ public abstract class GameBoard {
             index[1] = Integer.parseInt(String.valueOf(coordinate.charAt(1))) - 1;
         }
         else if (coordinate.length() == 3) // a letter + two digits
-            index[1] = Integer.parseInt(coordinate.substring(1));
+            index[1] = Integer.parseInt(coordinate.substring(1))-1;
         else return new int[]{-1, -1};
 
         return index;
