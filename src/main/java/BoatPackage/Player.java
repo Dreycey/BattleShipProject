@@ -206,7 +206,13 @@ public class Player {
 
     public int fireSonarPulse(String[][] resultIn) {
 
-
+        System.out.println("Sonar Pulse: ");
+        for (int row = 0; row < resultIn.length; row++) {
+            for (int col = 0; col < resultIn[row].length; col++) {
+                System.out.print(resultIn[row][col] + "\t");
+            }
+            System.out.println();
+        }
         return 0;
     }
 }
