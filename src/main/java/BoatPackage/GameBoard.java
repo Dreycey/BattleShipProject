@@ -1,20 +1,18 @@
 package BoatPackage;
 
-import java.util.ArrayList;
-
 public abstract class GameBoard {
     private int n = 10;
     private char matrix[][];
 
     public GameBoard() {
         matrix = new char[n][n];
-        initializeMatrix('-');
+        setMatrix('-');
     }
 
     public GameBoard(int boardSize) {
         n = boardSize;
         matrix = new char[n][n];
-        initializeMatrix('-');
+        setMatrix('-');
     }
 
     public void setBoardSize(int boardSize) {
@@ -25,7 +23,7 @@ public abstract class GameBoard {
         return n;
     }
 
-    private void initializeMatrix(char emptySymbol) {
+    private void setMatrix(char emptySymbol) {
         for (int i=0; i<matrix.length; i++) {
             for (int j=0; j<matrix[i].length; j++)
                 matrix[i][j] = emptySymbol; // initial state, empty board
