@@ -173,17 +173,40 @@ public class Player {
    }
 
    public String[][] receiveSonarPulse(String coordIn) {
-       String[][] sonarOutExpected2 = {
+        // initialize local DS
+        //String[][] sonarOut = {{}};
+        String[][] sonarOut = {
                {"-1","-1","-1","-1","-1"},
                {"1","1","1","1","0"},
                {"0","0","0","0","0"},
                {"0","0","0","0","0"},
                {"0","0","0","0","0"}
-       };
-        return sonarOutExpected2;
+        };
+        char[][] playerMatrix = primaryBoard.getMatrix();
+        int[] index = primaryBoard.convertCoordToIndex(coordIn);
+        System.out.println("index: " + Arrays.toString(index));
+
+        /*
+        Now:
+
+        NOTE:  think about making a char array.
+
+
+        1. loop through playerMatrix
+        1.5 make 5x5 String[5][5]
+        2. if off board: "-1" for that element
+            2.1 - if  rowmin < row < rowmax || colmin < col < colmax
+                   - use getBoardSize()
+        3. elif -: "0"
+            else: "1"
+        4. return the new array
+         */
+        return sonarOut;
    }
 
     public int fireSonarPulse(String[][] resultIn) {
+
+
         return 0;
     }
 }

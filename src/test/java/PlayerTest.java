@@ -94,4 +94,29 @@ public class PlayerTest {
         playerObjOne.placeShip(boatsList);
         Assertions.assertArrayEquals(sonarOutExpected, playerObjOne.receiveSonarPulse(coordIn));
     }
+
+    @Test
+    public void testFireSonarPulse() throws  Exception {
+
+        // expected input
+        String[][] sonarInExpected = {
+                {"-1","-1","-1","-1","-1"},
+                {"1","1","1","1","0"},
+                {"0","0","0","0","0"},
+                {"0","0","0","0","0"},
+                {"0","0","0","0","0"}
+        };
+
+        // testing
+        Boat boat1 = new Destroyer();
+        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
+        List<Boat> boatsList = new ArrayList<>();
+        boatsList.add(boat1);
+
+        // testing the receiveFire method
+        playerObjOne.placeShip(boatsList);
+        // check that it runs - actually a void but use 0 for passing
+        Assertions.assertEquals(0, playerObjOne.fireSonarPulse(sonarInExpected));
+
+    }
 }
