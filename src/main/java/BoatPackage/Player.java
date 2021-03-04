@@ -110,6 +110,42 @@ public class Player {
             // go through boats in the fleet
             for (Boat b : fleet) {
                 if (b.isCoordAfloat(inCoordinate)){
+                    //if it is captains cabin
+                    if(b.getCaptainsCabin().getLoc() == inCoordinate){
+                        //hit captains cabin, get result
+                        hitOrSunk = b.getCaptainsCabin().hit();
+
+                        if(hitOrSunk == "Sunk"){
+                            //tack the coords onto the end so we can sink them all (IF other coords exist)
+                            if(b.getCoordinates().length > 1) {
+                                for (int i = 0; i < b.getCoordinates().length; i++) {
+                                    hitOrSunk = hitOrSunk + " " + b.getCoordinates()[i];
+                                }
+                            }
+                            //remove it from fleet
+                            indexToSink = fleet.indexOf(b);
+                            fleet.remove(fleet.indexOf(b));
+
+                            //sink all coords
+                            //get coord list
+                            String[] arr = hitOrSunk.split(" ", 0);
+                            //for each one that isn't "Sunk", update the coord
+                            for(int i = 1; i < arr.length; i++){
+                                getPrimaryBoard().updateCoord(arr[i], 'x');
+                            }
+
+                            if (fleet.isEmpty()) return "Surrender";
+
+                            return hitOrSunk;
+                        }
+                        else{
+                            //if it is a miss, need to update board
+                            char toReplace = b.getName().charAt(0);
+                            getPrimaryBoard().updateCoord(inCoordinate, toReplace);
+                            return "Miss";
+                        }
+                    }
+                    //if the result is not a miss: remove
                     b.removeCoordinate(inCoordinate);
                     if (b.getStatus() == "Sunk") {
                         //"Afloat", "Hit", "Sunk"
@@ -176,6 +212,18 @@ public class Player {
         return 0;
    }
 
+
+    public PlayerBoard getPrimaryBoard() {
+        return primaryBoard;
+    }
+
+    public TargetBoard getTargetBoard() {return targetBoard;}
+
+    public void fireUponMany(String[] coords, String strikeResult){
+        for (String c : coords){
+            fireUpon(c, strikeResult);
+        }
+      
    public String[][] receiveSonarPulse(String coordIn) {
         // initialize local DS
         //String[][] sonarOut = {{}};

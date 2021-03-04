@@ -7,6 +7,8 @@ public class Boat {
     private int size;
     private String status = "Afloat";
     private String[] coordinates = {};
+    private captainsCabinType captainsCabin;
+    private int cabinIndex;
 
     public Boat() {
     }
@@ -27,6 +29,7 @@ public class Boat {
     }
 
     public boolean isValidCoordinate(String coord){
+        if(coord == ""){return true;}
         int letter = (int) coord.charAt(0);
         int number = Integer.parseInt(coord.substring(1));
         if(number > 0 && number < 11 && letter > 64 && letter < 75){
@@ -60,22 +63,42 @@ public class Boat {
 
     public void removeCoordinate(String c) {
         if(isCoordAfloat(c)){
-            int freshLength = coordinates.length - 1;
-            String[] coords = new String[freshLength];
+            String[] coords = new String[coordinates.length];
 
-            for (int i = 0, k = 0; i < coordinates.length; i++) {
+            for (int i = 0; i < coordinates.length; i++) {
 
-                // check if index is crossed, continue without copying
+                // check if index is crossed, add empty string
                 if (coordinates[i].equals(c)) {
-                    continue;
+                    coords[i] = "";
                 }
 
                 // else copy the element
-                coords[k++] = coordinates[i];
+                else {
+                    coords[i] = coordinates[i];
+                }
 
 
             }
             coordinates = coords;
         }
     }
+
+    public void setCaptainsCabin(String type, String loc){
+        if(type == "armored"){
+            captainsCabin = new armoredCaptainsCabin(loc);
+        }
+        else{
+            captainsCabin = new unarmoredCaptainsCabin(loc);
+        }
+    }
+
+    public captainsCabinType getCaptainsCabin(){
+        return captainsCabin;
+    }
+
+    public void setCabinIndex(int i){
+        cabinIndex = i;
+    }
+
+    public int getCabinIndex(){return cabinIndex;}
 }

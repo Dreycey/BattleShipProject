@@ -11,7 +11,7 @@ class BattleshipTest {
 
     @Test
     public void testInheritedWorks() throws Exception{
-        String[] coords = {"A1","A2","A3"};
+        String[] coords = {"A1","A2","A3","A4"};
         String defaultStatus = "Afloat";
 
         boat.setCoordinates(coords);
@@ -27,9 +27,9 @@ class BattleshipTest {
 
         Assertions.assertArrayEquals(coords, boat.getCoordinates());
 
-        boat.removeCoordinate("A3");
+        boat.removeCoordinate("A2");
 
-        String[] shouldBe = {"A1","A2"};
+        String[] shouldBe = {"A1","","A3","A4"};
 
         Assertions.assertArrayEquals(shouldBe, boat.getCoordinates());
 
@@ -62,5 +62,21 @@ class BattleshipTest {
 
         Assertions.assertEquals("Sunk", boat.getStatus());
 
+    }
+
+    @Test
+    public void testCabin() throws Exception{
+        String[] coords = {"A1","A2","A3","A4"};
+
+        Battleship boat = new Battleship(coords);
+
+        Assertions.assertEquals("A3", boat.getCaptainsCabin().getLoc());
+
+        Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Miss", boat.getCaptainsCabin().hit());
+        Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
     }
 }

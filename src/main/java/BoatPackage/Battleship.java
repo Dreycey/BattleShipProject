@@ -6,21 +6,30 @@ public class Battleship extends Boat{
         setSize(4);
     }
 
+    public Battleship(String[] coords){
+        setName("Battleship");
+        setSize(4);
+        setCabinIndex(2);
+        setCoordinates(coords);
+        setCaptainsCabin("armored",getCoordinates()[getCabinIndex()]);
+    }
+
     @Override
     public void removeCoordinate(String c) {
         if(isCoordAfloat(c)){
-            int freshLength = getCoordinates().length - 1;
-            String[] coords = new String[freshLength];
+            String[] coords = new String[getCoordinates().length];
 
-            for (int i = 0, k = 0; i < getCoordinates().length; i++) {
+            for (int i = 0; i < getCoordinates().length; i++) {
 
-                // check if index is crossed, continue without copying
+                // check if index is crossed, add empty string
                 if (getCoordinates()[i].equals(c)) {
-                    continue;
+                    coords[i] = "";
                 }
 
                 // else copy the element
-                coords[k++] = getCoordinates()[i];
+                else {
+                    coords[i] = getCoordinates()[i];
+                }
 
 
             }
@@ -30,12 +39,20 @@ public class Battleship extends Boat{
     }
 
     public void realignStatus(){
-        int coordLength = getCoordinates().length;
+        int validLength = 0;
 
-        if(coordLength == getSize()){
+        String[] oldCoords = getCoordinates();
+
+        for(int i = 0; i < oldCoords.length; i++){
+            if(oldCoords[i] != ""){
+                validLength += 1;
+            }
+        }
+
+        if(validLength == getSize()){
             setStatus("Afloat");
         }
-        else if(coordLength < getSize() && coordLength > 0){
+        else if(validLength < getSize() && validLength > 0){
             setStatus("Hit");
         }
         else{

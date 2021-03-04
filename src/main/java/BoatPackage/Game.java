@@ -150,7 +150,7 @@ public class Game {
         // assign the offensePlayer / defense
         Player offensePlayer;
         Player defensePlayer;
-        if (turn == 1){
+        if (turn == 1) {
             offensePlayer = playerOne;
             defensePlayer = playerTwo;
         } else {
@@ -168,6 +168,11 @@ public class Game {
 
         // checks impact on defensive player
         //String strikeRes = defensePlayer.receiveFire(strikeCoord);
+        //String[] hits = strikeRes.split(" ", 0);
+        //System.out.println("Result:" + hits[0]);
+
+        //if(hits.length > 1){offensePlayer.fireUpon(Arrays.copyOfRange(hits,1,hits.length-1);, hits[0]);}
+        //else{offensePlayer.fireUpon(strikeCoord, strikeRes);}
 
 /*        // TODO: impliment later on
         if (player.getSonarPulse > 0) {
@@ -179,7 +184,7 @@ public class Game {
         //System.out.println("Result:" + strikeRes);
 
         // returns output to offensive player
-        //offensePlayer.fireUpon(strikeCoord, strikeRes);
+        //
 
         //then switch turn
         turn = (turn == 1) ? 2 : 1;

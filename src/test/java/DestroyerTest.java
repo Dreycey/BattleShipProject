@@ -3,6 +3,8 @@ import BoatPackage.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DestroyerTest {
@@ -28,7 +30,7 @@ class DestroyerTest {
 
         boat.removeCoordinate("A3");
 
-        String[] shouldBe = {"A1","A2"};
+        String[] shouldBe = {"A1","A2",""};
 
         Assertions.assertArrayEquals(shouldBe, boat.getCoordinates());
 
@@ -62,6 +64,22 @@ class DestroyerTest {
         boat.removeCoordinate("A2");
 
         Assertions.assertEquals("Sunk", boat.getStatus());
+    }
+
+    @Test
+    public void testCabin() throws Exception{
+        String[] coords = {"A1","A2","A3"};
+
+        Destroyer boat = new Destroyer(coords);
+
+        Assertions.assertEquals("A2", boat.getCaptainsCabin().getLoc());
+
+        Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Miss", boat.getCaptainsCabin().hit());
+        Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
+
+        Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
     }
 
 }
