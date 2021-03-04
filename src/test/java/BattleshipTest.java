@@ -35,12 +35,6 @@ class BattleshipTest {
 
     }
 
-    @Test
-    public void testGetName() throws Exception{
-        String name = "Battleship";
-
-        Assertions.assertEquals(name, boat.getName());
-    }
 
     @Test
     public void testGetSize() throws Exception{
@@ -55,7 +49,7 @@ class BattleshipTest {
         String defaultStatus = "Afloat";
 
         boat.setCoordinates(coords);
-
+        boat.realignStatus();
         Assertions.assertEquals(defaultStatus, boat.getStatus());
 
         boat.removeCoordinate("A3");
@@ -67,5 +61,6 @@ class BattleshipTest {
         boat.removeCoordinate("A4");
 
         Assertions.assertEquals("Sunk", boat.getStatus());
+
     }
 }

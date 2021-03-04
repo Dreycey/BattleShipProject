@@ -13,7 +13,15 @@ public class PlayerTest {
     Player playerObjOne = new Player();
 
     @BeforeEach
-    public void before() {
+    public void testNonDefault() {
+        List<Boat> bList = new ArrayList<Boat>();
+        bList.add(new Destroyer());
+        bList.add(new Destroyer());
+        Player pNonDefault = new Player(bList);
+
+        String boatNames[] = {"Destroyer", "Destroyer"};
+        String actualNames[] = {pNonDefault.getFleet().get(0).getName(), pNonDefault.getFleet().get(1).getName()};
+        Assertions.assertArrayEquals(boatNames, actualNames);
     }
 
     // text placeShip
@@ -29,6 +37,14 @@ public class PlayerTest {
         Assertions.assertEquals(boatsList, playerObjOne.placeShip(boatsList));
     }
 
+    @Test
+    public void fleetIsEmpty() {
+        Player pEmpty = new Player();
+        pEmpty.setFleet(new ArrayList<Boat>());
+        Assertions.assertEquals(false, playerObjOne.fleetIsEmpty());
+        Assertions.assertEquals(true, pEmpty.fleetIsEmpty());
+    }
+
     // test revieveFire
     @Test
     public void revieveFireTest() {
@@ -37,6 +53,10 @@ public class PlayerTest {
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
         Assertions.assertEquals("Hit", playerObjOne.receiveFire("C3"));
         Assertions.assertEquals("Sunk", playerObjOne.receiveFire("C4"));
+
+        Player pEmpty = new Player();
+        pEmpty.setFleet(new ArrayList<Boat>());
+        Assertions.assertEquals("Surrender", pEmpty.receiveFire("C4"));
 
     }
 

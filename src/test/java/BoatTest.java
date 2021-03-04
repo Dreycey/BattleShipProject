@@ -10,9 +10,10 @@ class BoatTest {
     Boat boat = new Boat();
 
     @Test
-    public void testGetStatus() throws Exception{
-        String defaultStatus = "Afloat";
-        Assertions.assertEquals(defaultStatus,boat.getStatus());
+    public void testSetName() throws Exception {
+        String name = "Destroyer";
+        boat.setName(name);
+        Assertions.assertEquals(name, boat.getName());
     }
 
     @Test
@@ -21,8 +22,16 @@ class BoatTest {
         String badStatus = "BadStatus";
 
         boat.setStatus(badStatus);
-
         Assertions.assertEquals(defaultStatus, boat.getStatus());
+
+        boat.setStatus(defaultStatus);
+        Assertions.assertEquals(defaultStatus, boat.getStatus());
+    }
+
+    @Test
+    public void testSetSize() throws Exception{
+        boat.setSize(5);
+        Assertions.assertEquals(5, boat.getSize());
     }
 
     @Test
