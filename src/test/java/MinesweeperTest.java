@@ -10,7 +10,7 @@ class MinesweeperTest {
 
     @Test
     public void testInheritedWorks() throws Exception{
-        String[] coords = {"A1","A2","A3"};
+        String[] coords = {"A1","A2"};
         String defaultStatus = "Afloat";
 
         boat.setCoordinates(coords);
@@ -26,9 +26,9 @@ class MinesweeperTest {
 
         Assertions.assertArrayEquals(coords, boat.getCoordinates());
 
-        boat.removeCoordinate("A3");
+        boat.removeCoordinate("A2");
 
-        String[] shouldBe = {"A1","A2"};
+        String[] shouldBe = {"A1",""};
 
         Assertions.assertArrayEquals(shouldBe, boat.getCoordinates());
 

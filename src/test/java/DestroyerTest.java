@@ -3,6 +3,8 @@ import BoatPackage.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DestroyerTest {
@@ -28,7 +30,7 @@ class DestroyerTest {
 
         boat.removeCoordinate("A3");
 
-        String[] shouldBe = {"A1","A2"};
+        String[] shouldBe = {"A1","A2",""};
 
         Assertions.assertArrayEquals(shouldBe, boat.getCoordinates());
 
