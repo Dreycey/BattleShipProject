@@ -48,6 +48,10 @@ public class Player {
         return fleet;
     }
 
+    public void setFleet(List<Boat> boatList) {
+        this.fleet = boatList;
+    }
+
     /*
     DESCRIPTION:
         This method places a ship on the board and sends
