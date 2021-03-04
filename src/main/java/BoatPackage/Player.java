@@ -210,5 +210,9 @@ public class Player {
 
     public TargetBoard getTargetBoard() {return targetBoard;}
 
-    public void fireUponMany(String[] coords, String strikeResult){}
+    public void fireUponMany(String[] coords, String strikeResult){
+        for (String c : coords){
+            fireUpon(c, strikeResult);
+        }
+    }
 }
