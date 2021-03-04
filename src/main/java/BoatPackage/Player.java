@@ -143,6 +143,9 @@ public class Player {
         return 0 for passing
     */
    public int fireUpon(String inCoordinate, String strikeResult) {
+        if (strikeResult == "Sunk" && this.canUseSonarPulse == false) {
+            this.canUseSonarPulse = true;
+        }
         targetBoard.fireUpon(inCoordinate, strikeResult);
         return 0;
    }
@@ -193,7 +196,6 @@ public class Player {
 
         NOTE:  think about making a char array.
 
-
         1. loop through playerMatrix
         1.5 make 5x5 String[5][5]
         2. if off board: "-1" for that element
@@ -237,11 +239,21 @@ public class Player {
 
     public int fireSonarPulse(String[][] resultIn) {
         System.out.println("Sonar Pulse: ");
-        for (int row = 0; row < resultIn.length; row++) {
-            for (int col = 0; col < resultIn[row].length; col++) {
-                System.out.print(resultIn[row][col] + "\t");
+        if (this.canUseSonarPulse && (numSonarPulse < 2)) {
+            for (int row = 0; row < resultIn.length; row++) {
+                for (int col = 0; col < resultIn[row].length; col++) {
+                    System.out.print(resultIn[row][col] + "\t");
+                }
+                System.out.println();
             }
-            System.out.println();
+            numSonarPulse++; // increment counter
+        } else {
+            if (numSonarPulse < 2) {
+                System.out.println("This play does not have the pulse unlocked");
+                System.out.println("(Need to sinnk at least one ship first)");
+            } else {
+                System.out.println("This player ran out of attempts!");
+            }
         }
         return 0;
     }
