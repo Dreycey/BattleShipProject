@@ -2,17 +2,17 @@ package BoatPackage;
 
 public abstract class GameBoard {
     private int n = 10;
-    private char matrix[][];
+    private String matrix[][];
 
     public GameBoard() {
-        matrix = new char[n][n];
-        setMatrix('-');
+        matrix = new String[n][n];
+        setMatrix("-");
     }
 
     public GameBoard(int boardSize) {
         n = boardSize;
-        matrix = new char[n][n];
-        setMatrix('-');
+        matrix = new String[n][n];
+        setMatrix("-");
     }
 
     public void setBoardSize(int boardSize) {
@@ -23,24 +23,26 @@ public abstract class GameBoard {
         return n;
     }
 
-    private void setMatrix(char emptySymbol) {
+    private void setMatrix(String emptySymbol) {
         for (int i=0; i<matrix.length; i++) {
             for (int j=0; j<matrix[i].length; j++)
                 matrix[i][j] = emptySymbol; // initial state, empty board
         }
     }
 
-    public char[][] getMatrix() {
+    public String[][] getMatrix() {
         return matrix;
     }
 
-    public char valueAt(String coord) {
+    public String valueAt(String coord) {
         int[] cell = convertCoordToIndex(coord);
         return matrix[cell[0]][cell[1]];
     }
 
-    public boolean updateCoord(String coordinate, char action) {
+    public boolean updateCoord(String coordinate, String action) {
         int[] indexCoord = convertCoordToIndex(coordinate);
+        //System.out.println(indexCoord[0]);
+        //System.out.println(indexCoord[1]);
         if (indexCoord[0] != -1 && indexCoord[1] != -1) {
             matrix[indexCoord[0]][indexCoord[1]] = action;
             return true;

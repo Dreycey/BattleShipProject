@@ -68,7 +68,7 @@ public class PlayerTest {
         //TODO: Add surrender
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
         Assertions.assertEquals("Hit", playerObjOne.receiveFire("C2"));
-        Assertions.assertEquals("Sunk", playerObjOne.receiveFire("C1"));
+        Assertions.assertEquals("Sunk C1", playerObjOne.receiveFire("C1"));
 
         Player pEmpty = new Player();
         pEmpty.setFleet(new ArrayList<Boat>());
@@ -133,8 +133,8 @@ public class PlayerTest {
         Assertions.assertTrue(player.getFleet().contains(battleship));
 
         //is the player board correct?
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("C1"));
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("C2"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("C1"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("C2"));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class PlayerTest {
         Assertions.assertTrue(player.getFleet().get(0).isCoordAfloat("A3"));
 
         //is the player board correct?
-        Assertions.assertEquals('B', player.getPrimaryBoard().valueAt("A3"));
+        Assertions.assertEquals("B", player.getPrimaryBoard().valueAt("A3"));
     }
 
     @Test
@@ -204,10 +204,10 @@ public class PlayerTest {
         Assertions.assertFalse(player.getFleet().contains(battleship));
 
         //is the player board correct?
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A1"));
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A2"));
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A3"));
-        Assertions.assertEquals('x', player.getPrimaryBoard().valueAt("A4"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("A1"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("A2"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("A3"));
+        Assertions.assertEquals("x", player.getPrimaryBoard().valueAt("A4"));
     }
 
     @Test
@@ -230,9 +230,9 @@ public class PlayerTest {
 
         player.fireUponMany(fires, "Sunk A3 A4 A6");
 
-        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A3"));
-        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A4"));
-        Assertions.assertEquals('x', player.getTargetBoard().valueAt("A6"));
+        Assertions.assertEquals("x", player.getTargetBoard().valueAt("A3"));
+        Assertions.assertEquals("x", player.getTargetBoard().valueAt("A4"));
+        Assertions.assertEquals("x", player.getTargetBoard().valueAt("A6"));
     }
 
     public void testReceiveSonarPulse() throws  Exception{

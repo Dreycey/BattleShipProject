@@ -76,7 +76,7 @@ class BoatTest {
     @Test
     public void removeCoord() throws Exception{
         String[] coords = {"A1","A2","A3"};
-        String[] postRemoval = {"A1","A3"};
+        String[] postRemoval = {"A1","","A3"};
         boat.setCoordinates(coords);
 
         boat.removeCoordinate("A2");
