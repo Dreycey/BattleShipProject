@@ -230,15 +230,9 @@ public class Player {
 
       
    public String[][] receiveSonarPulse(String coordIn) {
-        // initialize local DS
-        //String[][] sonarOut = {{}};
-        //String[][] sonarOut = {
-        //       {"-1","-1","-1","-1","-1"},
-        //       {"1","1","1","1","0"},
-        //       {"0","0","0","0","0"},
-        //       {"0","0","0","0","0"},
-        //       {"0","0","0","0","0"}
-        //};
+
+        // init
+        int sonarBoardSize =5;
         char[][] playerMatrix = primaryBoard.getMatrix();
         int[] index = primaryBoard.convertCoordToIndex(coordIn);
         int boardSize = primaryBoard.getBoardSize();
@@ -247,9 +241,7 @@ public class Player {
 
         /*
         Now:
-
         NOTE:  think about making a char array.
-
         1. loop through playerMatrix
         1.5 make 5x5 String[5][5]
         2. if off board: "-1" for that element
@@ -260,7 +252,7 @@ public class Player {
         4. return the new array
          */
 
-       String[][] outputArray = new String[5][5];
+       String[][] outputArray = new String[sonarBoardSize][sonarBoardSize];
        char activeElement;
        int outRow = 0; // counter Row
        for (int row = (index[0]-2); row <= (index[0]+2); row++) {
