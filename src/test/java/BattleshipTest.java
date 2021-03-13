@@ -50,10 +50,10 @@ class BattleshipTest {
         int[][] east = {{0,0},{0,1},{0,2},{0,3}};
         int[][] west = {{0,0},{0,-1},{0,-2},{0,-3}};
 
-        Assertions.assertEquals(south, boat.genLocs('s'));
-        Assertions.assertEquals(north, boat.genLocs('n'));
-        Assertions.assertEquals(east, boat.genLocs('e'));
-        Assertions.assertEquals(west, boat.genLocs('w'));
+        Assertions.assertArrayEquals(south, boat.genLocs('s'));
+        Assertions.assertArrayEquals(north, boat.genLocs('n'));
+        Assertions.assertArrayEquals(east, boat.genLocs('e'));
+        Assertions.assertArrayEquals(west, boat.genLocs('w'));
 
     }
 }

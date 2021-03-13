@@ -2,6 +2,7 @@ import BoatPackage.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import sun.security.krb5.internal.crypto.Des;
 
 import java.util.Arrays;
 
@@ -42,6 +43,23 @@ class DestroyerTest {
         Assertions.assertTrue(boat.getCaptainsCabin().getHitStatus());
 
         Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
+    }
+
+    @Test
+    public void testGenLocs() throws Exception{
+
+        Destroyer boat = new Destroyer();
+
+        int[][] south = {{0,0},{-1,0},{-2,0}};
+        int[][] north = {{0,0},{1,0},{2,0}};
+        int[][] east = {{0,0},{0,1},{0,2}};
+        int[][] west = {{0,0},{0,-1},{0,-2}};
+
+        Assertions.assertArrayEquals(south, boat.genLocs('s'));
+        Assertions.assertArrayEquals(north, boat.genLocs('n'));
+        Assertions.assertArrayEquals(east, boat.genLocs('e'));
+        Assertions.assertArrayEquals(west, boat.genLocs('w'));
+
     }
 
 }
