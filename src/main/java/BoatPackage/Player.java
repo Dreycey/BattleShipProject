@@ -100,13 +100,13 @@ public class Player {
     public String receiveFire(String inCoordinate) {
 
         // initialize variables
-        char typeOfHit = primaryBoard.receiveFire(inCoordinate);
+        String typeOfHit = primaryBoard.receiveFire(inCoordinate);
         String hitOrSunk = "Hit";
         int indexToSink = -1;
 
         // If hit, remove from fleet and determine Hit, Sunk, or Surrender
         // Else, Miss
-        if (typeOfHit == 'x'){ // IF HIT
+        if (typeOfHit == "x"){ // IF HIT
             // go through boats in the fleet
             for (Boat b : fleet) {
                 if (b.isCoordAfloat(inCoordinate)){
@@ -119,7 +119,9 @@ public class Player {
                             //tack the coords onto the end so we can sink them all (IF other coords exist)
                             if(b.getCoordinates().length > 1) {
                                 for (int i = 0; i < b.getCoordinates().length; i++) {
-                                    hitOrSunk = hitOrSunk + " " + b.getCoordinates()[i];
+                                    if(b.getCoordinates()[i].length() > 0){
+                                        hitOrSunk = hitOrSunk + " " + b.getCoordinates()[i];
+                                    }
                                 }
                             }
                             //remove it from fleet
@@ -131,16 +133,18 @@ public class Player {
                             String[] arr = hitOrSunk.split(" ", 0);
                             //for each one that isn't "Sunk", update the coord
                             for(int i = 1; i < arr.length; i++){
-                                getPrimaryBoard().updateCoord(arr[i], 'x');
+                                if(arr[i].length() > 0) {
+                                    getPrimaryBoard().updateCoord(arr[i], "x");
+                                }
                             }
 
                             if (fleet.isEmpty()) return "Surrender";
 
-                            return hitOrSunk;
+                            return hitOrSunk.trim();
                         }
                         else{
                             //if it is a miss, need to update board
-                            char toReplace = b.getName().charAt(0);
+                            String toReplace = b.getName().substring(0,1);
                             getPrimaryBoard().updateCoord(inCoordinate, toReplace);
                             return "Miss";
                         }
@@ -230,6 +234,16 @@ public class Player {
 
       
    public String[][] receiveSonarPulse(String coordIn) {
+        // initialize local DS
+        //String[][] sonarOut = {{}};
+        //String[][] sonarOut = {
+        //       {"-1","-1","-1","-1","-1"},
+        //       {"1","1","1","1","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"},
+        //       {"0","0","0","0","0"}
+        //};
+        String[][] playerMatrix = primaryBoard.getMatrix();
 
         // init
         int sonarBoardSize =5;
@@ -253,7 +267,7 @@ public class Player {
          */
 
        String[][] outputArray = new String[sonarBoardSize][sonarBoardSize];
-       char activeElement;
+       String activeElement;
        int outRow = 0; // counter Row
        for (int row = (index[0]-2); row <= (index[0]+2); row++) {
            int outCol = 0; // counter Col
@@ -262,7 +276,7 @@ public class Player {
                // if on board
                if ( (0 <= row) && (row <= boardSize) && (0 <= col) && (col <= boardSize) ) {
                    activeElement = playerMatrix[row][col];
-                   if (activeElement == '-') {
+                   if (activeElement == "-") {
                        outputArray[outRow][outCol] = "0";
                    } else {
                        outputArray[outRow][outCol] = "1";

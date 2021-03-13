@@ -20,21 +20,21 @@ public class GameBoardTest {
     }
     @Test
     public void getMatrix() {
-        char[][] expectedMatrix = {{'-','-'},{'-','-'}};
+        String[][] expectedMatrix = {{"-","-"},{"-","-"}};
 
-        char[][] board = g1.getMatrix();
+        String[][] board = g1.getMatrix();
         Assertions.assertArrayEquals(expectedMatrix, board);
     }
 
     @Test
     public void updateCoordTrue() {
         String coordinate = "A1";
-        char action = 'x'; // hit
+        String action = "x"; // hit
         boolean isUpdated = g1.updateCoord(coordinate, action);
         Assertions.assertTrue(isUpdated);
 
         String falseCoord = "Z10";
-        char anotherAction = 'o';
+        String anotherAction = "o";
 
         Assertions.assertFalse(g1.updateCoord(falseCoord, anotherAction));
     }

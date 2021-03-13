@@ -18,10 +18,10 @@ public class PlayerBoard extends GameBoard {
     // should it return boolean or the new matrix?
     public boolean placeShip(String shipName, String[] coordList) {
         boolean validShipPlacement = false;
-        char shipSymbol;
+        String shipSymbol;
         // validate that there is no other existing ship
 
-        shipSymbol = shipName.toUpperCase().charAt(0);
+        shipSymbol = shipName.toUpperCase().substring(0,1);
 
 
         /* TODO: previous, delete below
@@ -37,17 +37,18 @@ public class PlayerBoard extends GameBoard {
     }
 
     // during opponent's turn, check to see if I've been hit
-    public char receiveFire(String coord) {
+    public String receiveFire(String coord) {
 
-        char fireStatus = '-';
+        String fireStatus = "-";
         int[] cell = convertCoordToIndex(coord);
         // TODO: validation of indices should be done in Game Class
         if (cell[0] != -1 && cell[1] != -1) {
             //if (getMatrix()[cell[0]][cell[1]] == '-')
-            if (valueAt(coord) == '-') {
-                fireStatus = 'o'; // miss
+            //System.out.println(valueAt(coord));
+            if (valueAt(coord) == "-") {
+                fireStatus = "o"; // miss
             }
-            else fireStatus = 'x'; // hit (anything that's not a '-' would be a ship
+            else fireStatus = "x"; // hit (anything that's not a '-' would be a ship
         }
 
         updateCoord(coord, fireStatus);

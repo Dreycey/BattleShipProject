@@ -13,7 +13,7 @@ public class PlayerBoardTest {
         String shipType = "Minesweeper";
         boolean isPlaced = pDefault.placeShip(shipType, coordList);
         Assertions.assertTrue(isPlaced);
-        Assertions.assertEquals('M', pDefault.valueAt("C3"));
+        Assertions.assertEquals("M", pDefault.valueAt("C4"));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class PlayerBoardTest {
         String shipType = "Destroyer";
         boolean isPlaced = p1.placeShip(shipType, coordList);
         Assertions.assertTrue(isPlaced);
-        Assertions.assertEquals('D', p1.valueAt("A1"));
+        Assertions.assertEquals("D", p1.valueAt("A1"));
     }
 
 
@@ -31,13 +31,18 @@ public class PlayerBoardTest {
     public void receiveFire() {
 
         String missTarget = "C9";
-        char expectedResultMiss = 'o';
-        char actual1 = pDefault.receiveFire(missTarget);
+        String expectedResultMiss = "o";
+        String actual1 = pDefault.receiveFire(missTarget);
         Assertions.assertEquals(expectedResultMiss, actual1);
 
-        String hitTarget = "A1";
-        char expectedResultHit = 'x';
-        char actual2 = p1.receiveFire(hitTarget);
+        String[] coordList = {"A1", "A2"};
+        String shipType = "Minesweeper";
+        boolean isPlaced = pDefault.placeShip(shipType, coordList);
+        Assertions.assertEquals("M", pDefault.valueAt("A1"));
+        Assertions.assertEquals("M", pDefault.valueAt("A2"));
+        String hitTarget = "A2";
+        String expectedResultHit = "x";
+        String actual2 = pDefault.receiveFire(hitTarget);
         Assertions.assertEquals(expectedResultHit, actual2);
     }
 

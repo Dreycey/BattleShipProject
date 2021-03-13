@@ -6,12 +6,12 @@ public class TargetBoard extends GameBoard {
         // if special symbol meaning there is a boat there, then hit and update target board
         // how will i have access to see if there's a boat there?
         // updates target board
-        char symbol = ' ';
+        String symbol = " ";
         if(action.equalsIgnoreCase("miss")){
-            symbol = 'o';
+            symbol = "o";
         }
         else{
-            symbol = 'x';
+            symbol = "x";
         }
         updateCoord(coordinate, symbol);
     }
