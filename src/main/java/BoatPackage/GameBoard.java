@@ -51,6 +51,15 @@ public abstract class GameBoard {
         return false;
     }
 
+    public boolean updateCoordByIndex(int coord0, int coord1, String action) {
+        if (coord0 != -1 && coord1 != -1) {
+            matrix[coord0][coord1] = action;
+            return true;
+        }
+
+        return false;
+    }
+
 //    // need validation for when there's already something done in a given cell (e.g. if != 0)
 //    public void setCoord(int []coord, char status) {
 //        // do something with the coordinate depending on what it is that's happening?

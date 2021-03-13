@@ -101,7 +101,6 @@ public class Player {
         String typeOfHit = primaryBoard.receiveFire(inCoordinate);
 
         if(typeOfHit != "Miss"){
-            System.out.println(typeOfHit);
 
             //find the boat that has been hit
             Boat hitBoat = null;
@@ -111,7 +110,6 @@ public class Player {
                 }
             }
 
-            System.out.println(hitBoat.getName());
 
             //has the captains cabin been hit?
             if((int)typeOfHit.charAt(1) == hitBoat.getCabinIndex()){
@@ -120,16 +118,32 @@ public class Player {
             }
             //if not:
             else{
-                //reduce size by one
+                //hit boat
+                hitBoat.hit();
+
                 //check status
                 //if status is sunk:
-                //remove the boat from the fleet
-                //if fleet is empty, return surrender
-                //otherwise return sunk w/appropriate coords to sink
+                if(hitBoat.getStatus() == "Sunk"){
+                    //tell board to sink all of the chars
+                    primaryBoard.sink(hitBoat.getName().charAt(0));
+
+                    //remove boat from fleet
+                    fleet.remove(hitBoat);
+
+                    //if fleet is empty now, return surrender
+                    if(fleetIsEmpty()){
+                        return "Surrender";
+                    }
+
+                    //otherwise return sunk
+                    else{
+                        return "Sunk "+hitBoat.getName();
+                    }
+                }
+                //else return hit
+                return "Hit";
+
             }
-
-
-            return "";
 
         }
         else{

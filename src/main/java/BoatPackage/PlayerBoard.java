@@ -82,5 +82,15 @@ public class PlayerBoard extends GameBoard {
         return returnVal;
     }
 
+    public void sink(char token){
+        for(int i = 0; i < getBoardSize(); i ++){
+            for(int j = 0; j < getBoardSize(); j++){
+                if(super.getMatrix()[i][j].indexOf(token) != -1){
+                    super.updateCoordByIndex(i,j,"x");
+                }
+            }
+        }
+    }
+
 
 }

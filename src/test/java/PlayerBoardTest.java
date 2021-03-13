@@ -63,4 +63,26 @@ public class PlayerBoardTest {
     public void renderBoard() {
         p1.renderBoard();
     }
+
+    @Test
+    public void testSink() throws Exception{
+        PlayerBoard p1 = new PlayerBoard(5);
+
+        p1.updateCoord("A1","B0");
+        p1.updateCoord("A2","B1");
+        p1.updateCoord("A3","B2");
+        p1.updateCoord("A4","B3");
+
+        Assertions.assertEquals("B0", p1.valueAt("A1"));
+        Assertions.assertEquals("B0", p1.valueAt("A1"));
+        Assertions.assertEquals("B0", p1.valueAt("A1"));
+        Assertions.assertEquals("B0", p1.valueAt("A1"));
+
+        p1.sink('B');
+
+        Assertions.assertEquals("x", p1.valueAt("A1"));
+        Assertions.assertEquals("x", p1.valueAt("A1"));
+        Assertions.assertEquals("x", p1.valueAt("A1"));
+        Assertions.assertEquals("x", p1.valueAt("A1"));
+    }
 }

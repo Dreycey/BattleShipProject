@@ -69,17 +69,15 @@ public class PlayerTest {
     public void receiveFireTest() {
         // Instantiate Player
         //set up boats
-        String[] bCoords = {"A1","A2","A3","A4"};
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship();
         Destroyer destroyer = new Destroyer();
         Minesweeper minesweeper = new Minesweeper();
 
-        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
-        String[] starts = {"A1","B1","C1"};
-        char[] directions = {'e','e','e'};
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"B1","C1"};
+        char[] directions = {'e','e'};
 
         //construct player
         Player playerObjOne = new Player(fleet, starts, directions);
@@ -89,11 +87,11 @@ public class PlayerTest {
         //TODO: Add surrender
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
         Assertions.assertEquals("Hit", playerObjOne.receiveFire("C2"));
-        Assertions.assertEquals("Sunk C1", playerObjOne.receiveFire("C1"));
+        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("C1"));
 
-        Player pEmpty = new Player();
-        pEmpty.setFleet(new ArrayList<Boat>());
-        Assertions.assertEquals("Surrender", pEmpty.receiveFire("C4"));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B1"));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2"));
+        Assertions.assertEquals("Surrender", playerObjOne.receiveFire("B3"));
 
     }
 
@@ -149,7 +147,7 @@ public class PlayerTest {
         String result = player.receiveFire("C1");
 
         //did method return sunk?
-        Assertions.assertEquals("Sunk C1 C2", result);
+        Assertions.assertEquals("Sunk Minesweeper", result);
 
         //is the unarmored boat out of the fleet?
         Assertions.assertFalse(player.getFleet().contains(minesweeper));
