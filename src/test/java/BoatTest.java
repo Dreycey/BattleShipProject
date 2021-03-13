@@ -64,4 +64,33 @@ class BoatTest {
         Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
     }
 
+    @Test
+    public void testHitsRemaining() throws Exception{
+        boat.setSize(5);
+        Assertions.assertEquals(5, boat.getHitsRemaining());
+    }
+
+    @Test
+    public void testHit() throws Exception{
+        Boat boat = new Boat();
+
+        boat.setSize(3);
+        boat.setCabinIndex(1);
+        boat.setName("Destroyer");
+
+        Assertions.assertEquals("Afloat", boat.getStatus());
+
+        boat.hit();
+
+        Assertions.assertEquals("Hit", boat.getStatus());
+
+        boat.hit();
+
+        Assertions.assertEquals("Hit", boat.getStatus());
+
+        boat.hit();
+
+        Assertions.assertEquals("Sunk", boat.getStatus());
+    }
+
 }

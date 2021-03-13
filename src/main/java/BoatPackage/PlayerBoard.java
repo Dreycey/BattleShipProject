@@ -62,19 +62,24 @@ public class PlayerBoard extends GameBoard {
     public String receiveFire(String coord) {
 
         String fireStatus = "-";
+        String returnVal = "";
         int[] cell = convertCoordToIndex(coord);
         // TODO: validation of indices should be done in Game Class
         if (cell[0] != -1 && cell[1] != -1) {
             //if (getMatrix()[cell[0]][cell[1]] == '-')
             //System.out.println(valueAt(coord));
-            if (valueAt(coord) == "-") {
+            returnVal = valueAt(coord);
+            if (returnVal == "-") {
                 fireStatus = "o"; // miss
+                returnVal = "Miss";
             }
-            else fireStatus = "x"; // hit (anything that's not a '-' would be a ship
+            else{
+                fireStatus = "x"; // hit (anything that's not a '-' would be a ship
+            }
         }
 
         updateCoord(coord, fireStatus);
-        return fireStatus;
+        return returnVal;
     }
 
 

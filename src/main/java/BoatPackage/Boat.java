@@ -6,9 +6,9 @@ public class Boat {
     private String name;
     private int size;
     private String status = "Afloat";
-    private String[] coordinates = {};
     private captainsCabinType captainsCabin;
     private int cabinIndex;
+    private int hitsRemaining;
 
     public Boat() {
     }
@@ -25,7 +25,9 @@ public class Boat {
         return size;
     }
     public void setSize(int size) {
+
         this.size = size;
+        hitsRemaining = size;
     }
 
     public String getStatus(){
@@ -59,4 +61,10 @@ public class Boat {
     public int getCabinIndex(){return cabinIndex;}
 
     public int[][] genLocs(char direction){return null;}
+
+    public int getHitsRemaining(){return hitsRemaining;}
+
+    public void hit(){
+
+    }
 }

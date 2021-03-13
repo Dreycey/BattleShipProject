@@ -43,7 +43,7 @@ public class PlayerBoardTest {
     public void receiveFire() {
 
         String missTarget = "C9";
-        String expectedResultMiss = "o";
+        String expectedResultMiss = "Miss";
         String actual1 = pDefault.receiveFire(missTarget);
         Assertions.assertEquals(expectedResultMiss, actual1);
 
@@ -54,7 +54,7 @@ public class PlayerBoardTest {
         Assertions.assertEquals("M0", pDefault.valueAt("A1"));
         Assertions.assertEquals("M1", pDefault.valueAt("A2"));
         String hitTarget = "A2";
-        String expectedResultHit = "x";
+        String expectedResultHit = "M1";
         String actual2 = pDefault.receiveFire(hitTarget);
         Assertions.assertEquals(expectedResultHit, actual2);
     }

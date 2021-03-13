@@ -67,6 +67,23 @@ public class PlayerTest {
     // test revieveFire
     @Test
     public void receiveFireTest() {
+        // Instantiate Player
+        //set up boats
+        String[] bCoords = {"A1","A2","A3","A4"};
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+        String[] starts = {"A1","B1","C1"};
+        char[] directions = {'e','e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
