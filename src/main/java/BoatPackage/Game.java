@@ -21,10 +21,25 @@ public class Game {
         //boats = new String[]{"BoatPackage.Battleship","BoatPackage.Destroyer", "BoatPackage.Minesweeper"};
 
         // Instantiate Players
-        String[][] coordPlayerOne = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
-        String[][] coordPlayerTwo = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
-        //playerOne = new Player(setUpCoords(coordPlayerOne));
-        //playerTwo = new Player(setUpCoords(coordPlayerTwo));
+        Battleship battleship1 = new Battleship();
+        Destroyer destroyer1 = new Destroyer();
+        Minesweeper minesweeper1 = new Minesweeper();
+
+        List<Boat> fleet1 = new LinkedList<Boat>(Arrays.asList(battleship1, destroyer1, minesweeper1));
+        String[] starts1 = {"A1","B1","C1"};
+        char[] directions1 = {'e','e','e'};
+
+        playerOne = new Player(fleet1, starts1, directions1);
+
+        Battleship battleship2 = new Battleship();
+        Destroyer destroyer2 = new Destroyer();
+        Minesweeper minesweeper2 = new Minesweeper();
+
+        List<Boat> fleet2 = new LinkedList<Boat>(Arrays.asList(battleship1, destroyer1, minesweeper1));
+        String[] starts2 = {"A1","B1","C1"};
+        char[] directions2 = {'e','e','e'};
+
+        playerTwo = new Player(fleet2, starts2, directions2);
 
         // Play the game!!
        // while(!gameOver()) {
