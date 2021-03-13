@@ -112,8 +112,29 @@ public class Player {
 
 
             //has the captains cabin been hit?
-            if((int)typeOfHit.charAt(1) == hitBoat.getCabinIndex()){
-                System.out.println("Captain's cabin hit!");
+            int hitIndex = Integer.parseInt(typeOfHit.substring(1));
+            if(hitIndex == hitBoat.getCabinIndex()){
+                //see result of hitting captains cabin
+                String response = hitBoat.getCaptainsCabin().hit();
+
+                //if the hit sinks the ship, follow sinking procedure
+                if(response == "Sunk"){
+                    //tell board to sink all of the chars
+                    primaryBoard.sink(hitBoat.getName().charAt(0));
+
+                    //remove boat from fleet
+                    fleet.remove(hitBoat);
+
+                    //if fleet is empty now, return surrender
+                    if(fleetIsEmpty()){
+                        return "Surrender";
+                    }
+
+                    //otherwise return sunk
+                    else{
+                        return "Sunk "+hitBoat.getName();
+                    }
+                }
                 return "";
             }
             //if not:
