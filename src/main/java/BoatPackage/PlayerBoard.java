@@ -16,23 +16,25 @@ public class PlayerBoard extends GameBoard {
     // is shipType needed or can I get ship type from coordList.length?
     // shipType data type may change
     // should it return boolean or the new matrix?
-    public boolean placeShip(String shipName, String[] coordList) {
+    public boolean placeShip(String coordinate, Boat boat, char direction) {
         boolean validShipPlacement = false;
+        /*
         String shipSymbol;
         // validate that there is no other existing ship
 
         shipSymbol = shipName.toUpperCase().substring(0,1);
 
 
-        /* TODO: previous, delete below
+         TODO: previous, delete below
         if (shipName == 1) shipSymbol = 'M'; // minesweeper
         else if (shipName == 2) shipSymbol = 'D';
         else if (shipType == 3) shipSymbol = 'B';
         else return false;
-        */
+
 
         for (String cell: coordList)
             updateCoord(cell, shipSymbol);
+        */
         return true;
     }
 

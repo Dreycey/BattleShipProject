@@ -37,7 +37,7 @@ class MinesweeperTest {
     public void testCabin() throws Exception{
         String[] coords = {"A1","A2"};
 
-        Minesweeper boat = new Minesweeper(coords);
+        Minesweeper boat = new Minesweeper();
 
         Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
 

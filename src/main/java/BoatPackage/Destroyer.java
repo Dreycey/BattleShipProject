@@ -2,13 +2,7 @@ package BoatPackage;
 
 public class Destroyer extends Boat{
 
-    public Destroyer() {
-        setName("Destroyer");
-        setSize(3);
-        setCabinIndex(1);
-    }
-
-    public Destroyer(String[] coords){
+    public Destroyer(){
         setName("Destroyer");
         setSize(3);
         setCabinIndex(1);

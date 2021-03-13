@@ -35,7 +35,7 @@ class DestroyerTest {
     public void testCabin() throws Exception{
         String[] coords = {"A1","A2","A3"};
 
-        Destroyer boat = new Destroyer(coords);
+        Destroyer boat = new Destroyer();
 
         Assertions.assertFalse(boat.getCaptainsCabin().getHitStatus());
 

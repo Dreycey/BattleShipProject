@@ -1,3 +1,5 @@
+import BoatPackage.Destroyer;
+import BoatPackage.Minesweeper;
 import BoatPackage.PlayerBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,8 @@ public class PlayerBoardTest {
         // place ship on default board
         String[] coordList = {"C3", "C4"};
         String shipType = "Minesweeper";
-        boolean isPlaced = pDefault.placeShip(shipType, coordList);
+        Minesweeper boat = new Minesweeper();
+        boolean isPlaced = pDefault.placeShip("C3",boat,'e');
         Assertions.assertTrue(isPlaced);
         Assertions.assertEquals("M", pDefault.valueAt("C4"));
     }
@@ -21,7 +24,8 @@ public class PlayerBoardTest {
         // place ship on nondefault board
         String[] coordList = {"A1", "A2"};
         String shipType = "Destroyer";
-        boolean isPlaced = p1.placeShip(shipType, coordList);
+        Destroyer boat = new Destroyer();
+        boolean isPlaced = p1.placeShip("A1", boat, 'e');
         Assertions.assertTrue(isPlaced);
         Assertions.assertEquals("D", p1.valueAt("A1"));
     }
@@ -37,7 +41,8 @@ public class PlayerBoardTest {
 
         String[] coordList = {"A1", "A2"};
         String shipType = "Minesweeper";
-        boolean isPlaced = pDefault.placeShip(shipType, coordList);
+        Minesweeper boat = new Minesweeper();
+        boolean isPlaced = pDefault.placeShip("A1",boat,'e');
         Assertions.assertEquals("M", pDefault.valueAt("A1"));
         Assertions.assertEquals("M", pDefault.valueAt("A2"));
         String hitTarget = "A2";
