@@ -9,6 +9,14 @@ public class PlayerBoardTest {
     PlayerBoard p1 = new PlayerBoard(5);
 
     @Test
+    public void testValidCoord() throws Exception{
+        PlayerBoard p2 = new PlayerBoard(10);
+
+        Assertions.assertFalse(p2.isValidCoordinate("K200"));
+        Assertions.assertTrue(p2.isValidCoordinate("A10"));
+    }
+
+    @Test
     public void placeShipDefault() {
         // place ship on default board
         String[] coordList = {"C3", "C4"};

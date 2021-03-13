@@ -17,24 +17,41 @@ public class PlayerBoard extends GameBoard {
     // shipType data type may change
     // should it return boolean or the new matrix?
     public boolean placeShip(String coordinate, Boat boat, char direction) {
-        boolean validShipPlacement = false;
-        /*
-        String shipSymbol;
-        // validate that there is no other existing ship
+        boolean validShipPlacement = true;
+        String shipSymbol = boat.getName().toUpperCase().substring(0,1);
 
-        shipSymbol = shipName.toUpperCase().substring(0,1);
+        int[][] locs = boat.genLocs(direction);
 
+        String[] coords = new String[locs.length];
 
-         TODO: previous, delete below
-        if (shipName == 1) shipSymbol = 'M'; // minesweeper
-        else if (shipName == 2) shipSymbol = 'D';
-        else if (shipType == 3) shipSymbol = 'B';
-        else return false;
+        char row = coordinate.charAt(0);
+        char col = coordinate.charAt(1);
 
+        for(int i = 0; i < locs.length; i++){
+            char newRow = (char)(row+locs[i][0]);
+            char newCol = (char)(col+locs[i][1]);
+            coords[i] = new StringBuilder().append(newRow).append(newCol).toString();
+        }
 
-        for (String cell: coordList)
+        //check that all coords are valid
+        for(String coord : coords){
+            if(!isValidCoordinate(coord)){
+                return false;
+            }
+        }
+
+        for (String cell: coords)
             updateCoord(cell, shipSymbol);
-        */
+
+        return true;
+    }
+
+    public boolean isValidCoordinate(String coord){
+        int[] index = super.convertCoordToIndex(coord);
+
+        if(index[0] < 0 || index[0] >= super.getBoardSize() || index[1] < 0 || index[1] >= super.getBoardSize()){
+            return false;
+        }
         return true;
     }
 
