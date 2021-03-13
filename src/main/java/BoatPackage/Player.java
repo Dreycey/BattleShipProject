@@ -2,6 +2,7 @@ package BoatPackage;
 import java.util.*;
 
 public class Player {
+
     private PlayerBoard primaryBoard;
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
@@ -18,9 +19,6 @@ public class Player {
         Boat DestBoat = new Destroyer();
         Boat BatBoat = new Battleship();
 
-        // Define Boats
-        mineBoat.setCoordinates(new String[]{"C3", "C4"});
-
         // add 3 default boats
         fleet.add(mineBoat);
         fleet.add(DestBoat);
@@ -29,7 +27,7 @@ public class Player {
         //add ships to primaryBoard
         for (int ind=0; ind < fleet.size(); ind++){
             Boat shipIter = fleet.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            //primaryBoard.placeShip(shipIter.getName());
         }
     }
 
@@ -41,7 +39,7 @@ public class Player {
         //add ships to primaryBoard
         for (int ind=0; ind < fleet.size(); ind++){
             Boat shipIter = fleet.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            //primaryBoard.placeShip(shipIter.getName());
         }
     }
 
@@ -71,7 +69,7 @@ public class Player {
         for (int ind=0; ind < boatlist.size(); ind++){
             System.out.println(boatlist.get(ind));
             Boat shipIter = boatlist.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            //primaryBoard.placeShip(shipIter.getName());
             outputTestArray.add(shipIter);
             fleet.add(shipIter);
         }
@@ -109,8 +107,9 @@ public class Player {
         if (typeOfHit == "x"){ // IF HIT
             // go through boats in the fleet
             for (Boat b : fleet) {
-                if (b.isCoordAfloat(inCoordinate)){
+                /*if (b.isCoordAfloat(inCoordinate)){
                     //if it is captains cabin
+                    /*
                     if(b.getCaptainsCabin().getLoc() == inCoordinate){
                         //hit captains cabin, get result
                         hitOrSunk = b.getCaptainsCabin().hit();
@@ -148,9 +147,9 @@ public class Player {
                             getPrimaryBoard().updateCoord(inCoordinate, toReplace);
                             return "Miss";
                         }
-                    }
+                    }*/
                     //if the result is not a miss: remove
-                    b.removeCoordinate(inCoordinate);
+                    //b.removeCoordinate(inCoordinate);
                     if (b.getStatus() == "Sunk") {
                         //"Afloat", "Hit", "Sunk"
                         indexToSink = fleet.indexOf(b);
@@ -169,10 +168,10 @@ public class Player {
                 return hitOrSunk;
             }
 
-        } else{ // IF NOT HIT
-            return "Miss";
-        }
-    }
+        } //else{ // IF NOT HIT
+            //return "Miss";
+        //}
+    //}
 
     /*
     DESCRIPTION:
@@ -247,7 +246,6 @@ public class Player {
 
         // init
         int sonarBoardSize =5;
-        char[][] playerMatrix = primaryBoard.getMatrix();
         int[] index = primaryBoard.convertCoordToIndex(coordIn);
         int boardSize = primaryBoard.getBoardSize();
         System.out.println("index: " + Arrays.toString(index));

@@ -121,10 +121,11 @@ public class Game {
             Boat boatObj = (Boat) boatCall.newInstance();
             // print String name, set coordinates
             System.out.println(boatObj.getName());
+            /*
             if (isValidCoordinate(inCoordinates[boatCounterInd])) {
                 boatObj.setCoordinates(inCoordinates[boatCounterInd]);
-            }
-            else {break;}
+            }*/
+            //else {break;}
             // add to list
             playerBoatList.add(boatObj);
             //increment counter

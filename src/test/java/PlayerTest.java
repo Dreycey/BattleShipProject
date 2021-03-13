@@ -18,9 +18,9 @@ public class PlayerTest {
     String[] dCoords = {"B1","B2","B3"};
     String[] mCoords = {"C1","C2"};
 
-    Battleship battleship = new Battleship(bCoords);
-    Destroyer destroyer = new Destroyer(dCoords);
-    Minesweeper minesweeper = new Minesweeper(mCoords);
+    Battleship battleship = new Battleship();
+    Destroyer destroyer = new Destroyer();
+    Minesweeper minesweeper = new Minesweeper();
 
     List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
@@ -113,9 +113,9 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
@@ -144,9 +144,9 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
@@ -162,9 +162,6 @@ public class PlayerTest {
         //is the armored boat still in the fleet?
         Assertions.assertTrue(player.getFleet().contains(battleship));
 
-        //is the coordinate still in the boat's list?
-        Assertions.assertTrue(player.getFleet().get(0).isCoordAfloat("A3"));
-
         //is the player board correct?
         Assertions.assertEquals("B", player.getPrimaryBoard().valueAt("A3"));
     }
@@ -176,9 +173,9 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
@@ -217,9 +214,9 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
@@ -251,8 +248,6 @@ public class PlayerTest {
         // testing
         Boat boat1 = new Destroyer();
         Boat boat2 = new Minesweeper();
-        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
-        boat2.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 
@@ -276,8 +271,6 @@ public class PlayerTest {
         // testing
         Boat boat1 = new Destroyer();
         Boat boat2 = new Minesweeper();
-        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
-        boat1.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 
