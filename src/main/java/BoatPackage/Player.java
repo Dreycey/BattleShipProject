@@ -244,6 +244,10 @@ public class Player {
         //       {"0","0","0","0","0"}
         //};
         String[][] playerMatrix = primaryBoard.getMatrix();
+
+        // init
+        int sonarBoardSize =5;
+        char[][] playerMatrix = primaryBoard.getMatrix();
         int[] index = primaryBoard.convertCoordToIndex(coordIn);
         int boardSize = primaryBoard.getBoardSize();
         System.out.println("index: " + Arrays.toString(index));
@@ -251,9 +255,7 @@ public class Player {
 
         /*
         Now:
-
         NOTE:  think about making a char array.
-
         1. loop through playerMatrix
         1.5 make 5x5 String[5][5]
         2. if off board: "-1" for that element
@@ -264,7 +266,7 @@ public class Player {
         4. return the new array
          */
 
-       String[][] outputArray = new String[5][5];
+       String[][] outputArray = new String[sonarBoardSize][sonarBoardSize];
        String activeElement;
        int outRow = 0; // counter Row
        for (int row = (index[0]-2); row <= (index[0]+2); row++) {
