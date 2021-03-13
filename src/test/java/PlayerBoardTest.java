@@ -24,7 +24,7 @@ public class PlayerBoardTest {
         Minesweeper boat = new Minesweeper();
         boolean isPlaced = pDefault.placeShip("C3",boat,'e');
         Assertions.assertTrue(isPlaced);
-        Assertions.assertEquals("M", pDefault.valueAt("C4"));
+        Assertions.assertEquals("M1", pDefault.valueAt("C4"));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class PlayerBoardTest {
         Destroyer boat = new Destroyer();
         boolean isPlaced = p1.placeShip("A1", boat, 'e');
         Assertions.assertTrue(isPlaced);
-        Assertions.assertEquals("D", p1.valueAt("A1"));
+        Assertions.assertEquals("D0", p1.valueAt("A1"));
     }
 
 
@@ -51,8 +51,8 @@ public class PlayerBoardTest {
         String shipType = "Minesweeper";
         Minesweeper boat = new Minesweeper();
         boolean isPlaced = pDefault.placeShip("A1",boat,'e');
-        Assertions.assertEquals("M", pDefault.valueAt("A1"));
-        Assertions.assertEquals("M", pDefault.valueAt("A2"));
+        Assertions.assertEquals("M0", pDefault.valueAt("A1"));
+        Assertions.assertEquals("M1", pDefault.valueAt("A2"));
         String hitTarget = "A2";
         String expectedResultHit = "x";
         String actual2 = pDefault.receiveFire(hitTarget);

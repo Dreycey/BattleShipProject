@@ -40,8 +40,11 @@ public class PlayerBoard extends GameBoard {
             }
         }
 
-        for (String cell: coords)
-            updateCoord(cell, shipSymbol);
+        for(int i = 0; i < coords.length; i++){
+            StringBuilder sb = new StringBuilder(String.valueOf (shipSymbol));
+            sb.append(i);
+            updateCoord(coords[i],sb.toString());
+        }
 
         return true;
     }
