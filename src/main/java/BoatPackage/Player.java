@@ -135,7 +135,14 @@ public class Player {
                         return "Sunk "+hitBoat.getName();
                     }
                 }
-                return "";
+                else{
+                    //update coordinate to be unhit
+                    String shouldBe = hitBoat.getName().substring(0,1)+String.valueOf(hitBoat.getCabinIndex());
+                    primaryBoard.updateCoord(inCoordinate, shouldBe);
+
+                    //return miss
+                    return "Miss";
+                }
             }
             //if not:
             else{

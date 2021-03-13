@@ -72,10 +72,10 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Destroyer destroyer = new Destroyer();
         Minesweeper minesweeper = new Minesweeper();
+        Destroyer destroyer = new Destroyer();
 
-        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(minesweeper, destroyer));
         String[] starts = {"B1","C1"};
         char[] directions = {'e','e'};
 
@@ -86,12 +86,24 @@ public class PlayerTest {
         // for now return True
         //TODO: Add surrender
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("C2"));
-        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("C1"));
-
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B1"));
         Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2"));
-        Assertions.assertEquals("Surrender", playerObjOne.receiveFire("B3"));
+        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1"));
+
+        Minesweeper minesweeper2 = new Minesweeper();
+
+        List<Boat> fleet2 = new LinkedList<Boat>(Arrays.asList(minesweeper2));
+        String[] starts2 = {"B1"};
+        char[] directions2 = {'e'};
+
+        //construct player
+        Player playerObjOne2 = new Player(fleet2, starts2, directions2);
+
+        // need the primary boat class for ultimate test
+        // for now return True
+        //TODO: Add surrender
+        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5"));
+        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2"));
+        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1"));
 
     }
 
@@ -186,7 +198,7 @@ public class PlayerTest {
         Assertions.assertTrue(player.getFleet().contains(battleship));
 
         //is the player board correct?
-        Assertions.assertEquals("B", player.getPrimaryBoard().valueAt("A3"));
+        Assertions.assertEquals("B2", player.getPrimaryBoard().valueAt("A3"));
     }
 
     @Test
@@ -218,7 +230,7 @@ public class PlayerTest {
         result = player.receiveFire("A3");
 
         //did method return sunk?
-        Assertions.assertEquals("Sunk A1 A3 A4", result);
+        Assertions.assertEquals("Sunk Battleship", result);
 
         //is the unarmored boat out of the fleet?
         Assertions.assertFalse(player.getFleet().contains(battleship));
