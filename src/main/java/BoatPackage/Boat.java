@@ -66,5 +66,19 @@ public class Boat {
 
     public void hit(){
 
+        hitsRemaining -= 1;
+        reAlignStatus();
+    }
+
+    public void reAlignStatus(){
+        if(hitsRemaining == size){
+            setStatus("Afloat");
+        }
+        else if(hitsRemaining > 0 && hitsRemaining < size){
+            setStatus("Hit");
+        }
+        else{
+            setStatus("Sunk");
+        }
     }
 }
