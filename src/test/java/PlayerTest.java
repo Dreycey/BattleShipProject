@@ -23,16 +23,20 @@ public class PlayerTest {
     Minesweeper minesweeper = new Minesweeper();
 
     List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+    String[] starts = {"A1","B1","C1"};
+    char[] directions = {'e','e','e'};
 
     //construct player
-    Player playerObjOne = new Player(fleet);
+    Player playerObjOne = new Player(fleet, starts, directions);
 
     @BeforeEach
     public void testNonDefault() {
         List<Boat> bList = new ArrayList<Boat>();
+        String[] starts = {"A1","B1"};
+        char[] directions = {'e','e'};
         bList.add(new Destroyer());
         bList.add(new Destroyer());
-        Player pNonDefault = new Player(bList);
+        Player pNonDefault = new Player(bList, starts, directions);
 
         String boatNames[] = {"Destroyer", "Destroyer"};
         String actualNames[] = {pNonDefault.getFleet().get(0).getName(), pNonDefault.getFleet().get(1).getName()};
@@ -118,9 +122,11 @@ public class PlayerTest {
         Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+        String[] starts = {"A1","B1","C1"};
+        char[] directions = {'e','e','e'};
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit unarmored captains cabin
         String result = player.receiveFire("C1");
@@ -149,9 +155,11 @@ public class PlayerTest {
         Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+        String[] starts = {"A1","B1","C1"};
+        char[] directions = {'e','e','e'};
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
         String result = player.receiveFire("A3");
@@ -180,7 +188,7 @@ public class PlayerTest {
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
         String result = player.receiveFire("A2");
@@ -221,7 +229,7 @@ public class PlayerTest {
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         String[] fires = {"A3","A4","A6"};
 

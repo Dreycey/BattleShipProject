@@ -23,8 +23,8 @@ public class Game {
         // Instantiate Players
         String[][] coordPlayerOne = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
         String[][] coordPlayerTwo = {{"A2","A3","A4"},{"B2","B3","B4","B5"},{"C4","C5"}};
-        playerOne = new Player(setUpCoords(coordPlayerOne));
-        playerTwo = new Player(setUpCoords(coordPlayerTwo));
+        //playerOne = new Player(setUpCoords(coordPlayerOne));
+        //playerTwo = new Player(setUpCoords(coordPlayerTwo));
 
         // Play the game!!
        // while(!gameOver()) {

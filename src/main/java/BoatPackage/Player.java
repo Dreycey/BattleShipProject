@@ -32,14 +32,14 @@ public class Player {
     }
 
     // Constructor for Player class
-    public Player(List<Boat> inputBoats) {
+    public Player(List<Boat> inputBoats, String[] coords, char[] directions) {
         primaryBoard = new PlayerBoard();
         targetBoard = new TargetBoard();
         fleet = inputBoats;
         //add ships to primaryBoard
         for (int ind=0; ind < fleet.size(); ind++){
             Boat shipIter = fleet.get(ind);
-            //primaryBoard.placeShip(shipIter.getName());
+            primaryBoard.placeShip(coords[ind], shipIter, directions[ind]);
         }
     }
 
