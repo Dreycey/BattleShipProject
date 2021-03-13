@@ -44,4 +44,21 @@ class MinesweeperTest {
         Assertions.assertEquals("Sunk", boat.getCaptainsCabin().hit());
     }
 
+    @Test
+    public void testGenLocs() throws Exception{
+
+        Minesweeper boat = new Minesweeper();
+
+        int[][] south = {{0,0},{-1,0}};
+        int[][] north = {{0,0},{1,0}};
+        int[][] east = {{0,0},{0,1}};
+        int[][] west = {{0,0},{0,-1}};
+
+        Assertions.assertArrayEquals(south, boat.genLocs('s'));
+        Assertions.assertArrayEquals(north, boat.genLocs('n'));
+        Assertions.assertArrayEquals(east, boat.genLocs('e'));
+        Assertions.assertArrayEquals(west, boat.genLocs('w'));
+
+    }
+
 }
