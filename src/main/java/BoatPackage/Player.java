@@ -2,6 +2,7 @@ package BoatPackage;
 import java.util.*;
 
 public class Player {
+
     private PlayerBoard primaryBoard;
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
@@ -18,9 +19,6 @@ public class Player {
         Boat DestBoat = new Destroyer();
         Boat BatBoat = new Battleship();
 
-        // Define Boats
-        mineBoat.setCoordinates(new String[]{"C3", "C4"});
-
         // add 3 default boats
         fleet.add(mineBoat);
         fleet.add(DestBoat);
@@ -29,19 +27,19 @@ public class Player {
         //add ships to primaryBoard
         for (int ind=0; ind < fleet.size(); ind++){
             Boat shipIter = fleet.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            //primaryBoard.placeShip(shipIter.getName());
         }
     }
 
     // Constructor for Player class
-    public Player(List<Boat> inputBoats) {
+    public Player(List<Boat> inputBoats, String[] coords, char[] directions) {
         primaryBoard = new PlayerBoard();
         targetBoard = new TargetBoard();
         fleet = inputBoats;
         //add ships to primaryBoard
         for (int ind=0; ind < fleet.size(); ind++){
             Boat shipIter = fleet.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            primaryBoard.placeShip(coords[ind], shipIter, directions[ind]);
         }
     }
 
@@ -71,7 +69,7 @@ public class Player {
         for (int ind=0; ind < boatlist.size(); ind++){
             System.out.println(boatlist.get(ind));
             Boat shipIter = boatlist.get(ind);
-            primaryBoard.placeShip(shipIter.getName(), shipIter.getCoordinates());
+            //primaryBoard.placeShip(shipIter.getName());
             outputTestArray.add(shipIter);
             fleet.add(shipIter);
         }
@@ -101,78 +99,89 @@ public class Player {
 
         // initialize variables
         String typeOfHit = primaryBoard.receiveFire(inCoordinate);
-        String hitOrSunk = "Hit";
-        int indexToSink = -1;
 
-        // If hit, remove from fleet and determine Hit, Sunk, or Surrender
-        // Else, Miss
-        if (typeOfHit == "x"){ // IF HIT
-            // go through boats in the fleet
-            for (Boat b : fleet) {
-                if (b.isCoordAfloat(inCoordinate)){
-                    //if it is captains cabin
-                    if(b.getCaptainsCabin().getLoc() == inCoordinate){
-                        //hit captains cabin, get result
-                        hitOrSunk = b.getCaptainsCabin().hit();
+        if(typeOfHit != "Miss"){
 
-                        if(hitOrSunk == "Sunk"){
-                            //tack the coords onto the end so we can sink them all (IF other coords exist)
-                            if(b.getCoordinates().length > 1) {
-                                for (int i = 0; i < b.getCoordinates().length; i++) {
-                                    if(b.getCoordinates()[i].length() > 0){
-                                        hitOrSunk = hitOrSunk + " " + b.getCoordinates()[i];
-                                    }
-                                }
-                            }
-                            //remove it from fleet
-                            indexToSink = fleet.indexOf(b);
-                            fleet.remove(fleet.indexOf(b));
-
-                            //sink all coords
-                            //get coord list
-                            String[] arr = hitOrSunk.split(" ", 0);
-                            //for each one that isn't "Sunk", update the coord
-                            for(int i = 1; i < arr.length; i++){
-                                if(arr[i].length() > 0) {
-                                    getPrimaryBoard().updateCoord(arr[i], "x");
-                                }
-                            }
-
-                            if (fleet.isEmpty()) return "Surrender";
-
-                            return hitOrSunk.trim();
-                        }
-                        else{
-                            //if it is a miss, need to update board
-                            String toReplace = b.getName().substring(0,1);
-                            getPrimaryBoard().updateCoord(inCoordinate, toReplace);
-                            return "Miss";
-                        }
-                    }
-                    //if the result is not a miss: remove
-                    b.removeCoordinate(inCoordinate);
-                    if (b.getStatus() == "Sunk") {
-                        //"Afloat", "Hit", "Sunk"
-                        indexToSink = fleet.indexOf(b);
-                        hitOrSunk = "Sunk";
-                    }
+            //find the boat that has been hit
+            Boat hitBoat = null;
+            for(Boat boat : fleet){
+                if(typeOfHit.charAt(0) == boat.getName().charAt(0)){
+                    hitBoat = boat;
                 }
             }
-            // If sunk, remove that ship.
-            if (hitOrSunk == "Sunk") {
-                fleet.remove(indexToSink);
+
+
+            //has the captains cabin been hit?
+            int hitIndex = Integer.parseInt(typeOfHit.substring(1));
+            if(hitIndex == hitBoat.getCabinIndex()){
+                //see result of hitting captains cabin
+                String response = hitBoat.getCaptainsCabin().hit();
+
+                //if the hit sinks the ship, follow sinking procedure
+                if(response == "Sunk"){
+                    //tell board to sink all of the chars
+                    primaryBoard.sink(hitBoat.getName().charAt(0));
+
+                    //remove boat from fleet
+                    fleet.remove(hitBoat);
+
+                    //if fleet is empty now, return surrender
+                    if(fleetIsEmpty()){
+                        return "Surrender";
+                    }
+
+                    //otherwise return sunk
+                    else{
+                        return "Sunk "+hitBoat.getName();
+                    }
+                }
+                else{
+                    //update coordinate to be unhit
+                    String shouldBe = hitBoat.getName().substring(0,1)+String.valueOf(hitBoat.getCabinIndex());
+                    primaryBoard.updateCoord(inCoordinate, shouldBe);
+
+                    //return miss
+                    return "Miss";
+                }
             }
-            // Check if all boats are sunk. -> this is a surrender
-            if (fleet.isEmpty()){
-                return "Surrender";
-            } else {
-                return hitOrSunk;
+            //if not:
+            else{
+                //hit boat
+                hitBoat.hit();
+
+                //check status
+                //if status is sunk:
+                if(hitBoat.getStatus() == "Sunk"){
+                    //tell board to sink all of the chars
+                    primaryBoard.sink(hitBoat.getName().charAt(0));
+
+                    //remove boat from fleet
+                    fleet.remove(hitBoat);
+
+                    //if fleet is empty now, return surrender
+                    if(fleetIsEmpty()){
+                        return "Surrender";
+                    }
+
+                    //otherwise return sunk
+                    else{
+                        return "Sunk "+hitBoat.getName();
+                    }
+                }
+                //else return hit
+                return "Hit";
+
             }
 
-        } else{ // IF NOT HIT
+        }
+        else{
             return "Miss";
         }
-    }
+
+        } //else{ // IF NOT HIT
+            //return "Miss";
+        //}
+    //}
 
     /*
     DESCRIPTION:
@@ -247,7 +256,6 @@ public class Player {
 
         // init
         int sonarBoardSize =5;
-        char[][] playerMatrix = primaryBoard.getMatrix();
         int[] index = primaryBoard.convertCoordToIndex(coordIn);
         int boardSize = primaryBoard.getBoardSize();
         System.out.println("index: " + Arrays.toString(index));

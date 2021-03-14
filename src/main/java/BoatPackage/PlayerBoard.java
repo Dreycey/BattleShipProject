@@ -16,23 +16,45 @@ public class PlayerBoard extends GameBoard {
     // is shipType needed or can I get ship type from coordList.length?
     // shipType data type may change
     // should it return boolean or the new matrix?
-    public boolean placeShip(String shipName, String[] coordList) {
-        boolean validShipPlacement = false;
-        String shipSymbol;
-        // validate that there is no other existing ship
+    public boolean placeShip(String coordinate, Boat boat, char direction) {
+        boolean validShipPlacement = true;
+        String shipSymbol = boat.getName().toUpperCase().substring(0,1);
 
-        shipSymbol = shipName.toUpperCase().substring(0,1);
+        int[][] locs = boat.genLocs(direction);
 
+        String[] coords = new String[locs.length];
 
-        /* TODO: previous, delete below
-        if (shipName == 1) shipSymbol = 'M'; // minesweeper
-        else if (shipName == 2) shipSymbol = 'D';
-        else if (shipType == 3) shipSymbol = 'B';
-        else return false;
-        */
+        char row = coordinate.charAt(0);
+        char col = coordinate.charAt(1);
 
-        for (String cell: coordList)
-            updateCoord(cell, shipSymbol);
+        for(int i = 0; i < locs.length; i++){
+            char newRow = (char)(row+locs[i][0]);
+            char newCol = (char)(col+locs[i][1]);
+            coords[i] = new StringBuilder().append(newRow).append(newCol).toString();
+        }
+
+        //check that all coords are valid
+        for(String coord : coords){
+            if(!isValidCoordinate(coord)){
+                return false;
+            }
+        }
+
+        for(int i = 0; i < coords.length; i++){
+            StringBuilder sb = new StringBuilder(String.valueOf (shipSymbol));
+            sb.append(i);
+            updateCoord(coords[i],sb.toString());
+        }
+
+        return true;
+    }
+
+    public boolean isValidCoordinate(String coord){
+        int[] index = super.convertCoordToIndex(coord);
+
+        if(index[0] < 0 || index[0] >= super.getBoardSize() || index[1] < 0 || index[1] >= super.getBoardSize()){
+            return false;
+        }
         return true;
     }
 
@@ -40,19 +62,34 @@ public class PlayerBoard extends GameBoard {
     public String receiveFire(String coord) {
 
         String fireStatus = "-";
+        String returnVal = "";
         int[] cell = convertCoordToIndex(coord);
         // TODO: validation of indices should be done in Game Class
         if (cell[0] != -1 && cell[1] != -1) {
             //if (getMatrix()[cell[0]][cell[1]] == '-')
             //System.out.println(valueAt(coord));
-            if (valueAt(coord) == "-") {
+            returnVal = valueAt(coord);
+            if (returnVal == "-") {
                 fireStatus = "o"; // miss
+                returnVal = "Miss";
             }
-            else fireStatus = "x"; // hit (anything that's not a '-' would be a ship
+            else{
+                fireStatus = "x"; // hit (anything that's not a '-' would be a ship
+            }
         }
 
         updateCoord(coord, fireStatus);
-        return fireStatus;
+        return returnVal;
+    }
+
+    public void sink(char token){
+        for(int i = 0; i < getBoardSize(); i ++){
+            for(int j = 0; j < getBoardSize(); j++){
+                if(super.getMatrix()[i][j].indexOf(token) != -1){
+                    super.updateCoordByIndex(i,j,"x");
+                }
+            }
+        }
     }
 
 

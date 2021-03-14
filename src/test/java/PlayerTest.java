@@ -18,21 +18,25 @@ public class PlayerTest {
     String[] dCoords = {"B1","B2","B3"};
     String[] mCoords = {"C1","C2"};
 
-    Battleship battleship = new Battleship(bCoords);
-    Destroyer destroyer = new Destroyer(dCoords);
-    Minesweeper minesweeper = new Minesweeper(mCoords);
+    Battleship battleship = new Battleship();
+    Destroyer destroyer = new Destroyer();
+    Minesweeper minesweeper = new Minesweeper();
 
     List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+    String[] starts = {"A1","B1","C1"};
+    char[] directions = {'e','e','e'};
 
     //construct player
-    Player playerObjOne = new Player(fleet);
+    Player playerObjOne = new Player(fleet, starts, directions);
 
     @BeforeEach
     public void testNonDefault() {
         List<Boat> bList = new ArrayList<Boat>();
+        String[] starts = {"A1","B1"};
+        char[] directions = {'e','e'};
         bList.add(new Destroyer());
         bList.add(new Destroyer());
-        Player pNonDefault = new Player(bList);
+        Player pNonDefault = new Player(bList, starts, directions);
 
         String boatNames[] = {"Destroyer", "Destroyer"};
         String actualNames[] = {pNonDefault.getFleet().get(0).getName(), pNonDefault.getFleet().get(1).getName()};
@@ -63,16 +67,43 @@ public class PlayerTest {
     // test revieveFire
     @Test
     public void receiveFireTest() {
+        // Instantiate Player
+        //set up boats
+        String[] dCoords = {"B1","B2","B3"};
+        String[] mCoords = {"C1","C2"};
+
+        Minesweeper minesweeper = new Minesweeper();
+        Destroyer destroyer = new Destroyer();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(minesweeper, destroyer));
+        String[] starts = {"B1","C1"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
         Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("C2"));
-        Assertions.assertEquals("Sunk C1", playerObjOne.receiveFire("C1"));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2"));
+        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1"));
 
-        Player pEmpty = new Player();
-        pEmpty.setFleet(new ArrayList<Boat>());
-        Assertions.assertEquals("Surrender", pEmpty.receiveFire("C4"));
+        Minesweeper minesweeper2 = new Minesweeper();
+
+        List<Boat> fleet2 = new LinkedList<Boat>(Arrays.asList(minesweeper2));
+        String[] starts2 = {"B1"};
+        char[] directions2 = {'e'};
+
+        //construct player
+        Player playerObjOne2 = new Player(fleet2, starts2, directions2);
+
+        // need the primary boat class for ultimate test
+        // for now return True
+        //TODO: Add surrender
+        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5"));
+        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2"));
+        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1"));
 
     }
 
@@ -113,20 +144,22 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+        String[] starts = {"A1","B1","C1"};
+        char[] directions = {'e','e','e'};
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit unarmored captains cabin
         String result = player.receiveFire("C1");
 
         //did method return sunk?
-        Assertions.assertEquals("Sunk C1 C2", result);
+        Assertions.assertEquals("Sunk Minesweeper", result);
 
         //is the unarmored boat out of the fleet?
         Assertions.assertFalse(player.getFleet().contains(minesweeper));
@@ -144,14 +177,16 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+        String[] starts = {"A1","B1","C1"};
+        char[] directions = {'e','e','e'};
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
         String result = player.receiveFire("A3");
@@ -162,11 +197,8 @@ public class PlayerTest {
         //is the armored boat still in the fleet?
         Assertions.assertTrue(player.getFleet().contains(battleship));
 
-        //is the coordinate still in the boat's list?
-        Assertions.assertTrue(player.getFleet().get(0).isCoordAfloat("A3"));
-
         //is the player board correct?
-        Assertions.assertEquals("B", player.getPrimaryBoard().valueAt("A3"));
+        Assertions.assertEquals("B2", player.getPrimaryBoard().valueAt("A3"));
     }
 
     @Test
@@ -176,14 +208,14 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
         String result = player.receiveFire("A2");
@@ -198,7 +230,7 @@ public class PlayerTest {
         result = player.receiveFire("A3");
 
         //did method return sunk?
-        Assertions.assertEquals("Sunk A1 A3 A4", result);
+        Assertions.assertEquals("Sunk Battleship", result);
 
         //is the unarmored boat out of the fleet?
         Assertions.assertFalse(player.getFleet().contains(battleship));
@@ -217,14 +249,14 @@ public class PlayerTest {
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
 
-        Battleship battleship = new Battleship(bCoords);
-        Destroyer destroyer = new Destroyer(dCoords);
-        Minesweeper minesweeper = new Minesweeper(mCoords);
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
         List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
 
         //construct player
-        Player player = new Player(fleet);
+        Player player = new Player(fleet, starts, directions);
 
         String[] fires = {"A3","A4","A6"};
 
@@ -251,8 +283,6 @@ public class PlayerTest {
         // testing
         Boat boat1 = new Destroyer();
         Boat boat2 = new Minesweeper();
-        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
-        boat2.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 
@@ -276,8 +306,6 @@ public class PlayerTest {
         // testing
         Boat boat1 = new Destroyer();
         Boat boat2 = new Minesweeper();
-        boat1.setCoordinates(new String[] {"A1","A2","A3","A4"});
-        boat1.setCoordinates(new String[] {"C3", "C4"});
         List<Boat> boatsList = new ArrayList<>();
         boatsList.add(boat1);
 

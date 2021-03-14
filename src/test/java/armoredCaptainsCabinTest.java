@@ -8,21 +8,12 @@ class armoredCaptainsCabinTest {
 
     @Test
     public void testConstructor() throws Exception{
-        String location = "A3";
-        captainsCabinType type = new armoredCaptainsCabin(location);
+        captainsCabinType type = new armoredCaptainsCabin();
     }
 
     @Test
     public void testGettersAndSetters() throws Exception{
-        String location = "A3";
-        captainsCabinType type = new armoredCaptainsCabin(location);
-
-        Assertions.assertEquals(location, type.getLoc());
-
-        String newLoc = "A4";
-        type.setLoc(newLoc);
-
-        Assertions.assertEquals(newLoc, type.getLoc());
+        captainsCabinType type = new armoredCaptainsCabin();
 
         Assertions.assertFalse(type.getHitStatus());
 
@@ -33,16 +24,14 @@ class armoredCaptainsCabinTest {
 
     @Test
     public void testHit() throws Exception{
-        String location = "A3";
-        captainsCabinType type = new armoredCaptainsCabin(location);
+        captainsCabinType type = new armoredCaptainsCabin();
 
         Assertions.assertEquals("Miss", type.hit());
     }
 
     @Test
     public void testHitTwice() throws Exception{
-        String location = "A3";
-        captainsCabinType type = new armoredCaptainsCabin(location);
+        captainsCabinType type = new armoredCaptainsCabin();
 
         Assertions.assertEquals("Miss", type.hit());
         Assertions.assertEquals("Sunk", type.hit());
