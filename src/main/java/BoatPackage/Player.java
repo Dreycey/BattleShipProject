@@ -277,9 +277,17 @@ public class Player {
        String[][] outputArray = new String[sonarBoardSize][sonarBoardSize];
        String activeElement;
        int outRow = 0; // counter Row
-       for (int row = (index[0]-2); row <= (index[0]+2); row++) {
+       // assign half of the  output board size
+       int sonarSizeHalf;
+       if (sonarBoardSize % 2 == 0) {
+           sonarSizeHalf = (sonarBoardSize / 2) - 1;
+       } else {
+           sonarSizeHalf = (sonarBoardSize / 2);
+       }
+       // loop over out array
+       for (int row = (index[0]-sonarSizeHalf); row <= (index[0]+sonarSizeHalf); row++) {
            int outCol = 0; // counter Col
-           for (int col = (index[1]-2); col <= (index[1]+2); col++) {
+           for (int col = (index[1]-sonarSizeHalf); col <= (index[1]+sonarSizeHalf); col++) {
 
                // if on board
                if ( (0 <= row) && (row <= boardSize) && (0 <= col) && (col <= boardSize) ) {
