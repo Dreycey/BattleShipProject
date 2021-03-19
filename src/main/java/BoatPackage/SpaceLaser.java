@@ -6,6 +6,8 @@ public class SpaceLaser implements Weapon{
         if(currentValue.equals("-")){
             return "o";
         }
-        return null;
+        else {
+            return "x";
+        }
     }
 }

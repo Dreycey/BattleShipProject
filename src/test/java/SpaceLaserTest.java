@@ -30,4 +30,22 @@ class SpaceLaserTest {
         Assertions.assertEquals("x",laser.hit(curr3));
     }
 
+    @Test
+    public void testSubHit() throws Exception{
+        //sub underwater can't be hit! - underwater signified by lowercase S
+
+        String curr = "s0";
+
+        Assertions.assertEquals("x",laser.hit(curr));
+    }
+
+    @Test
+    public void testSubHitUnderBoat() throws  Exception{
+        //sub under a boat should hit boat, but not sub
+
+        String curr = "B2&s1";
+
+        Assertions.assertEquals("x",laser.hit(curr));
+    }
+
 }
