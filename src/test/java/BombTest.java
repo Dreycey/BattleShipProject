@@ -41,4 +41,13 @@ class BombTest {
 
         Assertions.assertEquals("o",bomb.hit(curr));
     }
+
+    @Test
+    public void testSubHitUnderBoat() throws  Exception{
+        //sub under a boat should hit boat, but not sub
+
+        String curr = "B2*s1";
+
+        Assertions.assertEquals("x*s1",bomb.hit(curr));
+    }
 }

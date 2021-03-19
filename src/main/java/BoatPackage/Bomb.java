@@ -6,6 +6,9 @@ public class Bomb implements Weapon{
             return "o";
         }
         else{
+            if(currentValue.contains("s")){
+                return "o";
+            }
             return "x";
         }
     }
