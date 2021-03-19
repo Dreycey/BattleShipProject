@@ -8,6 +8,7 @@ public class Player {
     private List<Boat> fleet = new ArrayList<Boat>();
     private int numSonarPulse = 0;
     private boolean canUseSonarPulse = false;
+    private Weapon weapon;
 
     // if no input, construct boats for a example
     public Player() {

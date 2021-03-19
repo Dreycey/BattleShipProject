@@ -75,6 +75,7 @@ public class PlayerBoard extends GameBoard {
             }
             else{
                 fireStatus = "x"; // hit (anything that's not a '-' would be a ship
+                returnVal = "Hit";
             }
         }
 
