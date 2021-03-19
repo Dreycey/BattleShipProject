@@ -7,7 +7,13 @@ public class Bomb implements Weapon{
         }
         else{
             if(currentValue.contains("s")){
-                return "o";
+                if(currentValue.contains("&")){ //means a boat is above it
+                    String sub = currentValue.split("&")[1];
+                    return "x&"+sub;
+                }
+                else{
+                    return "o";
+                }
             }
             return "x";
         }
