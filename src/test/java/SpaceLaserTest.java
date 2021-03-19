@@ -16,4 +16,18 @@ class SpaceLaserTest {
         Assertions.assertEquals("o",result);
     }
 
+    @Test
+    public void testHit() throws Exception{
+        //given a boat, should return 'x'
+        String curr = "M0";
+        String curr1 = "D1";
+        String curr2 = "B2";
+        String curr3 = "S3";
+
+        Assertions.assertEquals("x",laser.hit(curr));
+        Assertions.assertEquals("x",laser.hit(curr1));
+        Assertions.assertEquals("x",laser.hit(curr2));
+        Assertions.assertEquals("x",laser.hit(curr3));
+    }
+
 }
