@@ -5,6 +5,8 @@ public class Bomb implements Weapon{
         if(currentValue == "-"){
             return "o";
         }
-        return null;
+        else{
+            return "x";
+        }
     }
 }

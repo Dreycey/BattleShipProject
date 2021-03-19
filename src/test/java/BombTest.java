@@ -32,4 +32,13 @@ class BombTest {
         Assertions.assertEquals("x",bomb.hit(curr2));
         Assertions.assertEquals("x",bomb.hit(curr3));
     }
+
+    @Test
+    public void testSubHit() throws Exception{
+        //sub underwater can't be hit! - underwater signified by lowercase S
+
+        String curr = "s0";
+
+        Assertions.assertEquals("o",bomb.hit(curr));
+    }
 }
