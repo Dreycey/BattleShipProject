@@ -55,6 +55,10 @@ public class Player {
         this.fleet = boatList;
     }
 
+    public Weapon getWeapon(){return weapon;}
+
+    public List<SpecialWeapon> getSpecialWeapons(){return specialWeapons;}
+
     /*
     DESCRIPTION:
         This method places a ship on the board and sends

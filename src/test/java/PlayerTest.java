@@ -315,7 +315,7 @@ public class PlayerTest {
                                {"0","1","1","1","0"},
                                {"1","1","0","0","0"},
                                {"0","0","0","0","0"},
-                               {"","","","",""}};
+                               {"0","0","0","0","0"}};
 
         SonarPulse pulse = new SonarPulse();
 
@@ -323,10 +323,84 @@ public class PlayerTest {
     }
 
     //test receiveFire for ship sinking
+    @Test
+    public void testReceiveFireSink() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+        minesweeper.setCabinIndex(-1);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        SpaceLaser laser = new SpaceLaser();
+
+        Assertions.assertEquals("Hit",player.receiveFire("D1",laser));
+        Assertions.assertEquals("Sunk Minesweeper",player.receiveFire("D2",laser));
+    }
 
     //test receiveFire for surrender
+    @Test
+    public void testReceiveFireSurrender() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+        minesweeper.setCabinIndex(-1);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        SpaceLaser laser = new SpaceLaser();
+
+        Assertions.assertEquals("Miss",player.receiveFire("A3",laser));
+        Assertions.assertEquals("Sunk Battleship",player.receiveFire("A3",laser));
+        Assertions.assertEquals("Miss",player.receiveFire("C3",laser));
+        Assertions.assertEquals("Sunk Destroyer",player.receiveFire("C3",laser));
+        Assertions.assertEquals("Hit",player.receiveFire("D1",laser));
+        Assertions.assertEquals("Surrender",player.receiveFire("D2",laser));
+    }
 
     //test fireupon for sonar
+    @Test
+    public void testFireUponSonar() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        //confirm weapon name is bomb
+        Assertions.assertTrue(player.getWeapon() instanceof Bomb);
+        //confirm length of special weapons is 0
+        Assertions.assertEquals(0, player.getSpecialWeapons().size());
+
+        //sink a ship
+        Assertions.assertEquals(0, player.fireUpon("B5","Sunk Minesweeper"));
+
+        //confirm weapon is space laser
+        Assertions.assertTrue(player.getWeapon() instanceof SpaceLaser);
+        //confirm length of special weapons is 2
+        Assertions.assertEquals(2, player.getSpecialWeapons().size());
+
+        //fireupon with sonar
+        Assertions.assertEquals(0, player.fireUpon("SonarPulse","results of pulse"));
+
+        //make sure length is now 1
+        Assertions.assertEquals(1, player.getSpecialWeapons().size());
+    }
 
 
 }
