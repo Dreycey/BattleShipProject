@@ -9,6 +9,7 @@ public class Player {
     private Weapon weapon;
     private boolean canUseSonarPulse;
     private int numSonarPulse;
+    private List<SpecialWeapon> specialWeapons = new ArrayList<>();
 
     // if no input, construct boats for a example
     public Player() {
@@ -98,10 +99,27 @@ public class Player {
     OUTPUT:
         String <"Sunk", "Surrender", "Hit", "Miss">
     */
-    public String receiveFire(String inCoordinate) {
+    public String receiveFire(String inCoordinate, String weaponName) {
+
+        String typeOfHit = "";
+        if(weaponName.equals("")){
+            typeOfHit = primaryBoard.receiveFire(inCoordinate, weapon);
+        }
+        else{
+            for(SpecialWeapon specialWeapon : specialWeapons){
+                if(specialWeapon.getName().equals(weaponName)){
+                    //get type of hit
+                    typeOfHit = primaryBoard.receiveFireSpecialWeapon(inCoordinate, specialWeapon);
+                    //delete this from the list
+                    specialWeapons.remove(specialWeapon);
+                    //break
+                    return typeOfHit;
+                }
+            }
+        }
 
         // initialize variables
-        String typeOfHit = primaryBoard.receiveFire(inCoordinate);
+        //System.out.println(typeOfHit);
 
         if(typeOfHit != "Miss"){
 

@@ -1,6 +1,4 @@
-import BoatPackage.Destroyer;
-import BoatPackage.Minesweeper;
-import BoatPackage.PlayerBoard;
+import BoatPackage.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,11 +38,13 @@ public class PlayerBoardTest {
 
 
     @Test
-    public void receiveFire() {
+    public void receiveFireBomb() {
+
+        Bomb weapon = new Bomb();
 
         String missTarget = "C9";
         String expectedResultMiss = "Miss";
-        String actual1 = pDefault.receiveFire(missTarget);
+        String actual1 = pDefault.receiveFire(missTarget, weapon);
         Assertions.assertEquals(expectedResultMiss, actual1);
 
         String[] coordList = {"A1", "A2"};
@@ -55,7 +55,7 @@ public class PlayerBoardTest {
         Assertions.assertEquals("M1", pDefault.valueAt("A2"));
         String hitTarget = "A2";
         String expectedResultHit = "M1";
-        String actual2 = pDefault.receiveFire(hitTarget);
+        String actual2 = pDefault.receiveFire(hitTarget, weapon);
         Assertions.assertEquals(expectedResultHit, actual2);
     }
 

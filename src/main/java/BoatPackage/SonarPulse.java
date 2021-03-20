@@ -2,6 +2,16 @@ package BoatPackage;
 
 public class SonarPulse implements SpecialWeapon{
 
+    private String name;
+
+    public SonarPulse(){
+        name = "SonarPulse";
+    }
+
+    public String getName(){
+        return name;
+    }
+
     public String[][] hit(String[][] matrix){
         String[][] toReturn = new String[matrix.length][matrix[0].length];
 

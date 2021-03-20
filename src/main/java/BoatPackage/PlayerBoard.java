@@ -59,29 +59,31 @@ public class PlayerBoard extends GameBoard {
     }
 
     // during opponent's turn, check to see if I've been hit
-    public String receiveFire(String coord) {
+    public String receiveFire(String coord, Weapon weapon) {
 
-        String fireStatus = "-";
-        String returnVal = "";
+        String fireStatus = "Miss";
+        String currVal = "";
+        String newVal = "";
         int[] cell = convertCoordToIndex(coord);
         // TODO: validation of indices should be done in Game Class
         if (cell[0] != -1 && cell[1] != -1) {
             //if (getMatrix()[cell[0]][cell[1]] == '-')
             //System.out.println(valueAt(coord));
-            returnVal = valueAt(coord);
-            if (returnVal == "-") {
-                fireStatus = "o"; // miss
-                returnVal = "Miss";
+            currVal = valueAt(coord);
+            newVal = weapon.hit(currVal);
+            if (newVal == "o") {
+                fireStatus = "Miss"; // miss
             }
             else{
-                fireStatus = "x"; // hit (anything that's not a '-' would be a ship
-                returnVal = "Hit";
+                fireStatus = currVal; // hit (anything that's not a '-' would be a ship, return what's there to parse
             }
         }
 
-        updateCoord(coord, fireStatus);
-        return returnVal;
+        updateCoord(coord, newVal);
+        return fireStatus;
     }
+
+    public String receiveFireSpecialWeapon(String coord, SpecialWeapon weapon){return null;}
 
     public void sink(char token){
         for(int i = 0; i < getBoardSize(); i ++){

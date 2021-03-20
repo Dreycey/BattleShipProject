@@ -85,9 +85,9 @@ public class PlayerTest {
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
-        Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2"));
-        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1"));
+        Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5",""));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2",""));
+        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1",""));
 
         Minesweeper minesweeper2 = new Minesweeper();
 
@@ -101,9 +101,9 @@ public class PlayerTest {
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
-        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2"));
-        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1"));
+        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5",""));
+        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2",""));
+        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1",""));
 
     }
 
@@ -156,7 +156,7 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit unarmored captains cabin
-        String result = player.receiveFire("C1");
+        String result = player.receiveFire("C1","Bomb");
 
         //did method return sunk?
         Assertions.assertEquals("Sunk Minesweeper", result);
@@ -189,7 +189,7 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
-        String result = player.receiveFire("A3");
+        String result = player.receiveFire("A3","Bomb");
 
         //did method return sunk?
         Assertions.assertEquals("Miss", result);
@@ -218,16 +218,16 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
-        String result = player.receiveFire("A2");
+        String result = player.receiveFire("A2","Bomb");
 
         Assertions.assertEquals("Hit", result);
 
-        result = player.receiveFire("A3");
+        result = player.receiveFire("A3","Bomb");
 
         Assertions.assertEquals("Miss", result);
 
         //hit second time
-        result = player.receiveFire("A3");
+        result = player.receiveFire("A3","Bomb");
 
         //did method return sunk?
         Assertions.assertEquals("Sunk Battleship", result);
