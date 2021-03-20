@@ -10,6 +10,12 @@ class SonarPulseTest {
     SonarPulse sonarPulse = new SonarPulse();
 
     @Test
+    public void testGetters() throws Exception{
+        Assertions.assertEquals("SonarPulse",sonarPulse.getName());
+        Assertions.assertEquals("SpecialWeapon",sonarPulse.getType());
+    }
+
+    @Test
     public void testMiss() throws Exception{
         //given empty cell (-), it should return '0'
         String[][] curr = {{"-","-","-"},{"-","-","-"},{"-","-","-"}};

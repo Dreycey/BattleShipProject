@@ -113,8 +113,14 @@ public class PlayerBoard extends GameBoard {
 
         for(int i = index[0]-lowerThresh; i <= index[0]+upperThresh; i++){
             int outCol = 0;
-            for(int j = index[0]-lowerThresh; j <= index[0]+upperThresh; j++){
-                toReturn[outRow][outCol] = getMatrix()[i][j];
+            for(int j = index[1]-lowerThresh; j <= index[1]+upperThresh; j++){
+                //System.out.printf("Row: %d Column: %d %n",i, j);
+                if(i < 0 || j < 0 || i >= getBoardSize() || j >= getBoardSize()){
+                    toReturn[outRow][outCol] = "";
+                }
+                else {
+                    toReturn[outRow][outCol] = getMatrix()[i][j];
+                }
                 outCol += 1;
             }
 

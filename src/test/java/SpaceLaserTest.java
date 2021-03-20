@@ -9,6 +9,12 @@ class SpaceLaserTest {
     SpaceLaser laser = new SpaceLaser();
 
     @Test
+    public void testGetters() throws Exception{
+        Assertions.assertEquals("SpaceLaser",laser.getName());
+        Assertions.assertEquals("Weapon",laser.getType());
+    }
+
+    @Test
     public void testMiss() throws Exception{
         //given empty cell (-), it should return 'o'
         String result = laser.hit("-");

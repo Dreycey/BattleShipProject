@@ -17,7 +17,7 @@ public class SonarPulse implements SpecialWeapon, Weapon{
     }
 
     public String hit(String currentValue) {
-        if(currentValue.equals("-")){
+        if(currentValue.equals("-") || currentValue.equals("o")){
             return "0";
         }
         else if(currentValue.equals("")){

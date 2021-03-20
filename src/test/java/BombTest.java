@@ -10,6 +10,12 @@ class BombTest {
     Bomb bomb = new Bomb();
 
     @Test
+    public void testGetters() throws Exception{
+        Assertions.assertEquals("Bomb",bomb.getName());
+        Assertions.assertEquals("Weapon",bomb.getType());
+    }
+
+    @Test
     public void testMiss() throws Exception{
         //given empty cell (-), it should return 'o'
         String curr = "-";
