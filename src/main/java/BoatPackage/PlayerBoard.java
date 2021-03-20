@@ -1,6 +1,7 @@
 package BoatPackage;
 
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class PlayerBoard extends GameBoard {
@@ -83,7 +84,45 @@ public class PlayerBoard extends GameBoard {
         return fireStatus;
     }
 
-    public String receiveFireSpecialWeapon(String coord, SpecialWeapon weapon){return null;}
+    public String receiveFireSpecialWeapon(String coord, SpecialWeapon weapon){
+        //FOR NOW
+        int weaponSize = 5;
+        //get appropriate array
+        String[][] boardSegment = getBoardSegment(coord, weaponSize);
+        //give array to weapon
+        //return result from weapon as a string
+        return Arrays.deepToString(weapon.hit(boardSegment));
+    }
+
+    public String[][] getBoardSegment(String coord, int size){
+        int upperThresh = 0;
+        int lowerThresh = 0;
+        int[] index = convertCoordToIndex(coord);
+        String[][] toReturn = new String[size][size];
+
+        if((size - 1) % 2 == 0){
+            upperThresh = (size-1)/2;
+            lowerThresh = (size-1)/2;
+        }
+        else{
+            upperThresh = size/2;
+            lowerThresh = (size/2)-1;
+        }
+
+        int outRow = 0;
+
+        for(int i = index[0]-lowerThresh; i <= index[0]+upperThresh; i++){
+            int outCol = 0;
+            for(int j = index[0]-lowerThresh; j <= index[0]+upperThresh; j++){
+                toReturn[outRow][outCol] = getMatrix()[i][j];
+                outCol += 1;
+            }
+
+            outRow += 1;
+
+        }
+        return  toReturn;
+    }
 
     public void sink(char token){
         for(int i = 0; i < getBoardSize(); i ++){

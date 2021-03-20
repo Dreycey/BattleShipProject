@@ -1,6 +1,6 @@
 package BoatPackage;
 
-public class SonarPulse implements SpecialWeapon{
+public class SonarPulse implements SpecialWeapon, Weapon{
 
     private String name;
 
@@ -12,20 +12,28 @@ public class SonarPulse implements SpecialWeapon{
         return name;
     }
 
+    public String getType() {
+        return "SpecialWeapon";
+    }
+
+    public String hit(String currentValue) {
+        if(currentValue.equals("-")){
+            return "0";
+        }
+        else if(currentValue.equals("")){
+            return "-1";
+        }
+        else{
+            return "1";
+        }
+    }
+
     public String[][] hit(String[][] matrix){
         String[][] toReturn = new String[matrix.length][matrix[0].length];
 
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix[0].length; j++){
-                if(matrix[i][j].equals("-")){
-                    toReturn[i][j] = "0";
-                }
-                else if(matrix[i][j].equals("")){
-                    toReturn[i][j] = "-1";
-                }
-                else{
-                    toReturn[i][j] = "1";
-                }
+                toReturn[i][j] = hit(matrix[i][j]);
             }
         }
         return toReturn;

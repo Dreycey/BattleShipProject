@@ -7,8 +7,6 @@ public class Player {
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
     private Weapon weapon;
-    private boolean canUseSonarPulse;
-    private int numSonarPulse;
     private List<SpecialWeapon> specialWeapons = new ArrayList<>();
 
     // if no input, construct boats for a example
@@ -99,23 +97,17 @@ public class Player {
     OUTPUT:
         String <"Sunk", "Surrender", "Hit", "Miss">
     */
-    public String receiveFire(String inCoordinate, String weaponName) {
+    public String receiveFire(String inCoordinate, Weapon firingWeapon) {
 
         String typeOfHit = "";
-        if(weaponName.equals("")){
-            typeOfHit = primaryBoard.receiveFire(inCoordinate, weapon);
+        if(firingWeapon.getType().equals("Weapon")){
+            typeOfHit = primaryBoard.receiveFire(inCoordinate, firingWeapon);
         }
         else{
-            for(SpecialWeapon specialWeapon : specialWeapons){
-                if(specialWeapon.getName().equals(weaponName)){
-                    //get type of hit
-                    typeOfHit = primaryBoard.receiveFireSpecialWeapon(inCoordinate, specialWeapon);
-                    //delete this from the list
-                    specialWeapons.remove(specialWeapon);
-                    //break
-                    return typeOfHit;
-                }
-            }
+            //get type of hit
+            typeOfHit = primaryBoard.receiveFireSpecialWeapon(inCoordinate, ((SpecialWeapon) firingWeapon));
+            return typeOfHit;
+
         }
 
         // initialize variables
@@ -217,6 +209,20 @@ public class Player {
         return 0 for passing
     */
    public int fireUpon(String inCoordinate, String strikeResult) {
+       if(strikeResult.contains("Sunk") && weapon.getName().equals("Bomb")){
+           weapon = new SpaceLaser();
+           specialWeapons.add(new SonarPulse());
+           specialWeapons.add(new SonarPulse());
+       }
+
+       for(SpecialWeapon specialWeapon : specialWeapons){
+           if(specialWeapon.getName().equals(inCoordinate)){
+               System.out.println("Sonar Pulse: ");
+               System.out.println(strikeResult);
+               specialWeapons.remove(specialWeapon);
+               return 0;
+           }
+       }
         targetBoard.fireUpon(inCoordinate, strikeResult);
         return 0;
    }
@@ -259,7 +265,7 @@ public class Player {
         }
     }
 
-      
+   /*
    public String[][] receiveSonarPulse(String coordIn) {
         // initialize local DS
         //String[][] sonarOut = {{}};
@@ -279,7 +285,7 @@ public class Player {
         System.out.println("index: " + Arrays.toString(index));
 
 
-        /*
+
         Now:
         NOTE:  think about making a char array.
         1. loop through playerMatrix
@@ -290,7 +296,7 @@ public class Player {
         3. elif -: "0"
             else: "1"
         4. return the new array
-         */
+
 
        String[][] outputArray = new String[sonarBoardSize][sonarBoardSize];
        String activeElement;
@@ -330,7 +336,9 @@ public class Player {
        }
         return outputArray;
    }
+   */
 
+    /*
     public int fireSonarPulse(String[][] resultIn) {
         System.out.println("Sonar Pulse: ");
         if (this.canUseSonarPulse && (numSonarPulse < 2)) {
@@ -351,4 +359,5 @@ public class Player {
         }
         return 0;
     }
+    */
 }

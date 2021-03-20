@@ -12,6 +12,10 @@ public class SpaceLaser implements Weapon{
         return name;
     }
 
+    public String getType() {
+        return "Weapon";
+    }
+
     public String hit(String currentValue) {
         if(currentValue.equals("-")){
             return "o";

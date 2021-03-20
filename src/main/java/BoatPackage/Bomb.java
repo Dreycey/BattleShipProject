@@ -12,6 +12,10 @@ public class Bomb implements Weapon{
         return name;
     }
 
+    public String getType() {
+        return "Weapon";
+    }
+
     public String hit(String currentValue){
         if(currentValue == "-"){
             return "o";
