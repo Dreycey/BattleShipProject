@@ -10,8 +10,11 @@ public class SonarPulse implements SpecialWeapon{
                 if(matrix[i][j].equals("-")){
                     toReturn[i][j] = "0";
                 }
-                else{
+                else if(matrix[i][j].equals("")){
                     toReturn[i][j] = "-1";
+                }
+                else{
+                    toReturn[i][j] = "1";
                 }
             }
         }

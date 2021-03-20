@@ -31,4 +31,15 @@ class SonarPulseTest {
 
         Assertions.assertArrayEquals(expected,result);
     }
+
+    @Test
+    public void testSub() throws Exception{
+        String[][] curr = {{"s0","s1","s2"},{"S0","S1","S2"},{"M0&s0","M1&s1","s2"}};
+
+        String[][] result = sonarPulse.hit(curr);
+
+        String[][] expected = {{"1","1","1"},{"1","1","1"},{"1","1","1"}};
+
+        Assertions.assertArrayEquals(expected,result);
+    }
 }
