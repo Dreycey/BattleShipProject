@@ -271,30 +271,6 @@ public class PlayerTest {
         Assertions.assertEquals("x", player.getTargetBoard().valueAt("A6"));
     }
 
-    public void testReceiveSonarPulse() throws  Exception{
-        // input
-        String coordIn = "B3";
-
-        // expected output
-        String[][] sonarOutExpected = {
-                {"-1","-1","-1","-1","-1"},
-                {"1","1","1","1","0"},
-                {"0","0","0","0","0"},
-                {"0","0","1","1","0"},
-                {"0","0","0","0","0"}
-        };
-
-        // testing
-        Boat boat1 = new Destroyer();
-        Boat boat2 = new Minesweeper();
-        List<Boat> boatsList = new ArrayList<>();
-        boatsList.add(boat1);
-
-        // testing the receiveFire method
-        playerObjOne.placeShip(boatsList);
-        //Assertions.assertArrayEquals(sonarOutExpected, playerObjOne.receiveSonarPulse(coordIn));
-    }
-
     @Test
     public void testFireSonarPulse() throws  Exception {
 
@@ -319,4 +295,38 @@ public class PlayerTest {
         //Assertions.assertEquals(0, playerObjOne.fireSonarPulse(sonarInExpected));
 
     }
+
+    //test receiveFire with sonar pulse
+    @Test
+    public void testReceiveSonarPulse() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+
+        String[][] expected = {{"0","0","0","0","0"},
+                               {"0","1","1","1","0"},
+                               {"1","1","0","0","0"},
+                               {"0","0","0","0","0"},
+                               {"","","","",""}};
+
+        SonarPulse pulse = new SonarPulse();
+
+        Assertions.assertEquals(Arrays.deepToString(expected),player.receiveFire("D3",pulse));
+    }
+
+    //test receiveFire for ship sinking
+
+    //test receiveFire for surrender
+
+    //test fireupon for sonar
+
+
 }
