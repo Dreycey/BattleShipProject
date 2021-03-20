@@ -6,9 +6,9 @@ public class Player {
     private PlayerBoard primaryBoard;
     private TargetBoard targetBoard;
     private List<Boat> fleet = new ArrayList<Boat>();
-    private int numSonarPulse = 0;
-    private boolean canUseSonarPulse = false;
     private Weapon weapon;
+    private boolean canUseSonarPulse;
+    private int numSonarPulse;
 
     // if no input, construct boats for a example
     public Player() {
@@ -30,6 +30,7 @@ public class Player {
             Boat shipIter = fleet.get(ind);
             //primaryBoard.placeShip(shipIter.getName());
         }
+        weapon = new Bomb();
     }
 
     // Constructor for Player class
@@ -42,6 +43,7 @@ public class Player {
             Boat shipIter = fleet.get(ind);
             primaryBoard.placeShip(coords[ind], shipIter, directions[ind]);
         }
+        weapon = new Bomb();
     }
 
 
@@ -197,9 +199,6 @@ public class Player {
         return 0 for passing
     */
    public int fireUpon(String inCoordinate, String strikeResult) {
-        if (strikeResult == "Sunk" && this.canUseSonarPulse == false) {
-            this.canUseSonarPulse = true;
-        }
         targetBoard.fireUpon(inCoordinate, strikeResult);
         return 0;
    }

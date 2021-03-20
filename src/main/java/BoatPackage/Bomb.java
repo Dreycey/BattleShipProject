@@ -1,6 +1,17 @@
 package BoatPackage;
 
 public class Bomb implements Weapon{
+
+    private String name;
+
+    public Bomb(){
+        name = "Bomb";
+    }
+
+    public String getName(){
+        return name;
+    }
+
     public String hit(String currentValue){
         if(currentValue == "-"){
             return "o";
