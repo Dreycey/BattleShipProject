@@ -388,6 +388,7 @@ public class Player {
                     }
                 }
             }
+            moves.push("N");
         }
         else if(move.equals("S")){
             newBoard[currBoard.length-1] = currBoard[currBoard.length-1];
@@ -403,6 +404,7 @@ public class Player {
                     }
                 }
             }
+            moves.push("S");
         }
         else if(move.equals("E")){
             for(int k = 0; k < currBoard.length; k++){
@@ -419,6 +421,7 @@ public class Player {
                     }
                 }
             }
+            moves.push("E");
         }
         else if(move.equals("W")){
             for(int k = 0; k < currBoard.length; k++){
@@ -435,6 +438,7 @@ public class Player {
                     }
                 }
             }
+            moves.push("W");
         }
 
         primaryBoard.setBoard(newBoard);
