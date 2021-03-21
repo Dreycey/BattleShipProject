@@ -3,10 +3,9 @@ import BoatPackage.*;
 //Junit imports
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
+
 import org.junit.jupiter.api.Assertions;
 import sun.security.krb5.internal.crypto.Des;
 
@@ -578,5 +577,28 @@ public class PlayerTest {
         Assertions.assertArrayEquals(shouldBe,playerObjOne.getPrimaryBoard().getMatrix());
     }
 
+    @Test
+    public void playerTestKeepMoves() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
 
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"B2","C2"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        playerObjOne.move("N");
+        playerObjOne.move("E");
+        playerObjOne.move("S");
+
+        Stack moves = playerObjOne.getMoves();
+
+        Assertions.assertEquals("S", moves.pop());
+        Assertions.assertEquals("E", moves.pop());
+        Assertions.assertEquals("N", moves.pop());
+
+    }
 }

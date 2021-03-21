@@ -8,6 +8,7 @@ public class Player {
     private List<Boat> fleet = new ArrayList<Boat>();
     private Weapon weapon;
     private List<SpecialWeapon> specialWeapons = new ArrayList<>();
+    private Stack moves = new Stack();
 
     // if no input, construct boats for a example
     public Player() {
@@ -58,6 +59,8 @@ public class Player {
     public Weapon getWeapon(){return weapon;}
 
     public List<SpecialWeapon> getSpecialWeapons(){return specialWeapons;}
+
+    public Stack getMoves(){return moves;}
 
     /*
     DESCRIPTION:
@@ -409,6 +412,22 @@ public class Player {
                 for(int j = currBoard.length-2; j >= 0; j--){
                     if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
                         newBoard[i][j+1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if(move.equals("W")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][0] = currBoard[k][0];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = 1; j < currBoard.length; j++){
+                    if(newBoard[i][j-1].equals("-") || newBoard[i][j-1].equals("o")){
+                        newBoard[i][j-1] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
                     else{
