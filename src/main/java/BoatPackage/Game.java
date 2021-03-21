@@ -16,7 +16,7 @@ public class Game {
         TODO: get rid of coupling.
 
      */
-    public Game() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Game() {
         turn = 1;
         //boats = new String[]{"BoatPackage.Battleship","BoatPackage.Destroyer", "BoatPackage.Minesweeper"};
 
