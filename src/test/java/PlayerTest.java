@@ -68,6 +68,7 @@ public class PlayerTest {
     @Test
     public void receiveFireTest() {
         // Instantiate Player
+        Bomb weapon = new Bomb();
         //set up boats
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
@@ -85,9 +86,9 @@ public class PlayerTest {
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
-        Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2"));
-        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1"));
+        Assertions.assertEquals("Miss", playerObjOne.receiveFire("A5",weapon));
+        Assertions.assertEquals("Hit", playerObjOne.receiveFire("B2",weapon));
+        Assertions.assertEquals("Sunk Minesweeper", playerObjOne.receiveFire("B1",weapon));
 
         Minesweeper minesweeper2 = new Minesweeper();
 
@@ -101,9 +102,9 @@ public class PlayerTest {
         // need the primary boat class for ultimate test
         // for now return True
         //TODO: Add surrender
-        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5"));
-        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2"));
-        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1"));
+        Assertions.assertEquals("Miss", playerObjOne2.receiveFire("A5",weapon));
+        Assertions.assertEquals("Hit", playerObjOne2.receiveFire("B2",weapon));
+        Assertions.assertEquals("Surrender", playerObjOne2.receiveFire("B1",weapon));
 
     }
 
@@ -140,6 +141,7 @@ public class PlayerTest {
     @Test
     public void testReceiveFireUnarmored() throws Exception{
         //set up boats
+        Bomb weapon = new Bomb();
         String[] bCoords = {"A1","A2","A3","A4"};
         String[] dCoords = {"B1","B2","B3"};
         String[] mCoords = {"C1","C2"};
@@ -156,7 +158,7 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit unarmored captains cabin
-        String result = player.receiveFire("C1");
+        String result = player.receiveFire("C1",weapon);
 
         //did method return sunk?
         Assertions.assertEquals("Sunk Minesweeper", result);
@@ -172,6 +174,7 @@ public class PlayerTest {
 
     @Test
     public void testReceiveFireArmoredFirst() throws Exception{
+        Bomb weapon = new Bomb();
         //set up boats
         String[] bCoords = {"A1","A2","A3","A4"};
         String[] dCoords = {"B1","B2","B3"};
@@ -189,7 +192,7 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
-        String result = player.receiveFire("A3");
+        String result = player.receiveFire("A3",weapon);
 
         //did method return sunk?
         Assertions.assertEquals("Miss", result);
@@ -203,6 +206,7 @@ public class PlayerTest {
 
     @Test
     public void testReceiveFireArmoredSecond() throws Exception{
+        Bomb weapon = new Bomb();
         //set up boats
         String[] bCoords = {"A1","A2","A3","A4"};
         String[] dCoords = {"B1","B2","B3"};
@@ -218,16 +222,16 @@ public class PlayerTest {
         Player player = new Player(fleet, starts, directions);
 
         //hit armored captains cabin
-        String result = player.receiveFire("A2");
+        String result = player.receiveFire("A2",weapon);
 
         Assertions.assertEquals("Hit", result);
 
-        result = player.receiveFire("A3");
+        result = player.receiveFire("A3",weapon);
 
         Assertions.assertEquals("Miss", result);
 
         //hit second time
-        result = player.receiveFire("A3");
+        result = player.receiveFire("A3",weapon);
 
         //did method return sunk?
         Assertions.assertEquals("Sunk Battleship", result);
@@ -267,30 +271,6 @@ public class PlayerTest {
         Assertions.assertEquals("x", player.getTargetBoard().valueAt("A6"));
     }
 
-    public void testReceiveSonarPulse() throws  Exception{
-        // input
-        String coordIn = "B3";
-
-        // expected output
-        String[][] sonarOutExpected = {
-                {"-1","-1","-1","-1","-1"},
-                {"1","1","1","1","0"},
-                {"0","0","0","0","0"},
-                {"0","0","1","1","0"},
-                {"0","0","0","0","0"}
-        };
-
-        // testing
-        Boat boat1 = new Destroyer();
-        Boat boat2 = new Minesweeper();
-        List<Boat> boatsList = new ArrayList<>();
-        boatsList.add(boat1);
-
-        // testing the receiveFire method
-        playerObjOne.placeShip(boatsList);
-        Assertions.assertArrayEquals(sonarOutExpected, playerObjOne.receiveSonarPulse(coordIn));
-    }
-
     @Test
     public void testFireSonarPulse() throws  Exception {
 
@@ -312,7 +292,115 @@ public class PlayerTest {
         // testing the receiveFire method
         playerObjOne.placeShip(boatsList);
         // check that it runs - actually a void but use 0 for passing
-        Assertions.assertEquals(0, playerObjOne.fireSonarPulse(sonarInExpected));
+        //Assertions.assertEquals(0, playerObjOne.fireSonarPulse(sonarInExpected));
 
     }
+
+    //test receiveFire with sonar pulse
+    @Test
+    public void testReceiveSonarPulse() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+
+        String[][] expected = {{"0","0","0","0","0"},
+                               {"0","1","1","1","0"},
+                               {"1","1","0","0","0"},
+                               {"0","0","0","0","0"},
+                               {"0","0","0","0","0"}};
+
+        SonarPulse pulse = new SonarPulse();
+
+        Assertions.assertEquals(Arrays.deepToString(expected),player.receiveFire("D3",pulse));
+    }
+
+    //test receiveFire for ship sinking
+    @Test
+    public void testReceiveFireSink() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+        minesweeper.setCabinIndex(-1);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        SpaceLaser laser = new SpaceLaser();
+
+        Assertions.assertEquals("Hit",player.receiveFire("D1",laser));
+        Assertions.assertEquals("Sunk Minesweeper",player.receiveFire("D2",laser));
+    }
+
+    //test receiveFire for surrender
+    @Test
+    public void testReceiveFireSurrender() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+        minesweeper.setCabinIndex(-1);
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        SpaceLaser laser = new SpaceLaser();
+
+        Assertions.assertEquals("Miss",player.receiveFire("A3",laser));
+        Assertions.assertEquals("Sunk Battleship",player.receiveFire("A3",laser));
+        Assertions.assertEquals("Miss",player.receiveFire("C3",laser));
+        Assertions.assertEquals("Sunk Destroyer",player.receiveFire("C3",laser));
+        Assertions.assertEquals("Hit",player.receiveFire("D1",laser));
+        Assertions.assertEquals("Surrender",player.receiveFire("D2",laser));
+    }
+
+    //test fireupon for sonar
+    @Test
+    public void testFireUponSonar() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(battleship, destroyer, minesweeper));
+
+        //construct player
+        String[] s = {"A1","C2","D1"};
+        char[] d = {'e','e','e'};
+        Player player = new Player(fleet, s, d);
+
+        //confirm weapon name is bomb
+        Assertions.assertTrue(player.getWeapon() instanceof Bomb);
+        //confirm length of special weapons is 0
+        Assertions.assertEquals(0, player.getSpecialWeapons().size());
+
+        //sink a ship
+        Assertions.assertEquals(0, player.fireUpon("B5","Sunk Minesweeper"));
+
+        //confirm weapon is space laser
+        Assertions.assertTrue(player.getWeapon() instanceof SpaceLaser);
+        //confirm length of special weapons is 2
+        Assertions.assertEquals(2, player.getSpecialWeapons().size());
+
+        //fireupon with sonar
+        Assertions.assertEquals(0, player.fireUpon("SonarPulse","results of pulse"));
+
+        //make sure length is now 1
+        Assertions.assertEquals(1, player.getSpecialWeapons().size());
+    }
+
+
 }

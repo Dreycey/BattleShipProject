@@ -190,7 +190,7 @@ public class Game {
         //if(hits.length > 1){offensePlayer.fireUpon(Arrays.copyOfRange(hits,1,hits.length-1);, hits[0]);}
         //else{offensePlayer.fireUpon(strikeCoord, strikeRes);}
 
-/*        // TODO: impliment later on
+/*        // TODO: implement later on
         if (player.getSonarPulse > 0) {
             String inputCoord = x;
             char[][] sonarResult = defensePlayer.recieveSonarPulse(inputCoord);
