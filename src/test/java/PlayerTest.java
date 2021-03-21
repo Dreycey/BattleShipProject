@@ -402,5 +402,47 @@ public class PlayerTest {
         Assertions.assertEquals(1, player.getSpecialWeapons().size());
     }
 
+    @Test
+    public void playerTestMoveNorth() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"B1","C1"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        String[][] currentBoard = {
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "D0", "D1", "D2", "-", "-", "-", "-", "-", "-", "-"},
+                {"M0", "M1","-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
+
+        String[][] shouldBe = {
+                { "D0", "D1", "D2", "-", "-", "-", "-", "-", "-", "-"},
+                { "M0", "M1", "-", "-", "-", "-", "-", "-", "-", "-"},
+                {"-", "-","-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
+                { "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
+
+        playerObjOne.move("N");
+
+        Assertions.assertArrayEquals(shouldBe,playerObjOne.getPrimaryBoard().getMatrix());
+    }
+
 
 }

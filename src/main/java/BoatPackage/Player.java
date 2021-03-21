@@ -364,4 +364,10 @@ public class Player {
         return 0;
     }
     */
+
+    public void move(String move){
+        String[][] currBoard = getPrimaryBoard().getMatrix();
+
+        String[][] newB
+    }
 }
