@@ -9,6 +9,7 @@ public class Player {
     private Weapon weapon;
     private List<SpecialWeapon> specialWeapons = new ArrayList<>();
     private Stack moves = new Stack();
+    private Stack redos = new Stack();
 
     // if no input, construct boats for a example
     public Player() {
@@ -61,6 +62,8 @@ public class Player {
     public List<SpecialWeapon> getSpecialWeapons(){return specialWeapons;}
 
     public Stack getMoves(){return moves;}
+
+    public Stack getRedos(){return redos;}
 
     /*
     DESCRIPTION:
@@ -368,7 +371,7 @@ public class Player {
     }
     */
 
-    public void move(String move){
+    public int move(String move){
         String[][] currBoard = getPrimaryBoard().getMatrix();
 
         String[][] newBoard = new String[currBoard.length][currBoard.length];
@@ -440,7 +443,30 @@ public class Player {
             }
             moves.push("W");
         }
+        else if(move.equals("undo")){
+            String top = (String)moves.pop();
+            String newMove = "";
+
+            if(top.equals("N")){
+                newMove = "S";
+            }
+            else if(top.equals("S")){
+                newMove = "N";
+            }
+            else if(top.equals("E")){
+                newMove = "W";
+            }
+            else{
+                newMove = "E";
+            }
+
+            move(newMove);
+            return 0;
+
+
+        }
 
         primaryBoard.setBoard(newBoard);
+        return 0;
     }
 }

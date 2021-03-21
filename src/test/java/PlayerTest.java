@@ -646,4 +646,33 @@ public class PlayerTest {
 
         Assertions.assertArrayEquals(currentBoard,playerObjOne.getPrimaryBoard().getMatrix());
     }
+
+    @Test
+    public void playerTestKeepUndos() throws Exception{
+        Battleship battleship = new Battleship();
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"B2","C2"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        playerObjOne.move("N");
+        playerObjOne.move("E");
+        playerObjOne.move("S");
+
+        playerObjOne.move("undo");
+        playerObjOne.move("undo");
+        playerObjOne.move("undo");
+
+        Stack moves = playerObjOne.getRedos();
+
+        Assertions.assertEquals("N", moves.pop());
+        Assertions.assertEquals("E", moves.pop());
+        Assertions.assertEquals("S", moves.pop());
+
+    }
 }
