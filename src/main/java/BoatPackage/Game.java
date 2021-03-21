@@ -9,6 +9,24 @@ public class Game {
     private Player playerOne;
     private Player playerTwo;
 
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public void setPlayerOne(Player playerOne) {
+        this.playerOne = playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public void setPlayerTwo(Player playerTwo) {
+        this.playerTwo = playerTwo;
+    }
+
+
+
     /*
     Description
         Instantiates the players.
@@ -124,30 +142,30 @@ public class Game {
 
     */
 
-    public List<Boat> setUpCoords(String[][] inCoordinates) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        List<Boat> playerBoatList = new ArrayList<Boat>();
-
-        // instantiate boats, add
-        int boatCounterInd = 0;
-        for (String playerBoat : boats) {
-            // Create object from string name
-            //TODO: Decouple so player does the next two
-            Class<?> boatCall = Class.forName(playerBoat);
-            Boat boatObj = (Boat) boatCall.newInstance();
-            // print String name, set coordinates
-            System.out.println(boatObj.getName());
-            /*
-            if (isValidCoordinate(inCoordinates[boatCounterInd])) {
-                boatObj.setCoordinates(inCoordinates[boatCounterInd]);
-            }*/
-            //else {break;}
-            // add to list
-            playerBoatList.add(boatObj);
-            //increment counter
-            boatCounterInd++;
-        }
-        return playerBoatList; // if works, returns 0
-    }
+//    public List<Boat> setUpCoords() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+//        List<Boat> playerBoatList = new ArrayList<Boat>();
+//
+//        // instantiate boats, add
+//        int boatCounterInd = 0;
+//        for (String playerBoat : boats) {
+//            // Create object from string name
+//            //TODO: Decouple so player does the next two
+//            Class<?> boatCall = Class.forName(playerBoat);
+//            Boat boatObj = (Boat) boatCall.newInstance();
+//            // print String name, set coordinates
+//            System.out.println(boatObj.getName());
+//            /*
+//            if (isValidCoordinate(inCoordinates[boatCounterInd])) {
+//                boatObj.setCoordinates(inCoordinates[boatCounterInd]);
+//            }*/
+//            //else {break;}
+//            // add to list
+//            playerBoatList.add(boatObj);
+//            //increment counter
+//            boatCounterInd++;
+//        }
+//        return playerBoatList; // if works, returns 0
+//    }
 
     public boolean gameOver() {
         if (playerOne.fleetIsEmpty()){

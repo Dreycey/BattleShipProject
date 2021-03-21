@@ -1,4 +1,5 @@
 import BoatPackage.*;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +58,16 @@ public class AllTest {
 
         Assertions.assertEquals(2, boat.getCabinIndex());
     }
+
+    @Test
+    public void testRealignStatus() {
+        // Test hits remaining == size of ship
+        Minesweeper mAfloat = new Minesweeper();
+        mAfloat.reAlignStatus();
+        Assertions.assertEquals("Afloat", mAfloat.getStatus());
+    }
+
+
 
     @Test
     public void BoattestCabinHits() throws Exception{
@@ -149,7 +160,7 @@ public class AllTest {
         Assertions.assertArrayEquals(north, boat.genLocs('n'));
         Assertions.assertArrayEquals(east, boat.genLocs('e'));
         Assertions.assertArrayEquals(west, boat.genLocs('w'));
-
+        Assertions.assertEquals(null, boat.genLocs('k'));
     }
 
     //Destroyer
@@ -568,6 +579,12 @@ public class AllTest {
         Assertions.assertFalse(g1.updateCoord(falseCoord, anotherAction));
     }
 
+    @Test
+    public void gameboardUpdateCoordFalse() {
+        GameBoard gboard1 = new TargetBoard();
+
+        Assertions.assertFalse(gboard1.updateCoordByIndex(-1,-1,"d9"));
+    }
 
     @Test
     public void gameboardConvertCoordToIndex() {
@@ -1228,6 +1245,17 @@ public class AllTest {
 
     //Game
     @Test
+    public void gameTestGetters() {
+        Game g = new Game();
+        Player p1 = new Player();
+        Player p2 = new Player();
+        g.setPlayerOne(p1);
+        g.setPlayerTwo(p2);
+
+        Assertions.assertEquals(p1, g.getPlayerOne());
+        Assertions.assertEquals(p2, g.getPlayerTwo());
+    }
+    @Test
     public void gameTestTurns(){
         Game g = new Game();
         Assertions.assertEquals(1,g.getTurn());
@@ -1253,6 +1281,14 @@ public class AllTest {
     }
 
     @Test
+    public void gameTestPlayTurn() {
+        Game g = new Game();
+        g.setTurn(2);
+
+        Assertions.assertEquals(0, g.playTurn());
+    }
+
+    @Test
     public void gameTestGetSetBoats(){
         Game g = new Game();
         String[] defaultBoats = {"BoatPackage.Battleship","BoatPackage.Destroyer", "BoatPackage.Minesweeper"};
@@ -1268,17 +1304,34 @@ public class AllTest {
     @Test
     public void gameTestIsValidCoordinate(){
         Game g = new Game();
-        String[] trueInput = {"A2","A3","A4"};
-        Assertions.assertEquals(true, g.isValidCoordinate(trueInput));
+        String[] rowInput = {"A2","A3","A4"};
+        Assertions.assertEquals(true, g.isValidCoordinate(rowInput));
+        String[] columnInput = {"A1", "B1", "C1"};
+        Assertions.assertEquals(true, g.isValidCoordinate(columnInput));
         String[] falseInput = {"A2","A3","B3"};
         Assertions.assertEquals(false, g.isValidCoordinate(falseInput));
         String[] falseInput2 = {"A2","A3","A10"};
         Assertions.assertEquals(false, g.isValidCoordinate(falseInput2));
+        String[] reallyFalseInput = {"Z100", "A10"};
+        Assertions.assertEquals(false, g.isValidCoordinate(reallyFalseInput));
     }
 
     @Test
     public void gameTestGameOver(){
         Game g = new Game();
         Assertions.assertEquals(false, g.gameOver());
+
+        List<Boat> fleet = new ArrayList<Boat>();
+        Player p1 = new Player();
+        p1.setFleet(fleet);
+        g.setPlayerOne(p1);
+        Assertions.assertEquals(true, g.gameOver());
+
+        Game g2 = new Game();
+        Player p2 = new Player();
+        p2.setFleet(fleet);
+        g2.setPlayerTwo(p2);
+        Assertions.assertEquals(true, g2.gameOver());
     }
+
 }
