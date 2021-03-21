@@ -30,6 +30,10 @@ public abstract class GameBoard {
         }
     }
 
+    public void setBoard(String[][] m){
+        matrix = m;
+    }
+
     public String[][] getMatrix() {
         return matrix;
     }

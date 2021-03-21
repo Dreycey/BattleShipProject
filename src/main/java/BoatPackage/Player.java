@@ -368,6 +368,41 @@ public class Player {
     public void move(String move){
         String[][] currBoard = getPrimaryBoard().getMatrix();
 
-        String[][] newB
+        String[][] newBoard = new String[currBoard.length][currBoard.length];
+
+        if(move.equals("N")){
+            newBoard[0] = currBoard[0];
+
+            for(int i = 1; i < currBoard.length; i++){
+                for(int j = 0; j < currBoard.length; j++){
+                    //System.out.println(newBoard[i-1][j]);
+                    if(newBoard[i-1][j].equals("-") || newBoard[i-1][j].equals("o")){
+                        newBoard[i-1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if(move.equals("S")){
+            newBoard[currBoard.length-1] = currBoard[currBoard.length-1];
+
+            for(int i = currBoard.length-2; i >= 0; i--){
+                for(int j = 0; j < currBoard.length; j++){
+                    if(newBoard[i+1][j].equals("-") || newBoard[i+1][j].equals("o")){
+                        newBoard[i+1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if()
+
+        primaryBoard.setBoard(newBoard);
     }
 }
