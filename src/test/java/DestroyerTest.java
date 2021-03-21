@@ -50,8 +50,8 @@ class DestroyerTest {
 
         Destroyer boat = new Destroyer();
 
-        int[][] south = {{0,0},{-1,0},{-2,0}};
-        int[][] north = {{0,0},{1,0},{2,0}};
+        int[][] south = {{0,0},{1,0},{2,0}};
+        int[][] north = {{0,0},{-1,0},{-2,0}};
         int[][] east = {{0,0},{0,1},{0,2}};
         int[][] west = {{0,0},{0,-1},{0,-2}};
 

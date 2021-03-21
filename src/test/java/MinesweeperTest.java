@@ -49,8 +49,8 @@ class MinesweeperTest {
 
         Minesweeper boat = new Minesweeper();
 
-        int[][] south = {{0,0},{-1,0}};
-        int[][] north = {{0,0},{1,0}};
+        int[][] south = {{0,0},{1,0}};
+        int[][] north = {{0,0},{-1,0}};
         int[][] east = {{0,0},{0,1}};
         int[][] west = {{0,0},{0,-1}};
 
