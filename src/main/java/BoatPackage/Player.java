@@ -445,22 +445,9 @@ public class Player {
         }
         else if(move.equals("undo")){
             String top = (String)moves.pop();
-            String newMove = "";
-
-            if(top.equals("N")){
-                newMove = "S";
-            }
-            else if(top.equals("S")){
-                newMove = "N";
-            }
-            else if(top.equals("E")){
-                newMove = "W";
-            }
-            else{
-                newMove = "E";
-            }
-
-            move(newMove);
+            //System.out.println(top);
+            redos.push(top);
+            undo(top);
             return 0;
 
 
@@ -468,5 +455,91 @@ public class Player {
 
         primaryBoard.setBoard(newBoard);
         return 0;
+    }
+
+    public void undo(String top){
+        String move = "";
+        if(top.equals("N")){
+            move = "S";
+        }
+        else if(top.equals("S")){
+            move = "N";
+        }
+        else if(top.equals("E")){
+            move = "W";
+        }
+        else{
+            move = "E";
+        }
+
+        String[][] currBoard = getPrimaryBoard().getMatrix();
+
+        String[][] newBoard = new String[currBoard.length][currBoard.length];
+
+        if(move.equals("N")){
+            newBoard[0] = currBoard[0];
+
+            for(int i = 1; i < currBoard.length; i++){
+                for(int j = 0; j < currBoard.length; j++){
+                    //System.out.println(newBoard[i-1][j]);
+                    if(newBoard[i-1][j].equals("-") || newBoard[i-1][j].equals("o")){
+                        newBoard[i-1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if(move.equals("S")){
+            newBoard[currBoard.length-1] = currBoard[currBoard.length-1];
+
+            for(int i = currBoard.length-2; i >= 0; i--){
+                for(int j = 0; j < currBoard.length; j++){
+                    if(newBoard[i+1][j].equals("-") || newBoard[i+1][j].equals("o")){
+                        newBoard[i+1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if(move.equals("E")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][currBoard.length-1] = currBoard[k][currBoard.length-1];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = currBoard.length-2; j >= 0; j--){
+                    if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
+                        newBoard[i][j+1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+        else if(move.equals("W")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][0] = currBoard[k][0];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = 1; j < currBoard.length; j++){
+                    if(newBoard[i][j-1].equals("-") || newBoard[i][j-1].equals("o")){
+                        newBoard[i][j-1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
+
+        primaryBoard.setBoard(newBoard);
     }
 }
