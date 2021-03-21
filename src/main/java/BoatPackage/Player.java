@@ -401,7 +401,22 @@ public class Player {
                 }
             }
         }
-        else if()
+        else if(move.equals("E")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][currBoard.length-1] = currBoard[k][currBoard.length-1];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = currBoard.length-2; j >= 0; j--){
+                    if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
+                        newBoard[i][j+1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                }
+            }
+        }
 
         primaryBoard.setBoard(newBoard);
     }
