@@ -698,6 +698,7 @@ public class PlayerTest {
         playerObjOne.move("N");
         playerObjOne.move("E");
         playerObjOne.move("S");
+        playerObjOne.move("W");
 /*
         Stack check = playerObjOne.getMoves();
 
@@ -708,7 +709,9 @@ public class PlayerTest {
         playerObjOne.move("undo");
         playerObjOne.move("undo");
         playerObjOne.move("undo");
+        playerObjOne.move("undo");
 
+        playerObjOne.move("redo");
         playerObjOne.move("redo");
         playerObjOne.move("redo");
         playerObjOne.move("redo");
@@ -727,5 +730,104 @@ public class PlayerTest {
 
         Assertions.assertArrayEquals(shouldBe,playerObjOne.getPrimaryBoard().getMatrix());
 
+    }
+
+    @Test
+    public void playerTestCantMoveN() throws Exception{
+        Destroyer destroyer = new Destroyer();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer));
+        String[] starts = {"A2"};
+        char[] directions = {'e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        playerObjOne.move("N");
+
+        playerObjOne.getMoves().push("S");
+
+        playerObjOne.move("undo");
+
+    }
+
+    @Test
+    public void playerTestCantMoveS() throws Exception{
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"I1","J1"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        //System.out.println(Arrays.deepToString(playerObjOne.getPrimaryBoard().getMatrix()));
+
+        playerObjOne.move("S");
+
+        //System.out.println(Arrays.deepToString(playerObjOne.getPrimaryBoard().getMatrix()));
+
+        playerObjOne.getMoves().push("N");
+
+        playerObjOne.move("undo");
+
+    }
+
+    @Test
+    public  void playerTestBadMove() throws Exception{
+        Destroyer destroyer = new Destroyer();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer));
+        String[] starts = {"J1"};
+        char[] directions = {'e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        Assertions.assertEquals(0, playerObjOne.move("oogabooga"));
+    }
+
+    @Test
+    public void playerTestCantMoveW() throws Exception{
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"A1","A4"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        //System.out.println(Arrays.deepToString(playerObjOne.getPrimaryBoard().getMatrix()));
+
+        playerObjOne.move("W");
+
+        playerObjOne.getMoves().push("E");
+
+        playerObjOne.move("undo");
+    }
+
+    @Test
+    public void playerTestCantMoveE() throws Exception{
+        Destroyer destroyer = new Destroyer();
+        Minesweeper minesweeper = new Minesweeper();
+
+        List<Boat> fleet = new LinkedList<Boat>(Arrays.asList(destroyer, minesweeper));
+        String[] starts = {"A6","A9"};
+        char[] directions = {'e','e'};
+
+        //construct player
+        Player playerObjOne = new Player(fleet, starts, directions);
+
+        //System.out.println(Arrays.deepToString(playerObjOne.getPrimaryBoard().getMatrix()));
+
+        playerObjOne.move("E");
+
+        playerObjOne.getMoves().push("W");
+
+        playerObjOne.move("undo");
     }
 }

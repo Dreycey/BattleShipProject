@@ -376,6 +376,124 @@ public class Player {
 
         String[][] newBoard = new String[currBoard.length][currBoard.length];
 
+        List<String> flagged = new ArrayList<>();
+
+        if(move.equals("N")){
+            newBoard[0] = currBoard[0];
+
+            for(int i = 1; i < currBoard.length; i++){
+                for(int j = 0; j < currBoard.length; j++){
+                    //System.out.println(newBoard[i-1][j]);
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i-1][j].equals("-") || newBoard[i-1][j].equals("o")){
+                        newBoard[i-1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
+                    }
+                }
+            }
+            moves.push("N");
+            redos = new Stack();
+        }
+        else if(move.equals("S")){
+            newBoard[currBoard.length-1] = currBoard[currBoard.length-1];
+
+            for(int i = currBoard.length-2; i >= 0; i--){
+                for(int j = 0; j < currBoard.length; j++){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i+1][j].equals("-") || newBoard[i+1][j].equals("o")){
+                        newBoard[i+1][j] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
+                    }
+                }
+            }
+            moves.push("S");
+            redos = new Stack();
+        }
+        else if(move.equals("E")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][currBoard.length-1] = currBoard[k][currBoard.length-1];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = currBoard.length-2; j >= 0; j--){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
+                        newBoard[i][j+1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
+                    }
+                }
+            }
+            moves.push("E");
+            redos = new Stack();
+        }
+        else if(move.equals("W")){
+            for(int k = 0; k < currBoard.length; k++){
+                newBoard[k][0] = currBoard[k][0];
+            }
+            for(int i = 0; i < currBoard.length; i++){
+                for(int j = 1; j < currBoard.length; j++){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i][j-1].equals("-") || newBoard[i][j-1].equals("o")){
+                        newBoard[i][j-1] = currBoard[i][j];
+                        newBoard[i][j] = "-";
+                    }
+                    else{
+                        newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
+                    }
+                }
+            }
+            moves.push("W");
+            redos = new Stack();
+        }
+        else if(move.equals("undo")){
+            String top = (String)moves.pop();
+            //System.out.println(top);
+            redos.push(top);
+            undo(top);
+            return 0;
+
+
+        }
+        else if(move.equals("redo")){
+            String top = (String)redos.pop();
+            //System.out.println(top);
+            moves.push(top);
+            redo(top);
+            return 0;
+        }
+        else{
+            return 0;
+        }
+
+        primaryBoard.setBoard(newBoard);
+        return 0;
+    }
+
+    public void redo(String move){
+        String[][] currBoard = getPrimaryBoard().getMatrix();
+
+        String[][] newBoard = new String[currBoard.length][currBoard.length];
+
         if(move.equals("N")){
             newBoard[0] = currBoard[0];
 
@@ -386,12 +504,8 @@ public class Player {
                         newBoard[i-1][j] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
-                    else{
-                        newBoard[i][j] = currBoard[i][j];
-                    }
                 }
             }
-            moves.push("N");
         }
         else if(move.equals("S")){
             newBoard[currBoard.length-1] = currBoard[currBoard.length-1];
@@ -402,12 +516,8 @@ public class Player {
                         newBoard[i+1][j] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
-                    else{
-                        newBoard[i][j] = currBoard[i][j];
-                    }
                 }
             }
-            moves.push("S");
         }
         else if(move.equals("E")){
             for(int k = 0; k < currBoard.length; k++){
@@ -419,12 +529,8 @@ public class Player {
                         newBoard[i][j+1] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
-                    else{
-                        newBoard[i][j] = currBoard[i][j];
-                    }
                 }
             }
-            moves.push("E");
         }
         else if(move.equals("W")){
             for(int k = 0; k < currBoard.length; k++){
@@ -436,28 +542,15 @@ public class Player {
                         newBoard[i][j-1] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
-                    else{
-                        newBoard[i][j] = currBoard[i][j];
-                    }
                 }
             }
-            moves.push("W");
-        }
-        else if(move.equals("undo")){
-            String top = (String)moves.pop();
-            //System.out.println(top);
-            redos.push(top);
-            undo(top);
-            return 0;
-
-
         }
 
         primaryBoard.setBoard(newBoard);
-        return 0;
     }
 
     public void undo(String top){
+        List<String> flagged = new ArrayList<>();
         String move = "";
         if(top.equals("N")){
             move = "S";
@@ -482,12 +575,16 @@ public class Player {
             for(int i = 1; i < currBoard.length; i++){
                 for(int j = 0; j < currBoard.length; j++){
                     //System.out.println(newBoard[i-1][j]);
-                    if(newBoard[i-1][j].equals("-") || newBoard[i-1][j].equals("o")){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i-1][j].equals("-") || newBoard[i-1][j].equals("o")){
                         newBoard[i-1][j] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
                     else{
                         newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
                     }
                 }
             }
@@ -497,12 +594,17 @@ public class Player {
 
             for(int i = currBoard.length-2; i >= 0; i--){
                 for(int j = 0; j < currBoard.length; j++){
-                    if(newBoard[i+1][j].equals("-") || newBoard[i+1][j].equals("o")){
+                    //System.out.println(currBoard[i][j]);
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i+1][j].equals("-") || newBoard[i+1][j].equals("o")){
                         newBoard[i+1][j] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
                     else{
                         newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
                     }
                 }
             }
@@ -513,12 +615,16 @@ public class Player {
             }
             for(int i = 0; i < currBoard.length; i++){
                 for(int j = currBoard.length-2; j >= 0; j--){
-                    if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i][j+1].equals("-") || newBoard[i][j+1].equals("o")){
                         newBoard[i][j+1] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
                     else{
                         newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
                     }
                 }
             }
@@ -529,12 +635,16 @@ public class Player {
             }
             for(int i = 0; i < currBoard.length; i++){
                 for(int j = 1; j < currBoard.length; j++){
-                    if(newBoard[i][j-1].equals("-") || newBoard[i][j-1].equals("o")){
+                    if(flagged.contains(Character.toString(currBoard[i][j].charAt(0)))){
+                        newBoard[i][j] = currBoard[i][j];
+                    }
+                    else if(newBoard[i][j-1].equals("-") || newBoard[i][j-1].equals("o")){
                         newBoard[i][j-1] = currBoard[i][j];
                         newBoard[i][j] = "-";
                     }
                     else{
                         newBoard[i][j] = currBoard[i][j];
+                        flagged.add(Character.toString(currBoard[i][j].charAt(0)));
                     }
                 }
             }
