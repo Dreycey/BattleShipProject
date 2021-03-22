@@ -30,6 +30,10 @@ public abstract class GameBoard {
         }
     }
 
+    public void setBoard(String[][] m){
+        matrix = m;
+    }
+
     public String[][] getMatrix() {
         return matrix;
     }
@@ -79,9 +83,11 @@ public abstract class GameBoard {
         else if (row == 'g') index[0] = 6;
         else if (row == 'h') index[0] = 7;
         else if (row == 'i') index[0] = 8;
+        else if (row == 'j') index[0] = 9;
         else return new int[]{-1, -1};
 
         if (coordinate.length() == 2) {
+            //System.out.println(coordinate);
             index[1] = Integer.parseInt(String.valueOf(coordinate.charAt(1))) - 1;
         }
         else if (coordinate.length() == 3) // a letter + two digits

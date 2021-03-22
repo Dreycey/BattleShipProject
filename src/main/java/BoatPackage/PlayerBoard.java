@@ -26,16 +26,19 @@ public class PlayerBoard extends GameBoard {
         String[] coords = new String[locs.length];
 
         char row = coordinate.charAt(0);
-        char col = coordinate.charAt(1);
+        int col = Integer.parseInt(coordinate.substring(1));
+
+        //System.out.println(col);
 
         for(int i = 0; i < locs.length; i++){
             char newRow = (char)(row+locs[i][0]);
-            char newCol = (char)(col+locs[i][1]);
+            int newCol = (col+locs[i][1]);
             coords[i] = new StringBuilder().append(newRow).append(newCol).toString();
         }
 
         //check that all coords are valid
         for(String coord : coords){
+            //System.out.println(coord);
             if(!isValidCoordinate(coord)){
                 return false;
             }
